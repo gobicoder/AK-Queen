@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK Queen's Choice | Royal Admin Catalog & Drive Manager</title>
+    <title>AK Queen's Choice | Royal Admin Catalog & Inventory Portal</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -96,7 +96,6 @@
 </head>
 <body class="bg-darkbg-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-vibrantPink-500 selection:text-white">
 
-    <!-- Header / Nav -->
     <header class="sticky top-0 z-40 bg-darkbg-900/95 border-b border-gold-500/30 backdrop-blur-md shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -116,21 +115,18 @@
 
                 <!-- Navigation Tabs -->
                 <div class="hidden md:flex items-center gap-3 text-xs font-bold uppercase tracking-wider">
-                    <button onclick="switchAdminTab('catalog')" id="tabBtnCatalog" class="px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink">
-                        <i class="fa-solid fa-boxes-stacked"></i> Inventory Manager
+                    <button onclick="switchAdminTab('catalog')" id="tabBtnCatalog" class="px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink transition-all">
+                        <i class="fa-solid fa-boxes-stacked"></i> Inventory Catalog
                     </button>
-                    <button onclick="switchAdminTab('upload')" id="tabBtnUpload" class="px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-plus text-gold-400"></i> Add New Item
-                    </button>
-                    <button onclick="switchAdminTab('drive')" id="tabBtnDrive" class="px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-vibrantPink-400 flex items-center gap-2">
-                        <i class="fa-brands fa-google-drive text-vibrantPink-400"></i> Drive Integration
+                    <button onclick="switchAdminTab('upload')" id="tabBtnUpload" class="px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-circle-plus text-gold-400"></i> Add New Product
                     </button>
                 </div>
 
                 <!-- Action Controls -->
                 <div class="flex items-center gap-3">
-                    <button onclick="exportCatalogJSON()" class="px-3.5 py-2 bg-darkbg-800 hover:bg-darkbg-700 border border-gold-500/40 text-gold-300 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow">
-                        <i class="fa-solid fa-file-export text-vibrantPink-400"></i> <span class="hidden sm:inline">Export Sync JSON</span>
+                    <button onclick="exportCatalogJSON()" class="px-4 py-2 bg-gradient-to-r from-gold-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-lg glow-pink">
+                        <i class="fa-solid fa-file-export"></i> <span class="hidden sm:inline">Sync Storefront JSON</span>
                     </button>
                 </div>
 
@@ -140,55 +136,85 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-        <!-- 1. DRIVE CONFIGURATION BAR & STATUS ALERT -->
-        <section class="card-glass rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 border border-gold-500/30 shadow-2xl">
-            <div class="flex items-center gap-3.5">
-                <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/60 border border-vibrantPink-500/40 flex items-center justify-center text-vibrantPink-400 text-lg flex-shrink-0">
-                    <i class="fa-brands fa-google-drive"></i>
+        <!-- Stats Overview Cards -->
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="card-glass rounded-2xl p-4 border border-gold-500/20 flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-lg flex-shrink-0">
+                    <i class="fa-solid fa-gem"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-2">
-                        <h3 class="font-serif font-bold text-sm text-gold-100">Google Drive & Apps Script Web App Endpoint</h3>
-                        <span id="endpointStatusBadge" class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase">Local Mode</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-0.5">Save photos to Drive and append catalog entries directly into Google Sheets.</p>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Total Products</span>
+                    <span id="statTotalItems" class="font-serif text-xl font-black text-white">0</span>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2 w-full md:w-auto">
-                <input type="text" id="scriptUrlInput" placeholder="Paste Google Apps Script Web App URL (https://script.google.com/macros/s/.../exec)" class="bg-darkbg-950 border border-gold-500/30 text-white text-xs px-3.5 py-2.5 rounded-xl w-full md:w-80 focus:outline-none focus:border-vibrantPink-500">
-                <button onclick="saveEndpointURL()" class="px-4 py-2.5 bg-gradient-to-r from-gold-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold text-xs rounded-xl shadow-md flex-shrink-0">Save & Test</button>
+            <div class="card-glass rounded-2xl p-4 border border-gold-500/20 flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-vibrantPink-500/10 border border-vibrantPink-500/30 flex items-center justify-center text-vibrantPink-400 text-lg flex-shrink-0">
+                    <i class="fa-solid fa-ring"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">1 Gram Jewelry</span>
+                    <span id="statJewelryCount" class="font-serif text-xl font-black text-white">0</span>
+                </div>
+            </div>
+
+            <div class="card-glass rounded-2xl p-4 border border-gold-500/20 flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-vibrantPink-500/10 border border-vibrantPink-500/30 flex items-center justify-center text-vibrantPink-300 text-lg flex-shrink-0">
+                    <i class="fa-solid fa-spa"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Hijab Essentials</span>
+                    <span id="statHijabCount" class="font-serif text-xl font-black text-white">0</span>
+                </div>
+            </div>
+
+            <div class="card-glass rounded-2xl p-4 border border-gold-500/20 flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-300 text-lg flex-shrink-0">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Stock Value</span>
+                    <span id="statStockValue" class="font-serif text-xl font-black text-gold-300">₹0</span>
+                </div>
             </div>
         </section>
 
         <!-- TAB 1: INVENTORY CATALOG & SUB-CATEGORY FILTERS -->
         <section id="tabCatalogSection" class="space-y-6">
             
-            <!-- Filter Bar Header -->
+            <!-- Sub-Category Filter Control Panel -->
             <div class="card-glass rounded-3xl p-6 border border-gold-500/30 shadow-2xl space-y-5">
                 
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <span class="text-xs text-vibrantPink-400 font-bold tracking-widest uppercase">AK Queen's Store Inventory</span>
-                        <h2 class="font-serif text-2xl font-black gold-pink-text mt-0.5">Filter Catalog By Sub-Category</h2>
+                        <span class="text-xs text-vibrantPink-400 font-bold tracking-widest uppercase">AK Queen's Store Catalog</span>
+                        <h2 class="font-serif text-2xl font-black gold-pink-text mt-0.5">Filter Products By Sub-Category</h2>
                     </div>
 
-                    <!-- Search Box -->
-                    <div class="relative max-w-xs w-full">
-                        <input type="text" id="adminSearchInput" onkeyup="renderAdminTable()" placeholder="Search title or SKU..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-2.5 rounded-xl focus:outline-none focus:border-vibrantPink-500">
-                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                    <!-- Search Box & View Mode Toggle -->
+                    <div class="flex items-center gap-3">
+                        <div class="relative max-w-xs w-full">
+                            <input type="text" id="adminSearchInput" onkeyup="renderAdminCatalog()" placeholder="Search product title or SKU..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-2.5 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                        </div>
+
+                        <!-- View Toggle -->
+                        <div class="flex items-center bg-darkbg-950 p-1 rounded-xl border border-gold-500/20">
+                            <button onclick="setViewMode('table')" id="btnViewTable" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gold-300 bg-darkbg-800 shadow"><i class="fa-solid fa-table-list"></i></button>
+                            <button onclick="setViewMode('grid')" id="btnViewGrid" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white"><i class="fa-solid fa-border-all"></i></button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Primary Category Switcher -->
+                <!-- Main Category Chips -->
                 <div class="flex items-center gap-2 border-b border-gold-500/20 pb-3">
-                    <button onclick="filterMainCategory('all')" id="btnMainCatAll" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink">
+                    <button onclick="filterMainCategory('all')" id="btnMainCatAll" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink transition-all">
                         <i class="fa-solid fa-crown mr-1"></i> All Categories
                     </button>
-                    <button onclick="filterMainCategory('jewelry')" id="btnMainCatJewelry" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500">
+                    <button onclick="filterMainCategory('jewelry')" id="btnMainCatJewelry" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500 transition-all">
                         <i class="fa-solid fa-gem text-gold-400 mr-1"></i> 1 Gram Plated Jewelry
                     </button>
-                    <button onclick="filterMainCategory('hijab')" id="btnMainCatHijab" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-vibrantPink-400">
+                    <button onclick="filterMainCategory('hijab')" id="btnMainCatHijab" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-vibrantPink-400 transition-all">
                         <i class="fa-solid fa-spa text-vibrantPink-400 mr-1"></i> Hijab Essentials
                     </button>
                 </div>
@@ -200,14 +226,14 @@
                         <span id="filteredCountBadge" class="text-slate-400 text-[11px] font-medium">Showing all items</span>
                     </div>
                     <div id="subCatPillContainer" class="flex gap-2 overflow-x-auto pb-2 pt-1 subcat-scroll">
-                        <!-- Rendered dynamically -->
+                        <!-- Populated dynamically -->
                     </div>
                 </div>
 
             </div>
 
-            <!-- Product Table -->
-            <div class="card-glass rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl">
+            <!-- Product Table View Container -->
+            <div id="catalogTableView" class="card-glass rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-200">
                         <thead class="bg-darkbg-950/90 text-gold-300 font-bold uppercase text-[10px] tracking-wider border-b border-gold-500/20">
@@ -217,16 +243,20 @@
                                 <th class="p-4">Sub-Category</th>
                                 <th class="p-4">Price</th>
                                 <th class="p-4">Anti-Tarnish</th>
-                                <th class="p-4">Stock Status</th>
-                                <th class="p-4 text-center">Drive Sync</th>
+                                <th class="p-4">Cloud Status</th>
                                 <th class="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="inventoryTableBody" class="divide-y divide-darkbg-800">
-                            <!-- Javascript populates inventory rows -->
+                            <!-- Populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <!-- Product Grid View Container -->
+            <div id="catalogGridView" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <!-- Populated by JavaScript -->
             </div>
 
         </section>
@@ -238,9 +268,9 @@
                 <div class="flex items-center justify-between pb-6 border-b border-gold-500/20">
                     <div>
                         <span id="formTitleTag" class="text-xs text-vibrantPink-400 font-bold uppercase tracking-widest">AK Queen's Product Studio</span>
-                        <h2 id="formHeading" class="font-serif text-2xl sm:text-3xl font-black gold-pink-text mt-0.5">Upload New Product Item</h2>
+                        <h2 id="formHeading" class="font-serif text-2xl sm:text-3xl font-black gold-pink-text mt-0.5">Upload Product To Drive & Sheets</h2>
                     </div>
-                    <button onclick="resetForm()" class="px-3.5 py-1.5 bg-darkbg-900 border border-gold-500/30 text-xs text-slate-300 hover:text-white rounded-xl">Clear Form</button>
+                    <button onclick="resetForm()" class="px-3.5 py-1.5 bg-darkbg-900 border border-gold-500/30 text-xs text-slate-300 hover:text-white rounded-xl transition-all">Clear Form</button>
                 </div>
 
                 <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-6 pt-4">
@@ -266,16 +296,16 @@
 
                     </div>
 
-                    <!-- Title & Badge -->
+                    <!-- Title & Tag Badge -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         
                         <div class="sm:col-span-2">
-                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Product Title <span class="text-vibrantPink-500">*</span></label>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Product Title / Name <span class="text-vibrantPink-500">*</span></label>
                             <input type="text" id="formTitle" required placeholder="e.g., Royal Anti-Tarnish Short Chain with Pendant" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Badge / Tag</label>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Badge / Display Tag</label>
                             <select id="formBadge" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
                                 <option value="6-Month Anti-Tarnish">6-Month Anti-Tarnish</option>
                                 <option value="Best Seller">Best Seller</option>
@@ -287,7 +317,7 @@
 
                     </div>
 
-                    <!-- Prices & Anti Tarnish Switch -->
+                    <!-- Pricing & Anti-Tarnish Option -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         
                         <div>
@@ -303,39 +333,39 @@
                         <div>
                             <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Anti-Tarnish Guarantee</label>
                             <select id="formAntiTarnish" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
-                                <option value="Yes">Yes (Guaranteed)</option>
-                                <option value="No">N/A (Standard)</option>
+                                <option value="Yes">Yes (6-Month Warranty)</option>
+                                <option value="No">N/A (Standard Item)</option>
                             </select>
                         </div>
 
                     </div>
 
-                    <!-- Image Upload Component -->
+                    <!-- Image Drag & Drop File Upload Container -->
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gold-300 uppercase">Product Image (Drive Upload / File) <span class="text-vibrantPink-500">*</span></label>
+                        <label class="block text-xs font-bold text-gold-300 uppercase">Product Image File (Auto Uploads to Google Drive) <span class="text-vibrantPink-500">*</span></label>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
                             
                             <div class="sm:col-span-8 relative border-2 border-dashed border-gold-500/30 hover:border-vibrantPink-500 rounded-2xl p-4 text-center bg-darkbg-950/60 transition-colors">
                                 <input type="file" id="formFile" accept="image/*" onchange="handleImagePreview(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
                                 <div class="space-y-1">
                                     <i class="fa-solid fa-cloud-arrow-up text-2xl text-vibrantPink-400"></i>
-                                    <p class="text-xs font-bold text-slate-200">Click or drag image file here</p>
-                                    <p class="text-[10px] text-slate-400">PNG, JPG, WEBP formats up to 5MB</p>
+                                    <p class="text-xs font-bold text-slate-200">Click or Drag & Drop Product Image</p>
+                                    <p class="text-[10px] text-slate-400">PNG, JPG, WEBP formats supported</p>
                                 </div>
                             </div>
 
                             <div class="sm:col-span-4 flex justify-center">
-                                <div class="w-28 h-28 rounded-2xl border border-gold-500/30 bg-darkbg-950 overflow-hidden relative flex items-center justify-center">
+                                <div class="w-28 h-28 rounded-2xl border border-gold-500/30 bg-darkbg-950 overflow-hidden relative flex items-center justify-center shadow-lg">
                                     <img id="imagePreview" src="https://placehold.co/150x150/141418/D4AF37?text=Preview" class="w-full h-full object-cover">
                                     <span class="absolute bottom-1 right-1 text-[9px] bg-darkbg-900/90 text-gold-400 px-1.5 py-0.5 rounded font-bold">Preview</span>
                                 </div>
                             </div>
 
                         </div>
-                        <input type="text" id="formImageUrl" placeholder="Or paste direct image URL (https://...)" class="w-full bg-darkbg-950 border border-gold-500/20 text-white text-xs px-4 py-2 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        <input type="text" id="formImageUrl" placeholder="Or paste external image URL (https://...)" class="w-full bg-darkbg-950 border border-gold-500/20 text-white text-xs px-4 py-2.5 rounded-xl focus:outline-none focus:border-vibrantPink-500">
                     </div>
 
-                    <!-- Specs & Description -->
+                    <!-- Specifications & Description -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Key Specifications</label>
@@ -343,15 +373,15 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Description</label>
-                            <input type="text" id="formDescription" placeholder="Handcrafted with precision and long-lasting shine..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                            <textarea id="formDescription" rows="2" placeholder="Handcrafted with precision and long-lasting shine..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs p-3 rounded-xl focus:outline-none focus:border-vibrantPink-500"></textarea>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="pt-4 flex justify-end gap-3">
+                    <!-- Submit Action Button -->
+                    <div class="pt-4 flex justify-end gap-3 border-t border-gold-500/20">
                         <button type="button" onclick="switchAdminTab('catalog')" class="px-6 py-3.5 bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider">Cancel</button>
-                        <button type="submit" id="submitFormBtn" class="px-8 py-3.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold text-xs rounded-xl shadow-xl glow-pink uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> <span>Upload To Catalog & Drive</span>
+                        <button type="submit" id="submitFormBtn" class="px-8 py-3.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold text-xs rounded-xl shadow-xl glow-pink uppercase tracking-wider flex items-center gap-2 transition-all">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> <span>Save Product to Google Sheets & Drive</span>
                         </button>
                     </div>
 
@@ -360,131 +390,37 @@
             </div>
         </section>
 
-        <!-- TAB 3: GOOGLE DRIVE APPS SCRIPT SETUP GUIDE -->
-        <section id="tabDriveSection" class="hidden space-y-6">
-            <div class="card-glass rounded-3xl p-6 sm:p-8 border border-gold-500/30 shadow-2xl max-w-4xl mx-auto space-y-6">
-                
-                <div>
-                    <span class="text-xs text-vibrantPink-400 font-bold uppercase tracking-widest">Connect Google Cloud & Drive</span>
-                    <h2 class="font-serif text-2xl sm:text-3xl font-black gold-pink-text mt-0.5">Google Apps Script Integration Instructions</h2>
-                    <p class="text-xs text-slate-300 mt-1">Deploy this 100% free Google Apps Script to save product images directly into your Google Drive folder and record catalog rows into Google Sheets.</p>
-                </div>
-
-                <!-- Steps List -->
-                <div class="space-y-4 text-xs">
-                    
-                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
-                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">1</div>
-                        <div>
-                            <h4 class="font-bold text-white">Create a Google Sheet & Google Drive Folder</h4>
-                            <p class="text-slate-400 mt-0.5">Go to Google Drive, create a folder named <strong class="text-gold-300">AK Queen Catalog Images</strong> and a Google Sheet named <strong class="text-gold-300">AK Queen Products DB</strong>.</p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
-                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">2</div>
-                        <div>
-                            <h4 class="font-bold text-white">Open Apps Script Editor</h4>
-                            <p class="text-slate-400 mt-0.5">Inside your Google Sheet, click <strong class="text-gold-300">Extensions &gt; Apps Script</strong>.</p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
-                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">3</div>
-                        <div class="w-full space-y-2">
-                            <h4 class="font-bold text-white">Copy & Paste the GAS Code Template Below:</h4>
-                            <div class="relative">
-                                <textarea id="gasCodeBox" readonly class="w-full h-48 bg-darkbg-950 font-mono text-[11px] text-gold-300 p-3 rounded-xl border border-gold-500/30 focus:outline-none">
-function doPost(e) {
-  try {
-    var data = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
-    var imageUrl = "";
-    if (data.imageBase64) {
-      var folderName = "AK Queen Catalog Images";
-      var folders = DriveApp.getFoldersByName(folderName);
-      var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
-      
-      var contentType = data.imageBase64.substring(data.imageBase64.indexOf(":")+1, data.imageBase64.indexOf(";"));
-      var base64Data = data.imageBase64.substring(data.imageBase64.indexOf(",") + 1);
-      var decodedData = Utilities.base64Decode(base64Data);
-      var blob = Utilities.newBlob(decodedData, contentType, data.title + ".jpg");
-      
-      var file = folder.createFile(blob);
-      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      imageUrl = "https://lh3.googleusercontent.com/d/" + file.getId();
-    } else {
-      imageUrl = data.imageUrl || "";
-    }
-    
-    sheet.appendRow([
-      new Date(),
-      data.id || Date.now(),
-      data.mainCategory,
-      data.subCategory,
-      data.title,
-      data.price,
-      data.originalPrice,
-      data.badge,
-      data.antiTarnish,
-      data.specs,
-      data.description,
-      imageUrl
-    ]);
-    
-    return ContentService.createTextOutput(JSON.stringify({ status: "success", imageUrl: imageUrl }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-                                </textarea>
-                                <button onclick="copyGASCode()" class="absolute top-2 right-2 px-3 py-1 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-bold text-[10px] rounded-lg shadow">Copy Code</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
-                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">4</div>
-                        <div>
-                            <h4 class="font-bold text-white">Deploy as Web App</h4>
-                            <p class="text-slate-400 mt-0.5">Click <strong class="text-gold-300">Deploy &gt; New deployment</strong>. Select type <strong>Web app</strong>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Click Deploy and copy the Web App URL into the config box above!</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
     </main>
 
-    <!-- Toast Notification Overlay -->
+    <!-- Toast Notification Container -->
     <div id="adminToastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- Quick Card Preview Modal -->
+    <!-- Quick-View Card Preview Modal -->
     <div id="previewModal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
         <div onclick="closePreviewModal()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md"></div>
         <div id="previewModalContent" class="relative bg-darkbg-900 border border-gold-500/40 rounded-3xl max-w-sm w-full p-6 text-white shadow-2xl pointer-events-auto transform scale-95 transition-transform duration-300 z-10">
-            <!-- Rendered by JS -->
+            <!-- Rendered dynamically by JS -->
         </div>
     </div>
 
     <script>
-        // Sub-categories list
+        // =========================================================================
+        // HARDCODED BACKEND GOOGLE APPS SCRIPT WEB APP ENDPOINT
+        // =========================================================================
+        const GOOGLE_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby8vhNW8ZRmhV9mN99zjhN-8j7wYCcII40Uf-P6_CbnpLMWzmp-Zh-cvx_msqA1v_fB/exec';
+
+        // Sub-categories list mapping
         const jewelrySubCats = [
             "Short Chains", "Long Chains", "Bangles", "Bracelet", "Rings", 
             "Haram Set", "Necklace Set", "Earrings", "Vintage Set", "Antiq Models"
         ];
 
         const hijabSubCats = [
-            "Premium Hijabs / Scarves", "Hijab Pins & Magnetic Clips", 
+            "Premium Hijabs / Scarves", "Hijab Pins & Clips", 
             "Undercaps / Inner Caps", "Hijab Brooches & Accessories"
         ];
 
-        // Default Initial Inventory
+        // Initial Seed Catalog Data
         const initialProducts = [
             {
                 id: 101,
@@ -501,7 +437,7 @@ function doPost(e) {
                 driveSynced: true
             },
             {
-                id: 106,
+                id: 102,
                 title: "Bridal Temple Goddess Lakshmi Haram Set",
                 mainCategory: "jewelry",
                 subCategory: "Haram Set",
@@ -526,25 +462,26 @@ function doPost(e) {
                 specs: "180x75 cm • Ultra Light Non-Slip Chiffon Fabric",
                 description: "Ultra-soft bubble chiffon scarf offering full opacity with effortless drape.",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600",
-                driveSynced: false
+                driveSynced: true
             }
         ];
 
-        // Global State
+        // Application State Variables
         let adminProducts = [];
         let filterMainCat = 'all';
         let filterSubCat = 'all';
+        let currentViewMode = 'table';
         let uploadedBase64 = '';
 
         window.onload = function() {
             loadStoredProducts();
-            loadStoredEndpoint();
             updateFormSubCategories();
             renderFilterSubCatPills();
-            renderAdminTable();
+            renderAdminCatalog();
+            calculateStats();
         };
 
-        // Load & Save Local Storage
+        // Load / Save Local Storage Persistence
         function loadStoredProducts() {
             const saved = localStorage.getItem('ak_queens_admin_products');
             if (saved) {
@@ -561,59 +498,61 @@ function doPost(e) {
 
         function saveProductsToStorage() {
             localStorage.setItem('ak_queens_admin_products', JSON.stringify(adminProducts));
+            calculateStats();
         }
 
-        function loadStoredEndpoint() {
-            const url = localStorage.getItem('ak_queens_gas_url');
-            if (url) {
-                document.getElementById('scriptUrlInput').value = url;
-                document.getElementById('endpointStatusBadge').innerText = "Connected";
-                document.getElementById('endpointStatusBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
-            }
+        // Dashboard Stats Counter
+        function calculateStats() {
+            document.getElementById('statTotalItems').innerText = adminProducts.length;
+            
+            const jewelryCount = adminProducts.filter(p => p.mainCategory === 'jewelry').length;
+            const hijabCount = adminProducts.filter(p => p.mainCategory === 'hijab').length;
+            const totalVal = adminProducts.reduce((sum, p) => sum + (parseFloat(p.price) || 0), 0);
+
+            document.getElementById('statJewelryCount').innerText = jewelryCount;
+            document.getElementById('statHijabCount').innerText = hijabCount;
+            document.getElementById('statStockValue').innerText = '₹' + totalVal.toLocaleString('en-IN');
         }
 
-        function saveEndpointURL() {
-            const url = document.getElementById('scriptUrlInput').value.trim();
-            if (url) {
-                localStorage.setItem('ak_queens_gas_url', url);
-                document.getElementById('endpointStatusBadge').innerText = "Connected";
-                document.getElementById('endpointStatusBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
-                showAdminToast("Google Apps Script Endpoint Saved!");
-            } else {
-                localStorage.removeItem('ak_queens_gas_url');
-                document.getElementById('endpointStatusBadge').innerText = "Local Mode";
-                document.getElementById('endpointStatusBadge').className = "bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
-                showAdminToast("Endpoint cleared. Operating in local storage mode.");
-            }
-        }
-
-        // Tab Switcher
         function switchAdminTab(tab) {
             document.getElementById('tabCatalogSection').classList.add('hidden');
             document.getElementById('tabUploadSection').classList.add('hidden');
-            document.getElementById('tabDriveSection').classList.add('hidden');
 
             const btnCat = document.getElementById('tabBtnCatalog');
             const btnUp = document.getElementById('tabBtnUpload');
-            const btnDrv = document.getElementById('tabBtnDrive');
 
-            [btnCat, btnUp, btnDrv].forEach(b => {
-                b.className = "px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2";
+            [btnCat, btnUp].forEach(b => {
+                b.className = "px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2 transition-all";
             });
 
             if (tab === 'catalog') {
                 document.getElementById('tabCatalogSection').classList.remove('hidden');
-                btnCat.className = "px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink";
+                btnCat.className = "px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink transition-all";
             } else if (tab === 'upload') {
                 document.getElementById('tabUploadSection').classList.remove('hidden');
-                btnUp.className = "px-4 py-2 rounded-xl bg-gold-500 text-darkbg-950 font-black shadow-md flex items-center gap-2 glow-gold";
-            } else if (tab === 'drive') {
-                document.getElementById('tabDriveSection').classList.remove('hidden');
-                btnDrv.className = "px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink";
+                btnUp.className = "px-4 py-2 rounded-xl bg-gold-500 text-darkbg-950 font-black shadow-md flex items-center gap-2 glow-gold transition-all";
             }
         }
 
-        // Dynamic Sub-Category Filtering Engine
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const btnTable = document.getElementById('btnViewTable');
+            const btnGrid = document.getElementById('btnViewGrid');
+
+            if (mode === 'table') {
+                document.getElementById('catalogTableView').classList.remove('hidden');
+                document.getElementById('catalogGridView').classList.add('hidden');
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-gold-300 bg-darkbg-800 shadow";
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white";
+            } else {
+                document.getElementById('catalogTableView').classList.add('hidden');
+                document.getElementById('catalogGridView').classList.remove('hidden');
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-gold-300 bg-darkbg-800 shadow";
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white";
+            }
+            renderAdminCatalog();
+        }
+
         function filterMainCategory(cat) {
             filterMainCat = cat;
             filterSubCat = 'all';
@@ -622,18 +561,18 @@ function doPost(e) {
             const btnJ = document.getElementById('btnMainCatJewelry');
             const btnH = document.getElementById('btnMainCatHijab');
 
-            [btnAll, btnJ, btnH].forEach(b => b.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500");
+            [btnAll, btnJ, btnH].forEach(b => b.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500 transition-all");
 
             if (cat === 'all') {
-                btnAll.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink";
+                btnAll.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink transition-all";
             } else if (cat === 'jewelry') {
-                btnJ.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-gold-500 text-darkbg-950 font-black shadow-md glow-gold";
+                btnJ.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-gold-500 text-darkbg-950 font-black shadow-md glow-gold transition-all";
             } else if (cat === 'hijab') {
-                btnH.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink";
+                btnH.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink transition-all";
             }
 
             renderFilterSubCatPills();
-            renderAdminTable();
+            renderAdminCatalog();
         }
 
         function renderFilterSubCatPills() {
@@ -667,12 +606,12 @@ function doPost(e) {
                 filterSubCat = subName;
             }
             renderFilterSubCatPills();
-            renderAdminTable();
+            renderAdminCatalog();
         }
 
-        // Render Inventory Data Table
-        function renderAdminTable() {
+        function renderAdminCatalog() {
             const tbody = document.getElementById('inventoryTableBody');
+            const gridContainer = document.getElementById('catalogGridView');
             const search = document.getElementById('adminSearchInput').value.toLowerCase().trim();
 
             let items = adminProducts;
@@ -694,15 +633,22 @@ function doPost(e) {
             if (items.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="8" class="p-8 text-center text-slate-400">
+                        <td colspan="7" class="p-8 text-center text-slate-400">
                             <i class="fa-solid fa-boxes-stacked text-2xl text-gold-400 mb-2 block"></i>
-                            No catalog items match this sub-category filter.
+                            No items found matching this sub-category filter.
                         </td>
                     </tr>
+                `;
+                gridContainer.innerHTML = `
+                    <div class="col-span-full p-12 text-center card-glass rounded-3xl border border-gold-500/20 text-slate-400">
+                        <i class="fa-solid fa-boxes-stacked text-3xl text-gold-400 mb-2 block"></i>
+                        No items found matching this sub-category filter.
+                    </div>
                 `;
                 return;
             }
 
+            // Table View
             tbody.innerHTML = items.map(item => `
                 <tr class="hover:bg-darkbg-800/50 transition-colors">
                     <td class="p-4 flex items-center gap-3">
@@ -728,21 +674,46 @@ function doPost(e) {
                         </span>
                     </td>
                     <td class="p-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-vibrantPink-900/50 text-vibrantPink-300 border border-vibrantPink-500/30">In Stock</span>
-                    </td>
-                    <td class="p-4 text-center">
-                        <i class="fa-solid ${item.driveSynced ? 'fa-cloud-check text-emerald-400' : 'fa-database text-amber-400'} text-sm" title="${item.driveSynced ? 'Synced with Drive' : 'Saved in Local Storage'}"></i>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.driveSynced ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'}">
+                            <i class="fa-solid ${item.driveSynced ? 'fa-cloud-check' : 'fa-database'} mr-1"></i>
+                            ${item.driveSynced ? 'Drive Synced' : 'Local'}
+                        </span>
                     </td>
                     <td class="p-4 text-right space-x-1.5">
-                        <button onclick="previewItemCard(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-gold-300 hover:text-white rounded-lg text-xs" title="Preview Card"><i class="fa-solid fa-eye"></i></button>
-                        <button onclick="editProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-vibrantPink-400 hover:text-white rounded-lg text-xs" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button onclick="deleteProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-rose-400 hover:text-rose-300 rounded-lg text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="previewItemCard(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-gold-300 hover:text-white rounded-lg text-xs transition-colors" title="Quick View"><i class="fa-solid fa-eye"></i></button>
+                        <button onclick="editProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-vibrantPink-400 hover:text-white rounded-lg text-xs transition-colors" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="deleteProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-rose-400 hover:text-rose-300 rounded-lg text-xs transition-colors" title="Delete"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
             `).join('');
+
+            // Grid View
+            gridContainer.innerHTML = items.map(item => `
+                <div class="card-glass rounded-2xl p-4 border border-gold-500/30 flex flex-col justify-between space-y-3 hover:border-vibrantPink-500 transition-all">
+                    <div class="space-y-2">
+                        <div class="aspect-square rounded-xl overflow-hidden bg-darkbg-950 border border-gold-500/20 relative">
+                            <img src="${item.image}" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 text-[9px] bg-darkbg-900/90 text-gold-300 font-bold px-2 py-0.5 rounded border border-gold-500/30 uppercase">${item.subCategory}</span>
+                        </div>
+                        <h4 class="font-bold text-white text-xs line-clamp-1">${item.title}</h4>
+                        <p class="text-[11px] text-slate-400 line-clamp-2">${item.description}</p>
+                    </div>
+                    <div class="pt-2 border-t border-gold-500/20 flex items-center justify-between">
+                        <div>
+                            <span class="text-sm font-black text-gold-300">₹${item.price.toLocaleString('en-IN')}</span>
+                            ${item.originalPrice ? `<span class="text-[10px] text-slate-500 line-through block">₹${item.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <button onclick="previewItemCard(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-gold-300 hover:text-white rounded-lg text-xs"><i class="fa-solid fa-eye"></i></button>
+                            <button onclick="editProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-vibrantPink-400 hover:text-white rounded-lg text-xs"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="deleteProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-rose-400 hover:text-rose-300 rounded-lg text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Form Dynamic Subcategories
+        // Form Dynamic Subcategories Mapping
         function updateFormSubCategories() {
             const cat = document.getElementById('formCategory').value;
             const select = document.getElementById('formSubCategory');
@@ -764,13 +735,12 @@ function doPost(e) {
             reader.readAsDataURL(file);
         }
 
-        // Product Form Submission
         async function handleProductSubmit(e) {
             e.preventDefault();
 
             const submitBtn = document.getElementById('submitFormBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Processing...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>Syncing to Google Drive & Sheets...</span>`;
 
             const editId = document.getElementById('editProductId').value;
             const mainCat = document.getElementById('formCategory').value;
@@ -781,42 +751,47 @@ function doPost(e) {
             const originalPrice = parseFloat(document.getElementById('formOriginalPrice').value) || (price + 500);
             const antiTarnish = document.getElementById('formAntiTarnish').value;
             const specs = document.getElementById('formSpecs').value || "1 Gram Gold Plated • High Polish";
-            const description = document.getElementById('formDescription').value || "Handcrafted luxury jewelry from AK Queen's Choice.";
+            const description = document.getElementById('formDescription').value || "Handcrafted luxury item from AK Queen's Choice.";
             const customUrl = document.getElementById('formImageUrl').value.trim();
 
             let finalImageUrl = customUrl || uploadedBase64 || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600";
             let driveSynced = false;
 
-            // Attempt Google Apps Script Drive Upload if URL exists
-            const gasUrl = localStorage.getItem('ak_queens_gas_url');
-            if (gasUrl) {
-                try {
-                    const response = await fetch(gasUrl, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            id: editId || Date.now(),
-                            mainCategory: mainCat,
-                            subCategory: subCat,
-                            title: title,
-                            price: price,
-                            originalPrice: originalPrice,
-                            badge: badge,
-                            antiTarnish: antiTarnish,
-                            specs: specs,
-                            description: description,
-                            imageBase64: uploadedBase64,
-                            imageUrl: customUrl
-                        })
-                    });
-                    const resData = await response.json();
-                    if (resData.status === 'success' && resData.imageUrl) {
+            // Transmit Payload directly to Hardcoded Google Apps Script Web App
+            try {
+                const payload = {
+                    id: editId || Date.now(),
+                    mainCategory: mainCat,
+                    subCategory: subCat,
+                    title: title,
+                    price: price,
+                    originalPrice: originalPrice,
+                    badge: badge,
+                    antiTarnish: antiTarnish,
+                    specs: specs,
+                    description: description,
+                    imageFile: uploadedBase64,
+                    imageName: title.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.jpg',
+                    imageUrl: customUrl
+                };
+
+                const response = await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                const resData = await response.json();
+                if (resData.result === 'success' || resData.status === 'success') {
+                    if (resData.imageUrl) {
                         finalImageUrl = resData.imageUrl;
-                        driveSynced = true;
-                        showAdminToast("Uploaded photo to Google Drive & recorded to Google Sheet!");
                     }
-                } catch(err) {
-                    console.warn("GAS Endpoint connection error, using local mode fallback.", err);
+                    driveSynced = true;
+                    showAdminToast("Uploaded photo to Google Drive & recorded in Google Sheets!");
                 }
+            } catch(err) {
+                console.warn("Google Apps Script sync warning (saved locally):", err);
+                showAdminToast("Saved product locally in browser cache!");
             }
 
             const newProduct = {
@@ -837,7 +812,7 @@ function doPost(e) {
             if (editId) {
                 const index = adminProducts.findIndex(p => p.id === parseInt(editId));
                 if (index !== -1) adminProducts[index] = newProduct;
-                showAdminToast("Product details updated successfully!");
+                showAdminToast("Product updated successfully!");
             } else {
                 adminProducts.unshift(newProduct);
                 showAdminToast("New product added to catalog!");
@@ -845,11 +820,11 @@ function doPost(e) {
 
             saveProductsToStorage();
             resetForm();
-            renderAdminTable();
+            renderAdminCatalog();
             switchAdminTab('catalog');
 
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>Upload To Catalog & Drive</span>`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>Save Product to Google Sheets & Drive</span>`;
         }
 
         function editProduct(id) {
@@ -870,7 +845,7 @@ function doPost(e) {
             document.getElementById('formImageUrl').value = product.image;
             document.getElementById('imagePreview').src = product.image;
 
-            document.getElementById('formHeading').innerText = "Edit Catalog Item";
+            document.getElementById('formHeading').innerText = "Edit Product Item";
             document.getElementById('formTitleTag').innerText = "Update Existing Item #" + product.id;
 
             switchAdminTab('upload');
@@ -880,7 +855,7 @@ function doPost(e) {
             if (!confirm("Are you sure you want to remove this item from catalog?")) return;
             adminProducts = adminProducts.filter(p => p.id !== id);
             saveProductsToStorage();
-            renderAdminTable();
+            renderAdminCatalog();
             showAdminToast("Item deleted from catalog.");
         }
 
@@ -888,13 +863,12 @@ function doPost(e) {
             document.getElementById('productForm').reset();
             document.getElementById('editProductId').value = '';
             document.getElementById('imagePreview').src = "https://placehold.co/150x150/141418/D4AF37?text=Preview";
-            document.getElementById('formHeading').innerText = "Upload New Product Item";
+            document.getElementById('formHeading').innerText = "Upload Product To Drive & Sheets";
             document.getElementById('formTitleTag').innerText = "AK Queen's Product Studio";
             uploadedBase64 = '';
             updateFormSubCategories();
         }
 
-        // Preview Item Modal
         function previewItemCard(id) {
             const item = adminProducts.find(p => p.id === id);
             if (!item) return;
@@ -925,14 +899,6 @@ function doPost(e) {
             document.getElementById('previewModal').classList.add('pointer-events-none', 'opacity-0');
         }
 
-        // Copy GAS Code helper
-        function copyGASCode() {
-            const code = document.getElementById('gasCodeBox').value;
-            navigator.clipboard.writeText(code);
-            showAdminToast("Google Apps Script code copied to clipboard!");
-        }
-
-        // Export JSON Sync
         function exportCatalogJSON() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(adminProducts, null, 2));
             const dlAnchor = document.createElement('a');
@@ -941,10 +907,10 @@ function doPost(e) {
             document.body.appendChild(dlAnchor);
             dlAnchor.click();
             dlAnchor.remove();
-            showAdminToast("Downloaded catalog JSON export!");
+            showAdminToast("Downloaded catalog JSON payload!");
         }
 
-        // Toast Notification System
+        // Toast Alert System
         function showAdminToast(msg) {
             const container = document.getElementById('adminToastContainer');
             const toast = document.createElement('div');
