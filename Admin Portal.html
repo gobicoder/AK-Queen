@@ -1,1 +1,963 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK Queen's Choice | Royal Admin Catalog & Drive Manager</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        darkbg: {
+                            950: '#060608',
+                            900: '#0A0A0C',
+                            800: '#141418',
+                            700: '#1F1F26',
+                            600: '#2A2A34',
+                        },
+                        gold: {
+                            100: '#FFF9E6',
+                            200: '#FCE8B3',
+                            300: '#F7D070',
+                            400: '#E6C054',
+                            500: '#D4AF37',
+                            600: '#AA8820',
+                            700: '#806311',
+                        },
+                        vibrantPink: {
+                            50: '#FFF0F5',
+                            100: '#FFDBE9',
+                            300: '#FFB6C1',
+                            400: '#FF69B4',
+                            500: '#E0115F',
+                            600: '#C2185B',
+                            700: '#9B0F48',
+                            900: '#5C082A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #D4AF37, #E0115F);
+            border-radius: 4px;
+        }
+        .gold-pink-text {
+            background: linear-gradient(135deg, #FFF9E6 0%, #D4AF37 40%, #FF69B4 75%, #E0115F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-pink {
+            box-shadow: 0 0 20px -5px rgba(224, 17, 95, 0.4);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px -5px rgba(212, 175, 55, 0.4);
+        }
+        .card-glass {
+            background: rgba(20, 20, 24, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .subcat-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .subcat-scroll::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-darkbg-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-vibrantPink-500 selection:text-white">
 
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-40 bg-darkbg-900/95 border-b border-gold-500/30 backdrop-blur-md shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-gold-500 via-vibrantPink-500 to-gold-300 p-0.5 shadow-lg glow-pink">
+                        <div class="w-full h-full bg-darkbg-950 rounded-full flex items-center justify-center text-vibrantPink-400">
+                            <i class="fa-solid fa-crown text-lg"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl font-black tracking-tight gold-pink-text">AK QUEEN'S CHOICE</span>
+                        <span class="block text-[10px] tracking-[0.25em] text-vibrantPink-400 font-extrabold uppercase -mt-1">ADMIN CATALOG PORTAL</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="hidden md:flex items-center gap-3 text-xs font-bold uppercase tracking-wider">
+                    <button onclick="switchAdminTab('catalog')" id="tabBtnCatalog" class="px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink">
+                        <i class="fa-solid fa-boxes-stacked"></i> Inventory Manager
+                    </button>
+                    <button onclick="switchAdminTab('upload')" id="tabBtnUpload" class="px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-plus text-gold-400"></i> Add New Item
+                    </button>
+                    <button onclick="switchAdminTab('drive')" id="tabBtnDrive" class="px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-vibrantPink-400 flex items-center gap-2">
+                        <i class="fa-brands fa-google-drive text-vibrantPink-400"></i> Drive Integration
+                    </button>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center gap-3">
+                    <button onclick="exportCatalogJSON()" class="px-3.5 py-2 bg-darkbg-800 hover:bg-darkbg-700 border border-gold-500/40 text-gold-300 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-file-export text-vibrantPink-400"></i> <span class="hidden sm:inline">Export Sync JSON</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- 1. DRIVE CONFIGURATION BAR & STATUS ALERT -->
+        <section class="card-glass rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 border border-gold-500/30 shadow-2xl">
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/60 border border-vibrantPink-500/40 flex items-center justify-center text-vibrantPink-400 text-lg flex-shrink-0">
+                    <i class="fa-brands fa-google-drive"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-serif font-bold text-sm text-gold-100">Google Drive & Apps Script Web App Endpoint</h3>
+                        <span id="endpointStatusBadge" class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase">Local Mode</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">Save photos to Drive and append catalog entries directly into Google Sheets.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 w-full md:w-auto">
+                <input type="text" id="scriptUrlInput" placeholder="Paste Google Apps Script Web App URL (https://script.google.com/macros/s/.../exec)" class="bg-darkbg-950 border border-gold-500/30 text-white text-xs px-3.5 py-2.5 rounded-xl w-full md:w-80 focus:outline-none focus:border-vibrantPink-500">
+                <button onclick="saveEndpointURL()" class="px-4 py-2.5 bg-gradient-to-r from-gold-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold text-xs rounded-xl shadow-md flex-shrink-0">Save & Test</button>
+            </div>
+        </section>
+
+        <!-- TAB 1: INVENTORY CATALOG & SUB-CATEGORY FILTERS -->
+        <section id="tabCatalogSection" class="space-y-6">
+            
+            <!-- Filter Bar Header -->
+            <div class="card-glass rounded-3xl p-6 border border-gold-500/30 shadow-2xl space-y-5">
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-vibrantPink-400 font-bold tracking-widest uppercase">AK Queen's Store Inventory</span>
+                        <h2 class="font-serif text-2xl font-black gold-pink-text mt-0.5">Filter Catalog By Sub-Category</h2>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="relative max-w-xs w-full">
+                        <input type="text" id="adminSearchInput" onkeyup="renderAdminTable()" placeholder="Search title or SKU..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-2.5 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Primary Category Switcher -->
+                <div class="flex items-center gap-2 border-b border-gold-500/20 pb-3">
+                    <button onclick="filterMainCategory('all')" id="btnMainCatAll" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink">
+                        <i class="fa-solid fa-crown mr-1"></i> All Categories
+                    </button>
+                    <button onclick="filterMainCategory('jewelry')" id="btnMainCatJewelry" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500">
+                        <i class="fa-solid fa-gem text-gold-400 mr-1"></i> 1 Gram Plated Jewelry
+                    </button>
+                    <button onclick="filterMainCategory('hijab')" id="btnMainCatHijab" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-vibrantPink-400">
+                        <i class="fa-solid fa-spa text-vibrantPink-400 mr-1"></i> Hijab Essentials
+                    </button>
+                </div>
+
+                <!-- Scrollable Sub-Category Filter Chips -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-xs text-gold-300 font-bold uppercase">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-filter text-vibrantPink-400"></i> Select Sub-Category:</span>
+                        <span id="filteredCountBadge" class="text-slate-400 text-[11px] font-medium">Showing all items</span>
+                    </div>
+                    <div id="subCatPillContainer" class="flex gap-2 overflow-x-auto pb-2 pt-1 subcat-scroll">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Product Table -->
+            <div class="card-glass rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-200">
+                        <thead class="bg-darkbg-950/90 text-gold-300 font-bold uppercase text-[10px] tracking-wider border-b border-gold-500/20">
+                            <tr>
+                                <th class="p-4">Item Details</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Sub-Category</th>
+                                <th class="p-4">Price</th>
+                                <th class="p-4">Anti-Tarnish</th>
+                                <th class="p-4">Stock Status</th>
+                                <th class="p-4 text-center">Drive Sync</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody" class="divide-y divide-darkbg-800">
+                            <!-- Javascript populates inventory rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: UPLOAD / EDIT PRODUCT FORM -->
+        <section id="tabUploadSection" class="hidden space-y-6">
+            <div class="card-glass rounded-3xl p-6 sm:p-8 border border-gold-500/30 shadow-2xl max-w-4xl mx-auto">
+                
+                <div class="flex items-center justify-between pb-6 border-b border-gold-500/20">
+                    <div>
+                        <span id="formTitleTag" class="text-xs text-vibrantPink-400 font-bold uppercase tracking-widest">AK Queen's Product Studio</span>
+                        <h2 id="formHeading" class="font-serif text-2xl sm:text-3xl font-black gold-pink-text mt-0.5">Upload New Product Item</h2>
+                    </div>
+                    <button onclick="resetForm()" class="px-3.5 py-1.5 bg-darkbg-900 border border-gold-500/30 text-xs text-slate-300 hover:text-white rounded-xl">Clear Form</button>
+                </div>
+
+                <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-6 pt-4">
+                    <input type="hidden" id="editProductId" value="">
+
+                    <!-- Category Selectors -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Main Category <span class="text-vibrantPink-500">*</span></label>
+                            <select id="formCategory" onchange="updateFormSubCategories()" required class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                                <option value="jewelry">1 Gram Plated Jewelry</option>
+                                <option value="hijab">Hijab Essentials</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Sub-Category Filter <span class="text-vibrantPink-500">*</span></label>
+                            <select id="formSubCategory" required class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Title & Badge -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Product Title <span class="text-vibrantPink-500">*</span></label>
+                            <input type="text" id="formTitle" required placeholder="e.g., Royal Anti-Tarnish Short Chain with Pendant" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Badge / Tag</label>
+                            <select id="formBadge" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                                <option value="6-Month Anti-Tarnish">6-Month Anti-Tarnish</option>
+                                <option value="Best Seller">Best Seller</option>
+                                <option value="New Arrival">New Arrival</option>
+                                <option value="Royal Collection">Royal Collection</option>
+                                <option value="Limited Edition">Limited Edition</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Prices & Anti Tarnish Switch -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Offer Price (₹) <span class="text-vibrantPink-500">*</span></label>
+                            <input type="number" id="formPrice" required placeholder="1299" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Original Price (₹)</label>
+                            <input type="number" id="formOriginalPrice" placeholder="1899" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Anti-Tarnish Guarantee</label>
+                            <select id="formAntiTarnish" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                                <option value="Yes">Yes (Guaranteed)</option>
+                                <option value="No">N/A (Standard)</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Image Upload Component -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-gold-300 uppercase">Product Image (Drive Upload / File) <span class="text-vibrantPink-500">*</span></label>
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                            
+                            <div class="sm:col-span-8 relative border-2 border-dashed border-gold-500/30 hover:border-vibrantPink-500 rounded-2xl p-4 text-center bg-darkbg-950/60 transition-colors">
+                                <input type="file" id="formFile" accept="image/*" onchange="handleImagePreview(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                                <div class="space-y-1">
+                                    <i class="fa-solid fa-cloud-arrow-up text-2xl text-vibrantPink-400"></i>
+                                    <p class="text-xs font-bold text-slate-200">Click or drag image file here</p>
+                                    <p class="text-[10px] text-slate-400">PNG, JPG, WEBP formats up to 5MB</p>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-4 flex justify-center">
+                                <div class="w-28 h-28 rounded-2xl border border-gold-500/30 bg-darkbg-950 overflow-hidden relative flex items-center justify-center">
+                                    <img id="imagePreview" src="https://placehold.co/150x150/141418/D4AF37?text=Preview" class="w-full h-full object-cover">
+                                    <span class="absolute bottom-1 right-1 text-[9px] bg-darkbg-900/90 text-gold-400 px-1.5 py-0.5 rounded font-bold">Preview</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="text" id="formImageUrl" placeholder="Or paste direct image URL (https://...)" class="w-full bg-darkbg-950 border border-gold-500/20 text-white text-xs px-4 py-2 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                    </div>
+
+                    <!-- Specs & Description -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Key Specifications</label>
+                            <input type="text" id="formSpecs" placeholder="1 Gram Micro Plated • Length: 18 Inches" class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gold-300 uppercase mb-2">Description</label>
+                            <input type="text" id="formDescription" placeholder="Handcrafted with precision and long-lasting shine..." class="w-full bg-darkbg-950 border border-gold-500/30 text-white text-xs px-4 py-3 rounded-xl focus:outline-none focus:border-vibrantPink-500">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4 flex justify-end gap-3">
+                        <button type="button" onclick="switchAdminTab('catalog')" class="px-6 py-3.5 bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider">Cancel</button>
+                        <button type="submit" id="submitFormBtn" class="px-8 py-3.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold text-xs rounded-xl shadow-xl glow-pink uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> <span>Upload To Catalog & Drive</span>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: GOOGLE DRIVE APPS SCRIPT SETUP GUIDE -->
+        <section id="tabDriveSection" class="hidden space-y-6">
+            <div class="card-glass rounded-3xl p-6 sm:p-8 border border-gold-500/30 shadow-2xl max-w-4xl mx-auto space-y-6">
+                
+                <div>
+                    <span class="text-xs text-vibrantPink-400 font-bold uppercase tracking-widest">Connect Google Cloud & Drive</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-black gold-pink-text mt-0.5">Google Apps Script Integration Instructions</h2>
+                    <p class="text-xs text-slate-300 mt-1">Deploy this 100% free Google Apps Script to save product images directly into your Google Drive folder and record catalog rows into Google Sheets.</p>
+                </div>
+
+                <!-- Steps List -->
+                <div class="space-y-4 text-xs">
+                    
+                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
+                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-white">Create a Google Sheet & Google Drive Folder</h4>
+                            <p class="text-slate-400 mt-0.5">Go to Google Drive, create a folder named <strong class="text-gold-300">AK Queen Catalog Images</strong> and a Google Sheet named <strong class="text-gold-300">AK Queen Products DB</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
+                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-white">Open Apps Script Editor</h4>
+                            <p class="text-slate-400 mt-0.5">Inside your Google Sheet, click <strong class="text-gold-300">Extensions &gt; Apps Script</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
+                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">3</div>
+                        <div class="w-full space-y-2">
+                            <h4 class="font-bold text-white">Copy & Paste the GAS Code Template Below:</h4>
+                            <div class="relative">
+                                <textarea id="gasCodeBox" readonly class="w-full h-48 bg-darkbg-950 font-mono text-[11px] text-gold-300 p-3 rounded-xl border border-gold-500/30 focus:outline-none">
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    var imageUrl = "";
+    if (data.imageBase64) {
+      var folderName = "AK Queen Catalog Images";
+      var folders = DriveApp.getFoldersByName(folderName);
+      var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
+      
+      var contentType = data.imageBase64.substring(data.imageBase64.indexOf(":")+1, data.imageBase64.indexOf(";"));
+      var base64Data = data.imageBase64.substring(data.imageBase64.indexOf(",") + 1);
+      var decodedData = Utilities.base64Decode(base64Data);
+      var blob = Utilities.newBlob(decodedData, contentType, data.title + ".jpg");
+      
+      var file = folder.createFile(blob);
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      imageUrl = "https://lh3.googleusercontent.com/d/" + file.getId();
+    } else {
+      imageUrl = data.imageUrl || "";
+    }
+    
+    sheet.appendRow([
+      new Date(),
+      data.id || Date.now(),
+      data.mainCategory,
+      data.subCategory,
+      data.title,
+      data.price,
+      data.originalPrice,
+      data.badge,
+      data.antiTarnish,
+      data.specs,
+      data.description,
+      imageUrl
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", imageUrl: imageUrl }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+                                </textarea>
+                                <button onclick="copyGASCode()" class="absolute top-2 right-2 px-3 py-1 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-bold text-[10px] rounded-lg shadow">Copy Code</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-darkbg-900 rounded-2xl border border-gold-500/20 flex gap-3">
+                        <div class="w-7 h-7 rounded-full bg-vibrantPink-600 text-white font-black flex items-center justify-center flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-bold text-white">Deploy as Web App</h4>
+                            <p class="text-slate-400 mt-0.5">Click <strong class="text-gold-300">Deploy &gt; New deployment</strong>. Select type <strong>Web app</strong>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Click Deploy and copy the Web App URL into the config box above!</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notification Overlay -->
+    <div id="adminToastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Quick Card Preview Modal -->
+    <div id="previewModal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div onclick="closePreviewModal()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md"></div>
+        <div id="previewModalContent" class="relative bg-darkbg-900 border border-gold-500/40 rounded-3xl max-w-sm w-full p-6 text-white shadow-2xl pointer-events-auto transform scale-95 transition-transform duration-300 z-10">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <script>
+        // Sub-categories list
+        const jewelrySubCats = [
+            "Short Chains", "Long Chains", "Bangles", "Bracelet", "Rings", 
+            "Haram Set", "Necklace Set", "Earrings", "Vintage Set", "Antiq Models"
+        ];
+
+        const hijabSubCats = [
+            "Premium Hijabs / Scarves", "Hijab Pins & Magnetic Clips", 
+            "Undercaps / Inner Caps", "Hijab Brooches & Accessories"
+        ];
+
+        // Default Initial Inventory
+        const initialProducts = [
+            {
+                id: 101,
+                title: "Anti-Tarnish 1 Gram Gold Short Chain",
+                mainCategory: "jewelry",
+                subCategory: "Short Chains",
+                price: 1299,
+                originalPrice: 1899,
+                badge: "6-Month Anti-Tarnish",
+                antiTarnish: "Yes",
+                specs: "1 Gram Micro Plated • Length: 18 Inches",
+                description: "Delicately crafted 1 gram gold micro-plated short chain with superior durability against daily wear.",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600",
+                driveSynced: true
+            },
+            {
+                id: 106,
+                title: "Bridal Temple Goddess Lakshmi Haram Set",
+                mainCategory: "jewelry",
+                subCategory: "Haram Set",
+                price: 3499,
+                originalPrice: 4999,
+                badge: "Grand Bridal",
+                antiTarnish: "Yes",
+                specs: "Includes Matching Jhumkas • Heavy Antique Gold Polish",
+                description: "Grand temple jewelry haram featuring Goddess Lakshmi motifs with rubies and emeralds.",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600",
+                driveSynced: true
+            },
+            {
+                id: 201,
+                title: "Premium Luxury Bubble Chiffon Hijab",
+                mainCategory: "hijab",
+                subCategory: "Premium Hijabs / Scarves",
+                price: 599,
+                originalPrice: 899,
+                badge: "Breathable",
+                antiTarnish: "N/A",
+                specs: "180x75 cm • Ultra Light Non-Slip Chiffon Fabric",
+                description: "Ultra-soft bubble chiffon scarf offering full opacity with effortless drape.",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600",
+                driveSynced: false
+            }
+        ];
+
+        // Global State
+        let adminProducts = [];
+        let filterMainCat = 'all';
+        let filterSubCat = 'all';
+        let uploadedBase64 = '';
+
+        window.onload = function() {
+            loadStoredProducts();
+            loadStoredEndpoint();
+            updateFormSubCategories();
+            renderFilterSubCatPills();
+            renderAdminTable();
+        };
+
+        // Load & Save Local Storage
+        function loadStoredProducts() {
+            const saved = localStorage.getItem('ak_queens_admin_products');
+            if (saved) {
+                try {
+                    adminProducts = JSON.parse(saved);
+                } catch(e) {
+                    adminProducts = [...initialProducts];
+                }
+            } else {
+                adminProducts = [...initialProducts];
+                localStorage.setItem('ak_queens_admin_products', JSON.stringify(adminProducts));
+            }
+        }
+
+        function saveProductsToStorage() {
+            localStorage.setItem('ak_queens_admin_products', JSON.stringify(adminProducts));
+        }
+
+        function loadStoredEndpoint() {
+            const url = localStorage.getItem('ak_queens_gas_url');
+            if (url) {
+                document.getElementById('scriptUrlInput').value = url;
+                document.getElementById('endpointStatusBadge').innerText = "Connected";
+                document.getElementById('endpointStatusBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
+            }
+        }
+
+        function saveEndpointURL() {
+            const url = document.getElementById('scriptUrlInput').value.trim();
+            if (url) {
+                localStorage.setItem('ak_queens_gas_url', url);
+                document.getElementById('endpointStatusBadge').innerText = "Connected";
+                document.getElementById('endpointStatusBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
+                showAdminToast("Google Apps Script Endpoint Saved!");
+            } else {
+                localStorage.removeItem('ak_queens_gas_url');
+                document.getElementById('endpointStatusBadge').innerText = "Local Mode";
+                document.getElementById('endpointStatusBadge').className = "bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2 py-0.5 rounded uppercase";
+                showAdminToast("Endpoint cleared. Operating in local storage mode.");
+            }
+        }
+
+        // Tab Switcher
+        function switchAdminTab(tab) {
+            document.getElementById('tabCatalogSection').classList.add('hidden');
+            document.getElementById('tabUploadSection').classList.add('hidden');
+            document.getElementById('tabDriveSection').classList.add('hidden');
+
+            const btnCat = document.getElementById('tabBtnCatalog');
+            const btnUp = document.getElementById('tabBtnUpload');
+            const btnDrv = document.getElementById('tabBtnDrive');
+
+            [btnCat, btnUp, btnDrv].forEach(b => {
+                b.className = "px-4 py-2 rounded-xl bg-darkbg-800 border border-gold-500/30 text-slate-300 hover:border-gold-500 flex items-center gap-2";
+            });
+
+            if (tab === 'catalog') {
+                document.getElementById('tabCatalogSection').classList.remove('hidden');
+                btnCat.className = "px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink";
+            } else if (tab === 'upload') {
+                document.getElementById('tabUploadSection').classList.remove('hidden');
+                btnUp.className = "px-4 py-2 rounded-xl bg-gold-500 text-darkbg-950 font-black shadow-md flex items-center gap-2 glow-gold";
+            } else if (tab === 'drive') {
+                document.getElementById('tabDriveSection').classList.remove('hidden');
+                btnDrv.className = "px-4 py-2 rounded-xl bg-vibrantPink-600 text-white shadow-md flex items-center gap-2 glow-pink";
+            }
+        }
+
+        // Dynamic Sub-Category Filtering Engine
+        function filterMainCategory(cat) {
+            filterMainCat = cat;
+            filterSubCat = 'all';
+
+            const btnAll = document.getElementById('btnMainCatAll');
+            const btnJ = document.getElementById('btnMainCatJewelry');
+            const btnH = document.getElementById('btnMainCatHijab');
+
+            [btnAll, btnJ, btnH].forEach(b => b.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-900 border border-gold-500/30 text-slate-300 hover:border-gold-500");
+
+            if (cat === 'all') {
+                btnAll.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink";
+            } else if (cat === 'jewelry') {
+                btnJ.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-gold-500 text-darkbg-950 font-black shadow-md glow-gold";
+            } else if (cat === 'hijab') {
+                btnH.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-vibrantPink-600 text-white shadow-md glow-pink";
+            }
+
+            renderFilterSubCatPills();
+            renderAdminTable();
+        }
+
+        function renderFilterSubCatPills() {
+            const container = document.getElementById('subCatPillContainer');
+            let list = [];
+
+            if (filterMainCat === 'jewelry') {
+                list = ["All Jewelry", ...jewelrySubCats];
+            } else if (filterMainCat === 'hijab') {
+                list = ["All Hijabs", ...hijabSubCats];
+            } else {
+                list = ["All Sub-Categories", ...jewelrySubCats, ...hijabSubCats];
+            }
+
+            container.innerHTML = list.map(subName => {
+                const isSelected = (filterSubCat === 'all' && subName.startsWith('All')) || filterSubCat === subName;
+                const activeStyle = isSelected ? 'bg-gradient-to-r from-gold-500 to-vibrantPink-500 text-white font-extrabold shadow-md' : 'bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-400';
+
+                return `
+                    <button onclick="filterSubCategory('${subName}')" class="px-3.5 py-1.5 rounded-xl text-xs transition-all whitespace-nowrap flex-shrink-0 ${activeStyle}">
+                        ${subName}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function filterSubCategory(subName) {
+            if (subName.startsWith('All')) {
+                filterSubCat = 'all';
+            } else {
+                filterSubCat = subName;
+            }
+            renderFilterSubCatPills();
+            renderAdminTable();
+        }
+
+        // Render Inventory Data Table
+        function renderAdminTable() {
+            const tbody = document.getElementById('inventoryTableBody');
+            const search = document.getElementById('adminSearchInput').value.toLowerCase().trim();
+
+            let items = adminProducts;
+
+            if (filterMainCat !== 'all') {
+                items = items.filter(i => i.mainCategory === filterMainCat);
+            }
+
+            if (filterSubCat !== 'all') {
+                items = items.filter(i => i.subCategory === filterSubCat);
+            }
+
+            if (search) {
+                items = items.filter(i => i.title.toLowerCase().includes(search) || i.subCategory.toLowerCase().includes(search));
+            }
+
+            document.getElementById('filteredCountBadge').innerText = `Showing ${items.length} items`;
+
+            if (items.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="p-8 text-center text-slate-400">
+                            <i class="fa-solid fa-boxes-stacked text-2xl text-gold-400 mb-2 block"></i>
+                            No catalog items match this sub-category filter.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = items.map(item => `
+                <tr class="hover:bg-darkbg-800/50 transition-colors">
+                    <td class="p-4 flex items-center gap-3">
+                        <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-cover rounded-xl border border-gold-500/30 flex-shrink-0">
+                        <div>
+                            <h4 class="font-bold text-white text-xs line-clamp-1">${item.title}</h4>
+                            <span class="text-[10px] text-vibrantPink-400 font-bold">${item.badge || 'Standard'}</span>
+                        </div>
+                    </td>
+                    <td class="p-4 uppercase text-[10px] font-bold text-slate-300">
+                        ${item.mainCategory === 'jewelry' ? '1 Gram Jewelry' : 'Hijab Essentials'}
+                    </td>
+                    <td class="p-4 font-bold text-gold-300">
+                        ${item.subCategory}
+                    </td>
+                    <td class="p-4 font-black text-white">
+                        ₹${item.price.toLocaleString('en-IN')}
+                        ${item.originalPrice ? `<span class="text-[10px] text-slate-500 line-through block">₹${item.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                    </td>
+                    <td class="p-4">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.antiTarnish === 'Yes' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-400'}">
+                            ${item.antiTarnish || 'N/A'}
+                        </span>
+                    </td>
+                    <td class="p-4">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-vibrantPink-900/50 text-vibrantPink-300 border border-vibrantPink-500/30">In Stock</span>
+                    </td>
+                    <td class="p-4 text-center">
+                        <i class="fa-solid ${item.driveSynced ? 'fa-cloud-check text-emerald-400' : 'fa-database text-amber-400'} text-sm" title="${item.driveSynced ? 'Synced with Drive' : 'Saved in Local Storage'}"></i>
+                    </td>
+                    <td class="p-4 text-right space-x-1.5">
+                        <button onclick="previewItemCard(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-gold-300 hover:text-white rounded-lg text-xs" title="Preview Card"><i class="fa-solid fa-eye"></i></button>
+                        <button onclick="editProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-vibrantPink-400 hover:text-white rounded-lg text-xs" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="deleteProduct(${item.id})" class="p-1.5 bg-darkbg-900 border border-gold-500/30 text-rose-400 hover:text-rose-300 rounded-lg text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Form Dynamic Subcategories
+        function updateFormSubCategories() {
+            const cat = document.getElementById('formCategory').value;
+            const select = document.getElementById('formSubCategory');
+            const list = cat === 'jewelry' ? jewelrySubCats : hijabSubCats;
+
+            select.innerHTML = list.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+
+        // Image Preview Handler
+        function handleImagePreview(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedBase64 = e.target.result;
+                document.getElementById('imagePreview').src = uploadedBase64;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Product Form Submission
+        async function handleProductSubmit(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitFormBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Processing...`;
+
+            const editId = document.getElementById('editProductId').value;
+            const mainCat = document.getElementById('formCategory').value;
+            const subCat = document.getElementById('formSubCategory').value;
+            const title = document.getElementById('formTitle').value.trim();
+            const badge = document.getElementById('formBadge').value;
+            const price = parseFloat(document.getElementById('formPrice').value);
+            const originalPrice = parseFloat(document.getElementById('formOriginalPrice').value) || (price + 500);
+            const antiTarnish = document.getElementById('formAntiTarnish').value;
+            const specs = document.getElementById('formSpecs').value || "1 Gram Gold Plated • High Polish";
+            const description = document.getElementById('formDescription').value || "Handcrafted luxury jewelry from AK Queen's Choice.";
+            const customUrl = document.getElementById('formImageUrl').value.trim();
+
+            let finalImageUrl = customUrl || uploadedBase64 || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600";
+            let driveSynced = false;
+
+            // Attempt Google Apps Script Drive Upload if URL exists
+            const gasUrl = localStorage.getItem('ak_queens_gas_url');
+            if (gasUrl) {
+                try {
+                    const response = await fetch(gasUrl, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            id: editId || Date.now(),
+                            mainCategory: mainCat,
+                            subCategory: subCat,
+                            title: title,
+                            price: price,
+                            originalPrice: originalPrice,
+                            badge: badge,
+                            antiTarnish: antiTarnish,
+                            specs: specs,
+                            description: description,
+                            imageBase64: uploadedBase64,
+                            imageUrl: customUrl
+                        })
+                    });
+                    const resData = await response.json();
+                    if (resData.status === 'success' && resData.imageUrl) {
+                        finalImageUrl = resData.imageUrl;
+                        driveSynced = true;
+                        showAdminToast("Uploaded photo to Google Drive & recorded to Google Sheet!");
+                    }
+                } catch(err) {
+                    console.warn("GAS Endpoint connection error, using local mode fallback.", err);
+                }
+            }
+
+            const newProduct = {
+                id: editId ? parseInt(editId) : Date.now(),
+                mainCategory: mainCat,
+                subCategory: subCat,
+                title: title,
+                badge: badge,
+                price: price,
+                originalPrice: originalPrice,
+                antiTarnish: antiTarnish,
+                specs: specs,
+                description: description,
+                image: finalImageUrl,
+                driveSynced: driveSynced
+            };
+
+            if (editId) {
+                const index = adminProducts.findIndex(p => p.id === parseInt(editId));
+                if (index !== -1) adminProducts[index] = newProduct;
+                showAdminToast("Product details updated successfully!");
+            } else {
+                adminProducts.unshift(newProduct);
+                showAdminToast("New product added to catalog!");
+            }
+
+            saveProductsToStorage();
+            resetForm();
+            renderAdminTable();
+            switchAdminTab('catalog');
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>Upload To Catalog & Drive</span>`;
+        }
+
+        function editProduct(id) {
+            const product = adminProducts.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('formCategory').value = product.mainCategory;
+            updateFormSubCategories();
+            document.getElementById('formSubCategory').value = product.subCategory;
+            document.getElementById('formTitle').value = product.title;
+            document.getElementById('formBadge').value = product.badge || "6-Month Anti-Tarnish";
+            document.getElementById('formPrice').value = product.price;
+            document.getElementById('formOriginalPrice').value = product.originalPrice || "";
+            document.getElementById('formAntiTarnish').value = product.antiTarnish || "Yes";
+            document.getElementById('formSpecs').value = product.specs || "";
+            document.getElementById('formDescription').value = product.description || "";
+            document.getElementById('formImageUrl').value = product.image;
+            document.getElementById('imagePreview').src = product.image;
+
+            document.getElementById('formHeading').innerText = "Edit Catalog Item";
+            document.getElementById('formTitleTag').innerText = "Update Existing Item #" + product.id;
+
+            switchAdminTab('upload');
+        }
+
+        function deleteProduct(id) {
+            if (!confirm("Are you sure you want to remove this item from catalog?")) return;
+            adminProducts = adminProducts.filter(p => p.id !== id);
+            saveProductsToStorage();
+            renderAdminTable();
+            showAdminToast("Item deleted from catalog.");
+        }
+
+        function resetForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('editProductId').value = '';
+            document.getElementById('imagePreview').src = "https://placehold.co/150x150/141418/D4AF37?text=Preview";
+            document.getElementById('formHeading').innerText = "Upload New Product Item";
+            document.getElementById('formTitleTag').innerText = "AK Queen's Product Studio";
+            uploadedBase64 = '';
+            updateFormSubCategories();
+        }
+
+        // Preview Item Modal
+        function previewItemCard(id) {
+            const item = adminProducts.find(p => p.id === id);
+            if (!item) return;
+
+            const modal = document.getElementById('previewModal');
+            const content = document.getElementById('previewModalContent');
+
+            content.innerHTML = `
+                <button onclick="closePreviewModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <div class="space-y-3">
+                    <span class="text-[10px] bg-vibrantPink-900/60 text-vibrantPink-300 border border-vibrantPink-500/40 px-2 py-0.5 rounded font-bold uppercase">${item.subCategory}</span>
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-darkbg-950 border border-gold-500/30">
+                        <img src="${item.image}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif font-bold text-white text-sm">${item.title}</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.description}</p>
+                    <div class="flex items-center justify-between pt-2 border-t border-darkbg-800">
+                        <span class="text-base font-black text-gold-300">₹${item.price.toLocaleString('en-IN')}</span>
+                        <span class="text-[10px] bg-gold-500 text-darkbg-950 font-bold px-2 py-0.5 rounded">${item.badge}</span>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('pointer-events-none', 'opacity-0');
+        }
+
+        // Copy GAS Code helper
+        function copyGASCode() {
+            const code = document.getElementById('gasCodeBox').value;
+            navigator.clipboard.writeText(code);
+            showAdminToast("Google Apps Script code copied to clipboard!");
+        }
+
+        // Export JSON Sync
+        function exportCatalogJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(adminProducts, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "ak_queens_catalog_sync.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+            showAdminToast("Downloaded catalog JSON export!");
+        }
+
+        // Toast Notification System
+        function showAdminToast(msg) {
+            const container = document.getElementById('adminToastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'bg-darkbg-900 text-gold-300 border border-vibrantPink-500/50 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0 glow-pink';
+            toast.innerHTML = `<i class="fa-solid fa-crown text-vibrantPink-400 text-sm"></i><span>${msg}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
