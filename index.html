@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK Queen's Choice | Royalty & Everyday Elegance</title>
+    <title>AK Queen's Choice | Luxury Royalty & Everyday Elegance</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,9 +14,8 @@
     <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind Custom Color & Style Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,26 +25,32 @@
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        plum: {
-                            50: '#f7f3f8',
-                            100: '#eddfe8',
-                            800: '#3c183d',
-                            900: '#2b102c',
-                            950: '#1b091c',
+                        darkbg: {
+                            950: '#060606',
+                            900: '#0A0A0A',
+                            800: '#121212',
+                            700: '#1A1A1A',
+                            600: '#262626',
                         },
                         gold: {
-                            100: '#fbf4dc',
-                            300: '#e7ce84',
-                            400: '#dfbc5e',
-                            500: '#d4af37',
-                            600: '#b89228',
+                            100: '#FFF8E7',
+                            200: '#FCE8B3',
+                            300: '#F7D070',
+                            400: '#E6C054',
+                            500: '#D4AF37',
+                            600: '#AA8820',
+                            700: '#806311',
                         },
-                        cream: {
-                            50: '#fdfbf7',
-                            100: '#faf6f0',
-                            200: '#f2e8da',
-                        },
-                        rosegold: '#b76e79',
+                        vibrantPink: {
+                            50: '#FFF0F6',
+                            100: '#FFD6E7',
+                            300: '#FF85C0',
+                            400: '#FF4D94',
+                            500: '#FF1493',
+                            600: '#E91E63',
+                            700: '#C2185B',
+                            900: '#880E4F',
+                        }
                     }
                 }
             }
@@ -57,171 +62,198 @@
             width: 7px;
         }
         ::-webkit-scrollbar-track {
-            background: #faf6f0;
+            background: #0A0A0A;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d4af37;
+            background: linear-gradient(180deg, #D4AF37, #FF1493);
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #b89228;
+            background: #FF1493;
         }
 
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #fbf4dc 0%, #d4af37 50%, #e7ce84 100%);
+        .gold-pink-gradient-text {
+            background: linear-gradient(135deg, #FFF8E7 0%, #D4AF37 40%, #FF69B4 80%, #FF1493 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border-gradient {
-            border-image: linear-gradient(to right, #d4af37, #fbf4dc, #d4af37) 1;
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF8E7 0%, #F7D070 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pink-gradient-text {
+            background: linear-gradient(135deg, #FFD6E7 0%, #FF69B4 50%, #E91E63 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-pattern {
-            background-color: #2b102c;
-            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #2b102c 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0,15px 15px;
-            background-opacity: 0.05;
+            background-color: #0A0A0A;
+            background-image: 
+                radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px), 
+                radial-gradient(rgba(255, 20, 147, 0.08) 1px, #0A0A0A 1px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
         }
 
-        .custom-glass {
-            background: rgba(43, 16, 44, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .glow-pink {
+            box-shadow: 0 0 25px -5px rgba(255, 20, 147, 0.35);
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.35);
+        }
+
+        .card-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .card-border-glow:hover {
+            border-color: #FF1493;
+            box-shadow: 0 10px 30px -10px rgba(255, 20, 147, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .glass-dark {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
     </style>
 </head>
-<body class="bg-cream-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-darkbg-900 text-slate-100 font-sans antialiased flex flex-col min-h-screen">
 
-    <div class="bg-plum-950 text-gold-300 text-xs py-2 px-4 text-center tracking-wider border-b border-gold-500/20 font-medium flex items-center justify-center gap-2">
-        <i class="fa-solid fa-crown text-gold-400 text-xs"></i>
-        <span>Welcome to <strong>AK Queen's Choice</strong> – Free Express Shipping on Orders Above ₹1,499!</span>
-        <i class="fa-solid fa-crown text-gold-400 text-xs"></i>
+    <div class="bg-gradient-to-r from-darkbg-950 via-vibrantPink-900 to-darkbg-950 text-gold-300 text-xs py-2 px-4 text-center tracking-wider border-b border-gold-500/20 font-medium flex items-center justify-center gap-2">
+        <i class="fa-solid fa-crown text-vibrantPink-400 text-xs"></i>
+        <span>Welcome to <strong class="text-gold-200">AK Queen's Choice</strong> – Free Royal Express Shipping on Orders Above ₹1,499!</span>
+        <i class="fa-solid fa-crown text-vibrantPink-400 text-xs"></i>
     </div>
 
-    <header class="sticky top-0 z-40 bg-plum-900/95 backdrop-blur-md text-white shadow-lg border-b border-gold-500/30">
+    <header class="sticky top-0 z-40 bg-darkbg-900/95 backdrop-blur-md text-white shadow-2xl border-b border-gold-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 gap-4">
                 
                 <!-- Brand Logo -->
                 <a href="#" class="flex items-center gap-3 group flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-300 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
-                        <div class="w-full h-full bg-plum-950 rounded-full flex items-center justify-center text-gold-400">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-gold-500 via-vibrantPink-500 to-gold-300 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-darkbg-950 rounded-full flex items-center justify-center text-vibrantPink-400">
                             <i class="fa-solid fa-crown text-lg"></i>
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <span class="font-serif text-2xl font-bold tracking-tight gold-gradient-text">AK QUEEN'S</span>
-                        <span class="text-[10px] tracking-[0.25em] text-gold-300 font-medium uppercase -mt-1">CHOICE</span>
+                        <span class="font-serif text-2xl font-black tracking-tight gold-pink-gradient-text">AK QUEEN'S</span>
+                        <span class="text-[10px] tracking-[0.28em] text-vibrantPink-400 font-bold uppercase -mt-1">CHOICE</span>
                     </div>
                 </a>
 
-                <!-- Interactive Search Bar -->
+                <!-- Search Bar -->
                 <div class="hidden md:flex flex-1 max-w-lg items-center relative">
-                    <div class="flex w-full rounded-full border border-gold-500/40 bg-plum-950/60 focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400/50 transition-all">
-                        <input type="text" id="searchInput" onkeyup="handleLiveSearch()" placeholder="Search Sarees, 1 Gram Jewelry, Hijabs..." class="w-full bg-transparent px-5 py-2.5 text-sm text-cream-100 placeholder-gold-300/50 focus:outline-none">
-                        <button onclick="handleSearchSubmit()" class="px-5 text-gold-400 hover:text-gold-300 transition-colors">
+                    <div class="flex w-full rounded-full border border-gold-500/30 bg-darkbg-800/90 focus-within:border-vibrantPink-500 focus-within:ring-1 focus-within:ring-vibrantPink-500/50 transition-all shadow-inner">
+                        <input type="text" id="searchInput" onkeyup="handleLiveSearch()" placeholder="Search Sarees, 1 Gram Jewelry, Hijabs..." class="w-full bg-transparent px-5 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none">
+                        <button onclick="handleSearchSubmit()" class="px-5 text-gold-400 hover:text-vibrantPink-400 transition-colors">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
-                    <!-- Live Search Overlay Dropdown -->
-                    <div id="searchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-plum-900 border border-gold-500/30 rounded-2xl shadow-2xl p-3 z-50 max-h-80 overflow-y-auto">
-                        <!-- Populated dynamically -->
+                    <!-- Search Results Overlay -->
+                    <div id="searchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-darkbg-800 border border-vibrantPink-500/40 rounded-2xl shadow-2xl p-3 z-50 max-h-80 overflow-y-auto">
                     </div>
                 </div>
 
                 <!-- Right Action Buttons -->
                 <div class="flex items-center gap-3 sm:gap-5">
                     
-                    <!-- Wishlist Counter -->
-                    <button onclick="scrollToWishlist()" class="relative p-2 text-gold-300 hover:text-gold-100 rounded-full hover:bg-white/5 transition-colors" title="Wishlist">
+                    <!-- Wishlist Button -->
+                    <button onclick="scrollToWishlist()" class="relative p-2.5 text-slate-300 hover:text-vibrantPink-400 rounded-full hover:bg-white/5 transition-colors" title="Wishlist">
                         <i class="fa-regular fa-heart text-xl"></i>
-                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rosegold text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-vibrantPink-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                     </button>
 
-                    <!-- Cart Drawer Trigger Button -->
-                    <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-gradient-to-r from-gold-500 to-gold-600 text-plum-950 rounded-full font-bold shadow-md hover:scale-105 transition-transform flex items-center justify-center" title="Shopping Cart">
+                    <!-- Shopping Cart Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center justify-center glow-pink" title="Shopping Cart">
                         <i class="fa-solid fa-bag-shopping text-base"></i>
-                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-plum-950 text-gold-300 border border-gold-400 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-darkbg-950 text-gold-300 border border-vibrantPink-500 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
                     </button>
 
-                    <!-- Mobile Navigation Toggle -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gold-300 hover:text-white focus:outline-none">
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gold-400 hover:text-white focus:outline-none">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Categories Link Bar -->
-            <nav class="hidden md:flex items-center justify-center gap-8 py-3 border-t border-gold-500/20 text-xs font-semibold tracking-wider uppercase text-cream-100">
-                <a href="#" class="text-gold-400 hover:text-gold-300 transition-colors">Home</a>
-                <a href="#categories" class="hover:text-gold-400 transition-colors">Categories</a>
-                <a href="#featured" onclick="filterCategory('jewelry')" class="hover:text-gold-400 transition-colors">One Gram Jewelry</a>
-                <a href="#featured" onclick="filterCategory('sarees')" class="hover:text-gold-400 transition-colors">Sarees</a>
-                <a href="#featured" onclick="filterCategory('hijab')" class="hover:text-gold-400 transition-colors">Hijab Essentials</a>
-                <a href="#featured" onclick="filterCategory('stationary')" class="hover:text-gold-400 transition-colors">Stationary</a>
-                <a href="#featured" onclick="filterCategory('fancy')" class="hover:text-gold-400 transition-colors">Fancy Items</a>
-                <a href="#flash-sale" class="text-rosegold hover:text-white transition-colors font-bold flex items-center gap-1">
+            <nav class="hidden md:flex items-center justify-center gap-8 py-3 border-t border-gold-500/20 text-xs font-semibold tracking-wider uppercase text-slate-300">
+                <a href="#" class="text-gold-400 hover:text-vibrantPink-400 transition-colors">Home</a>
+                <a href="#categories" class="hover:text-vibrantPink-400 transition-colors">Categories</a>
+                <a href="#featured" onclick="filterCategory('jewelry')" class="hover:text-vibrantPink-400 transition-colors">1 Gram Jewelry</a>
+                <a href="#featured" onclick="filterCategory('sarees')" class="hover:text-vibrantPink-400 transition-colors">Sarees</a>
+                <a href="#featured" onclick="filterCategory('hijab')" class="hover:text-vibrantPink-400 transition-colors">Hijab Essentials</a>
+                <a href="#featured" onclick="filterCategory('stationary')" class="hover:text-vibrantPink-400 transition-colors">Stationary</a>
+                <a href="#featured" onclick="filterCategory('fancy')" class="hover:text-vibrantPink-400 transition-colors">Fancy Items</a>
+                <a href="#flash-sale" class="text-vibrantPink-400 hover:text-gold-300 transition-colors font-bold flex items-center gap-1">
                     <i class="fa-solid fa-bolt text-gold-400"></i> Royal Offer
                 </a>
             </nav>
         </div>
 
-        <!-- Mobile Drawer Navigation Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-plum-950 border-b border-gold-500/30 px-5 pt-3 pb-6 space-y-3">
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-darkbg-950 border-b border-gold-500/30 px-5 pt-3 pb-6 space-y-3">
             <div class="relative mb-4">
-                <input type="text" id="mobileSearchInput" onkeyup="handleLiveSearchMobile()" placeholder="Search products..." class="w-full bg-plum-900 border border-gold-500/30 text-white px-4 py-2 rounded-xl text-sm focus:outline-none">
+                <input type="text" id="mobileSearchInput" onkeyup="handleLiveSearchMobile()" placeholder="Search products..." class="w-full bg-darkbg-800 border border-gold-500/30 text-white px-4 py-2 rounded-xl text-sm focus:outline-none">
             </div>
-            <a href="#" onclick="toggleMobileMenu()" class="block py-2 text-gold-400 font-semibold border-b border-plum-900">Home</a>
-            <a href="#categories" onclick="toggleMobileMenu()" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">All Categories</a>
-            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('jewelry')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">One Gram Jewelry</a>
-            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('sarees')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Sarees Collection</a>
-            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('hijab')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Hijab Items</a>
-            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('stationary')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Stationary</a>
-            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('fancy')" class="block py-2 text-cream-100 hover:text-gold-300">Fancy Items</a>
+            <a href="#" onclick="toggleMobileMenu()" class="block py-2 text-gold-400 font-semibold border-b border-darkbg-800">Home</a>
+            <a href="#categories" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800">All Categories</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('jewelry')" class="block py-2 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800">One Gram Jewelry</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('sarees')" class="block py-2 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800">Sarees Collection</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('hijab')" class="block py-2 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800">Hijab Items</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('stationary')" class="block py-2 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800">Stationary</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('fancy')" class="block py-2 text-slate-200 hover:text-vibrantPink-400">Fancy Items</a>
         </div>
     </header>
 
-    <section class="relative bg-plum-950 text-white overflow-hidden py-16 lg:py-24 border-b border-gold-500/30 hero-pattern">
+    <section class="relative bg-darkbg-900 text-white overflow-hidden py-16 lg:py-24 border-b border-gold-500/20 hero-pattern">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Hero Text Left -->
+                <!-- Hero Left Content -->
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs uppercase tracking-widest font-semibold">
-                        <i class="fa-solid fa-gem text-xs"></i> Unveiling The Royal Collection 2026
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkbg-800 border border-vibrantPink-500/40 text-vibrantPink-400 text-xs uppercase tracking-widest font-bold glow-pink">
+                        <i class="fa-solid fa-gem text-gold-400 text-xs"></i> The Royal Dark Glamour Collection
                     </div>
-                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-cream-50">
-                        Elevate Your Grace with <span class="gold-gradient-text block mt-1">AK Queen's Choice</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white">
+                        Elegance Redefined in <span class="gold-pink-gradient-text block mt-1">Black, Gold & Pink</span>
                     </h1>
-                    <p class="text-cream-200/80 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        Discover 1 Gram Plated Jewelry, Silk Sarees, Designer Hijabs, Premium Stationary, and Exclusive Fancy Essentials tailored for modern royalty.
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Explore handcrafted 1 Gram Plated Jewelry, Silk Sarees, Designer Hijab Essentials, Premium Stationary, and Luxurious Fancy Goods designed for royalty.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                        <a href="#featured" onclick="filterCategory('jewelry')" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold rounded-xl shadow-xl shadow-gold-500/20 transition-all transform hover:-translate-y-0.5 text-center text-sm">
+                        <a href="#featured" onclick="filterCategory('jewelry')" class="px-8 py-4 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-bold rounded-xl shadow-xl transition-all transform hover:-translate-y-0.5 text-center text-sm glow-pink">
                             Shop 1 Gram Gold <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
-                        <a href="#featured" onclick="filterCategory('sarees')" class="px-8 py-4 bg-plum-900/80 hover:bg-plum-800 text-gold-300 border border-gold-500/40 font-semibold rounded-xl backdrop-blur-md transition-all text-center text-sm">
-                            Explore Sarees Collection
+                        <a href="#featured" onclick="filterCategory('sarees')" class="px-8 py-4 bg-darkbg-800/90 hover:bg-darkbg-700 text-gold-300 border border-gold-500/40 font-semibold rounded-xl backdrop-blur-md transition-all text-center text-sm">
+                            Explore Silk Sarees
                         </a>
                     </div>
                 </div>
 
-                <!-- Hero Visual Showcase Right -->
+                <!-- Hero Visual Right Card -->
                 <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-2 bg-gradient-to-b from-gold-400/40 via-gold-500/10 to-transparent shadow-2xl">
-                        <div class="w-full h-full rounded-2xl overflow-hidden relative group">
-                            <img id="heroImage" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Royal Jewelry Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-80"></div>
+                    <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-1.5 bg-gradient-to-b from-gold-500 via-vibrantPink-500 to-transparent shadow-2xl glow-gold">
+                        <div class="w-full h-full rounded-2xl overflow-hidden relative group bg-darkbg-950">
+                            <img id="heroImage" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Royal Jewelry Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-transparent to-transparent opacity-90"></div>
                             
-                            <!-- Floating Floating Card Tag -->
-                            <div class="absolute bottom-6 left-6 right-6 p-4 bg-plum-950/80 backdrop-blur-md rounded-2xl border border-gold-500/30 text-white flex items-center justify-between">
+                            <!-- Floating Product Showcase Card -->
+                            <div class="absolute bottom-6 left-6 right-6 p-4 bg-darkbg-900/90 backdrop-blur-md rounded-2xl border border-vibrantPink-500/40 text-white flex items-center justify-between">
                                 <div>
-                                    <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold">Featured Spotlight</p>
-                                    <h3 class="font-serif font-bold text-base text-cream-100">Antique Temple Necklace</h3>
+                                    <p class="text-[10px] uppercase tracking-widest text-vibrantPink-400 font-bold">Featured Spotlight</p>
+                                    <h3 class="font-serif font-bold text-base text-gold-100">Antique Temple Gold Haram</h3>
                                 </div>
-                                <span class="bg-gold-500 text-plum-950 font-extrabold text-xs px-2.5 py-1 rounded-lg">₹2,499</span>
+                                <span class="bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg shadow-md">₹2,499</span>
                             </div>
                         </div>
                     </div>
@@ -231,47 +263,47 @@
         </div>
     </section>
 
-    <section class="bg-cream-100 py-8 border-b border-gold-500/20 shadow-inner">
+    <section class="bg-darkbg-800 py-8 border-b border-gold-500/20 shadow-inner">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
-                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-darkbg-900 border border-gold-500/20 shadow-md">
+                    <div class="w-12 h-12 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-gem"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">1 Gram Gold Guarantee</h4>
-                        <p class="text-[11px] text-gray-500">Long-lasting shine finish</p>
+                        <h4 class="font-bold text-slate-100 text-xs sm:text-sm">1 Gram Gold Finish</h4>
+                        <p class="text-[11px] text-slate-400">Long-lasting luster & sheen</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-darkbg-900 border border-gold-500/20 shadow-md">
+                    <div class="w-12 h-12 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-vibrantPink-400 flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">Handpicked Sarees</h4>
-                        <p class="text-[11px] text-gray-500">Authentic royal fabrics</p>
+                        <h4 class="font-bold text-slate-100 text-xs sm:text-sm">Handpicked Sarees</h4>
+                        <p class="text-[11px] text-slate-400">Pure royal weave fabrics</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-darkbg-900 border border-gold-500/20 shadow-md">
+                    <div class="w-12 h-12 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-truck-fast"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">Express Shipping</h4>
-                        <p class="text-[11px] text-gray-500">Safe doorstep delivery</p>
+                        <h4 class="font-bold text-slate-100 text-xs sm:text-sm">Express Shipping</h4>
+                        <p class="text-[11px] text-slate-400">Safe doorstep delivery</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-darkbg-900 border border-gold-500/20 shadow-md">
+                    <div class="w-12 h-12 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-vibrantPink-400 flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-shield-heart"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">100% Quality Assured</h4>
-                        <p class="text-[11px] text-gray-500">Direct boutique quality</p>
+                        <h4 class="font-bold text-slate-100 text-xs sm:text-sm">100% Quality Guarantee</h4>
+                        <p class="text-[11px] text-slate-400">Direct boutique quality</p>
                     </div>
                 </div>
 
@@ -279,63 +311,63 @@
         </div>
     </section>
 
-    <section id="categories" class="py-16 bg-cream-50">
+    <section id="categories" class="py-16 bg-darkbg-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Explore Collections</span>
-                <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-plum-900 mt-1">Our 5 Boutique Pillars</h2>
-                <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-3"></div>
+                <span class="text-vibrantPink-400 font-bold text-xs tracking-widest uppercase">Explore Collections</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-extrabold gold-gradient-text mt-1">Our 5 Boutique Pillars</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-gold-500 to-vibrantPink-500 mx-auto mt-3"></div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
                 
                 <!-- Category 1 -->
-                <div onclick="filterCategory('jewelry')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
-                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400" alt="1 Gram Plated Jewelry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
-                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Top Selling</span>
-                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">1 Gram Plated Jewelry</h3>
-                        <p class="text-xs text-gold-300/80">35+ Designs</p>
+                <div onclick="filterCategory('jewelry')" class="group relative rounded-2xl overflow-hidden shadow-xl bg-darkbg-950 cursor-pointer aspect-[3/4] card-border-glow">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400" alt="1 Gram Plated Jewelry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/40 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-darkbg-950 font-extrabold px-2 py-0.5 rounded-md w-max mb-1 uppercase tracking-wider">Top Selling</span>
+                        <h3 class="font-serif font-bold text-base text-white group-hover:text-vibrantPink-400 transition-colors">1 Gram Plated Jewelry</h3>
+                        <p class="text-xs text-gold-300">35+ Designs</p>
                     </div>
                 </div>
 
                 <!-- Category 2 -->
-                <div onclick="filterCategory('sarees')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
-                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=400" alt="Sarees Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
-                        <span class="text-[10px] bg-rosegold text-white font-bold px-2 py-0.5 rounded-md w-max mb-1">New Arrivals</span>
-                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Sarees Collection</h3>
-                        <p class="text-xs text-gold-300/80">42+ Silks & Weaves</p>
+                <div onclick="filterCategory('sarees')" class="group relative rounded-2xl overflow-hidden shadow-xl bg-darkbg-950 cursor-pointer aspect-[3/4] card-border-glow">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=400" alt="Sarees Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/40 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-vibrantPink-600 text-white font-extrabold px-2 py-0.5 rounded-md w-max mb-1 uppercase tracking-wider">New Silk</span>
+                        <h3 class="font-serif font-bold text-base text-white group-hover:text-vibrantPink-400 transition-colors">Sarees</h3>
+                        <p class="text-xs text-gold-300">42+ Silks & Weaves</p>
                     </div>
                 </div>
 
                 <!-- Category 3 -->
-                <div onclick="filterCategory('hijab')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400" alt="Hijab Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
-                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Essentials</span>
-                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Hijab Essentials</h3>
-                        <p class="text-xs text-gold-300/80">28+ Fabrics & Pins</p>
+                <div onclick="filterCategory('hijab')" class="group relative rounded-2xl overflow-hidden shadow-xl bg-darkbg-950 cursor-pointer aspect-[3/4] card-border-glow">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400" alt="Hijab Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/40 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-darkbg-950 font-extrabold px-2 py-0.5 rounded-md w-max mb-1 uppercase tracking-wider">Essentials</span>
+                        <h3 class="font-serif font-bold text-base text-white group-hover:text-vibrantPink-400 transition-colors">Hijab Items</h3>
+                        <p class="text-xs text-gold-300">28+ Fabrics & Pins</p>
                     </div>
                 </div>
 
                 <!-- Category 4 -->
-                <div onclick="filterCategory('stationary')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
-                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=400" alt="Stationary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
-                        <span class="text-[10px] bg-gold-500/20 border border-gold-400 text-gold-300 font-bold px-2 py-0.5 rounded-md w-max mb-1">Trending</span>
-                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Stationary</h3>
-                        <p class="text-xs text-gold-300/80">18+ Royal Journals</p>
+                <div onclick="filterCategory('stationary')" class="group relative rounded-2xl overflow-hidden shadow-xl bg-darkbg-950 cursor-pointer aspect-[3/4] card-border-glow">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=400" alt="Stationary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/40 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-vibrantPink-900 border border-vibrantPink-500 text-vibrantPink-300 font-extrabold px-2 py-0.5 rounded-md w-max mb-1 uppercase tracking-wider">Royal</span>
+                        <h3 class="font-serif font-bold text-base text-white group-hover:text-vibrantPink-400 transition-colors">Stationary</h3>
+                        <p class="text-xs text-gold-300">18+ Premium Journals</p>
                     </div>
                 </div>
 
                 <!-- Category 5 -->
-                <div onclick="filterCategory('fancy')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
-                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400" alt="Fancy Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
-                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Gifting</span>
-                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Fancy Items</h3>
-                        <p class="text-xs text-gold-300/80">25+ Accessories</p>
+                <div onclick="filterCategory('fancy')" class="group relative rounded-2xl overflow-hidden shadow-xl bg-darkbg-950 cursor-pointer aspect-[3/4] card-border-glow">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400" alt="Fancy Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/40 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-darkbg-950 font-extrabold px-2 py-0.5 rounded-md w-max mb-1 uppercase tracking-wider">Accessories</span>
+                        <h3 class="font-serif font-bold text-base text-white group-hover:text-vibrantPink-400 transition-colors">Fancy Items</h3>
+                        <p class="text-xs text-gold-300">25+ Accessories</p>
                     </div>
                 </div>
 
@@ -343,37 +375,37 @@
         </div>
     </section>
 
-    <section id="flash-sale" class="py-12 bg-gradient-to-r from-plum-950 via-plum-900 to-plum-950 text-white relative overflow-hidden border-y border-gold-500/30">
+    <section id="flash-sale" class="py-12 bg-gradient-to-r from-darkbg-950 via-darkbg-800 to-darkbg-950 text-white relative overflow-hidden border-y border-vibrantPink-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
                 
                 <div class="text-center lg:text-left space-y-2">
-                    <span class="bg-gold-500/20 text-gold-300 border border-gold-500/40 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest inline-block">
-                        👑 Queen's Exclusive Sale
+                    <span class="bg-vibrantPink-900/60 text-vibrantPink-300 border border-vibrantPink-500/50 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest inline-block glow-pink">
+                        👑 Queen's Special Discount
                     </span>
-                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-cream-50">
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">
                         Flat 30% Off On All 1 Gram Jewelry Sets
                     </h2>
-                    <p class="text-cream-200/80 text-sm max-w-lg">
-                        Limited time offer! Get complimentary luxury velvet packaging on every purchase.
+                    <p class="text-slate-300 text-sm max-w-lg">
+                        Limited time offer! Receive complimentary luxury velvet gift packaging on every order.
                     </p>
                 </div>
 
-                <!-- Functional Countdown Display -->
+                <!-- Countdown Timer -->
                 <div class="flex items-center gap-3">
-                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                    <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="hours" class="font-serif text-2xl font-black text-gold-400 block">12</span>
-                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Hours</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Hours</span>
                     </div>
-                    <span class="text-gold-400 font-bold text-xl">:</span>
-                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                    <span class="text-vibrantPink-500 font-bold text-xl">:</span>
+                    <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="minutes" class="font-serif text-2xl font-black text-gold-400 block">45</span>
-                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Mins</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Mins</span>
                     </div>
-                    <span class="text-gold-400 font-bold text-xl">:</span>
-                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                    <span class="text-vibrantPink-500 font-bold text-xl">:</span>
+                    <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="seconds" class="font-serif text-2xl font-black text-gold-400 block">30</span>
-                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Secs</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Secs</span>
                     </div>
                 </div>
 
@@ -381,27 +413,27 @@
         </div>
     </section>
 
-    <section id="featured" class="py-16 bg-white">
+    <section id="featured" class="py-16 bg-darkbg-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                 <div>
-                    <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Handpicked for Royalty</span>
-                    <h2 class="font-serif text-3xl font-extrabold text-plum-900 mt-1">Featured Product Showcase</h2>
+                    <span class="text-vibrantPink-400 font-semibold text-xs tracking-widest uppercase">Handpicked for Royalty</span>
+                    <h2 class="font-serif text-3xl font-extrabold text-white mt-1">Featured Product Showcase</h2>
                 </div>
 
-                <!-- Category Filter Buttons -->
+                <!-- Filter Category Buttons -->
                 <div class="flex flex-wrap gap-2 text-xs font-semibold">
-                    <button onclick="filterCategory('all')" class="filter-tab active-tab px-4 py-2 rounded-full bg-plum-900 text-gold-300 shadow-md transition-all" data-cat="all">All Items</button>
-                    <button onclick="filterCategory('jewelry')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="jewelry">1 Gram Jewelry</button>
-                    <button onclick="filterCategory('sarees')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="sarees">Sarees</button>
-                    <button onclick="filterCategory('hijab')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="hijab">Hijab Items</button>
-                    <button onclick="filterCategory('stationary')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="stationary">Stationary</button>
-                    <button onclick="filterCategory('fancy')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="fancy">Fancy Items</button>
+                    <button onclick="filterCategory('all')" class="filter-tab active-tab px-4 py-2 rounded-full bg-vibrantPink-600 text-white shadow-lg transition-all" data-cat="all">All Items</button>
+                    <button onclick="filterCategory('jewelry')" class="filter-tab px-4 py-2 rounded-full bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-500 transition-all" data-cat="jewelry">1 Gram Jewelry</button>
+                    <button onclick="filterCategory('sarees')" class="filter-tab px-4 py-2 rounded-full bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-500 transition-all" data-cat="sarees">Sarees</button>
+                    <button onclick="filterCategory('hijab')" class="filter-tab px-4 py-2 rounded-full bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-500 transition-all" data-cat="hijab">Hijab Items</button>
+                    <button onclick="filterCategory('stationary')" class="filter-tab px-4 py-2 rounded-full bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-500 transition-all" data-cat="stationary">Stationary</button>
+                    <button onclick="filterCategory('fancy')" class="filter-tab px-4 py-2 rounded-full bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-500 transition-all" data-cat="fancy">Fancy Items</button>
                 </div>
             </div>
 
-            <!-- Dynamic Products Grid -->
+            <!-- Products Grid Container -->
             <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Javascript populated cards -->
             </div>
@@ -409,62 +441,62 @@
         </div>
     </section>
 
-    <section class="py-16 bg-cream-100 border-t border-gold-500/20">
+    <section class="py-16 bg-darkbg-900 border-t border-gold-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Queen's Feedback</span>
-                <h2 class="font-serif text-3xl font-extrabold text-plum-900 mt-1">Stories From Our Queens</h2>
-                <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-3"></div>
+                <span class="text-vibrantPink-400 font-semibold text-xs tracking-widest uppercase">Queen's Feedback</span>
+                <h2 class="font-serif text-3xl font-extrabold gold-gradient-text mt-1">Stories From Our Queens</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-gold-500 to-vibrantPink-500 mx-auto mt-3"></div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Review 1 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
-                    <div class="flex text-gold-500 gap-1 text-sm">
+                <div class="bg-darkbg-800 p-6 rounded-2xl shadow-xl border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-400 gap-1 text-sm">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
-                        "The 1 Gram Gold Plated Haram looks identical to real gold! I wore it to my cousin's wedding and got endless compliments."
+                    <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed">
+                        "The 1 Gram Gold Haram necklace looks pure gold! I wore it to a family wedding and received compliments all night long."
                     </p>
                     <div class="flex items-center gap-3 pt-2">
-                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">FA</div>
+                        <div class="w-10 h-10 rounded-full bg-vibrantPink-600 text-white font-bold flex items-center justify-center text-sm">FA</div>
                         <div>
-                            <h4 class="font-bold text-xs text-plum-900">Fatima Ahamed</h4>
-                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                            <h4 class="font-bold text-xs text-white">Fatima Ahamed</h4>
+                            <p class="text-[10px] text-vibrantPink-400 font-semibold">Verified Buyer</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Review 2 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
-                    <div class="flex text-gold-500 gap-1 text-sm">
+                <div class="bg-darkbg-800 p-6 rounded-2xl shadow-xl border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-400 gap-1 text-sm">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
-                        "The Kanchipuram Soft Silk Saree fabric texture is so soft and light to drape. Outstanding quality and prompt delivery."
+                    <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed">
+                        "The Kanchipuram Soft Silk Saree texture is incredibly silky and lightweight to drape. Fast shipping as well!"
                     </p>
                     <div class="flex items-center gap-3 pt-2">
-                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">PR</div>
+                        <div class="w-10 h-10 rounded-full bg-gold-500 text-darkbg-950 font-bold flex items-center justify-center text-sm">PR</div>
                         <div>
-                            <h4 class="font-bold text-xs text-plum-900">Priya Ramakrishnan</h4>
-                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                            <h4 class="font-bold text-xs text-white">Priya Ramakrishnan</h4>
+                            <p class="text-[10px] text-gold-400 font-semibold">Verified Buyer</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Review 3 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
-                    <div class="flex text-gold-500 gap-1 text-sm">
+                <div class="bg-darkbg-800 p-6 rounded-2xl shadow-xl border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-400 gap-1 text-sm">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
-                        "The Chiffon Hijabs and magnetic pins set are super comfortable for daily wear. AK Queen's Choice is my go-to boutique now!"
+                    <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed">
+                        "The Chiffon Hijabs and magnetic pins set are super soft and comfortable. AK Queen's Choice is my favorite luxury store!"
                     </p>
                     <div class="flex items-center gap-3 pt-2">
-                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">AZ</div>
+                        <div class="w-10 h-10 rounded-full bg-vibrantPink-600 text-white font-bold flex items-center justify-center text-sm">AZ</div>
                         <div>
-                            <h4 class="font-bold text-xs text-plum-900">Ayesha Zoya</h4>
-                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                            <h4 class="font-bold text-xs text-white">Ayesha Zoya</h4>
+                            <p class="text-[10px] text-vibrantPink-400 font-semibold">Verified Buyer</p>
                         </div>
                     </div>
                 </div>
@@ -473,58 +505,57 @@
     </section>
 
     <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
-        <!-- Backdrop Blur overlay -->
-        <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-plum-950/70 backdrop-blur-sm transition-opacity"></div>
+        <!-- Overlay backdrop -->
+        <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md transition-opacity"></div>
         
-        <!-- Drawer Slide Out Panel -->
-        <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300 border-l border-gold-500/30">
+        <!-- Cart Panel Drawer -->
+        <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-darkbg-900 shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300 border-l border-gold-500/30">
             
-            <!-- Cart Header -->
-            <div class="p-5 bg-plum-900 text-white flex items-center justify-between border-b border-gold-500/30">
+            <!-- Header -->
+            <div class="p-5 bg-darkbg-950 text-white flex items-center justify-between border-b border-gold-500/30">
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-crown text-gold-400 text-lg"></i>
-                    <h3 class="font-serif font-bold text-lg text-cream-100">Your Queen's Basket</h3>
-                    <span id="cartDrawerCount" class="text-xs bg-gold-500 text-plum-950 font-extrabold px-2 py-0.5 rounded-full">0</span>
+                    <i class="fa-solid fa-crown text-vibrantPink-400 text-lg"></i>
+                    <h3 class="font-serif font-bold text-lg gold-gradient-text">Your Queen's Basket</h3>
+                    <span id="cartDrawerCount" class="text-xs bg-vibrantPink-600 text-white font-extrabold px-2 py-0.5 rounded-full">0</span>
                 </div>
-                <button onclick="toggleCartDrawer()" class="p-1.5 text-gold-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                <button onclick="toggleCartDrawer()" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <!-- Free Shipping Progress Tracker Bar -->
-            <div class="p-4 bg-cream-100 border-b border-gold-500/20 text-xs">
-                <div class="flex justify-between font-semibold text-plum-900 mb-1.5">
+            <!-- Free Shipping Bar -->
+            <div class="p-4 bg-darkbg-800 border-b border-gold-500/20 text-xs">
+                <div class="flex justify-between font-semibold text-slate-200 mb-1.5">
                     <span id="shippingText">Add ₹1,499 for FREE Delivery</span>
-                    <span id="shippingTarget">0%</span>
+                    <span id="shippingTarget" class="text-gold-400">0%</span>
                 </div>
-                <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div id="shippingProgressBar" class="h-full bg-gradient-to-r from-gold-500 to-gold-600 w-0 transition-all duration-500"></div>
+                <div class="w-full h-2 bg-darkbg-950 rounded-full overflow-hidden border border-gold-500/20">
+                    <div id="shippingProgressBar" class="h-full bg-gradient-to-r from-gold-500 to-vibrantPink-500 w-0 transition-all duration-500"></div>
                 </div>
             </div>
 
             <!-- Cart Items List Container -->
             <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
-                <!-- Dynamically rendered -->
             </div>
 
-            <!-- Cart Subtotal & Checkout Actions Footer -->
-            <div class="p-5 border-t border-gray-100 bg-cream-50 space-y-4">
+            <!-- Footer Subtotal & Checkout -->
+            <div class="p-5 border-t border-gold-500/20 bg-darkbg-950 space-y-4">
                 <div class="space-y-2 text-sm">
-                    <div class="flex justify-between text-gray-600">
+                    <div class="flex justify-between text-slate-300">
                         <span>Subtotal</span>
-                        <span id="cartSubtotal" class="font-bold text-plum-900">₹0.00</span>
+                        <span id="cartSubtotal" class="font-bold text-white">₹0.00</span>
                     </div>
-                    <div class="flex justify-between text-gray-600">
+                    <div class="flex justify-between text-slate-300">
                         <span>Estimated Shipping</span>
-                        <span id="shippingCost" class="text-gold-600 font-bold">Calculated at Checkout</span>
+                        <span id="shippingCost" class="text-vibrantPink-400 font-bold">Calculated at Checkout</span>
                     </div>
-                    <div class="border-t border-gray-200 pt-2 flex justify-between text-base font-extrabold text-plum-900">
+                    <div class="border-t border-gold-500/20 pt-2 flex justify-between text-base font-extrabold text-white">
                         <span>Grand Total</span>
-                        <span id="cartTotal" class="text-gold-600">₹0.00</span>
+                        <span id="cartTotal" class="text-gold-400">₹0.00</span>
                     </div>
                 </div>
 
-                <button onclick="handleCheckout()" class="w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold rounded-xl shadow-lg shadow-gold-500/20 transition-all text-center flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                <button onclick="handleCheckout()" class="w-full py-4 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-bold rounded-xl shadow-lg transition-all text-center flex items-center justify-center gap-2 text-sm uppercase tracking-wider glow-pink">
                     Proceed To Order <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </div>
@@ -532,54 +563,55 @@
         </div>
     </div>
 
+    <!-- Toast Notifications -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <footer class="bg-plum-950 text-cream-200/80 text-sm border-t border-gold-500/30 mt-auto">
+    <footer class="bg-darkbg-950 text-slate-300 text-sm border-t border-gold-500/30 mt-auto">
         
         <!-- Newsletter Signup Section -->
-        <div class="border-b border-gold-500/20 py-12 bg-plum-900/40">
+        <div class="border-b border-gold-500/20 py-12 bg-darkbg-900/50">
             <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
-                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto border border-gold-500/30">
+                <div class="w-12 h-12 rounded-full bg-vibrantPink-900/50 text-vibrantPink-400 flex items-center justify-center text-xl mx-auto border border-vibrantPink-500/40 glow-pink">
                     <i class="fa-solid fa-crown"></i>
                 </div>
-                <h3 class="font-serif text-2xl sm:text-3xl font-extrabold text-cream-100">Join The Queen's VIP Circle</h3>
-                <p class="text-xs sm:text-sm text-gold-300/80 max-w-md mx-auto">
+                <h3 class="font-serif text-2xl sm:text-3xl font-extrabold gold-pink-gradient-text">Join The Queen's VIP Circle</h3>
+                <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
                     Subscribe for exclusive previews of new 1 Gram Gold designs, silk sarees, and private discount offers.
                 </p>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
-                    <input type="email" id="newsletterEmail" required placeholder="Enter your email address" class="px-5 py-3 rounded-xl bg-plum-900 border border-gold-500/40 text-white placeholder-gold-300/40 focus:outline-none focus:border-gold-400 flex-1 text-xs">
-                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-plum-950 font-bold rounded-xl text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+                    <input type="email" id="newsletterEmail" required placeholder="Enter your email address" class="px-5 py-3 rounded-xl bg-darkbg-800 border border-gold-500/30 text-white placeholder-slate-500 focus:outline-none focus:border-vibrantPink-500 flex-1 text-xs">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
                         Subscribe
                     </button>
                 </form>
             </div>
         </div>
 
-        <!-- Footer Links Grid -->
+        <!-- Footer Grid Links -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
                 
                 <!-- Brand Info -->
                 <div class="lg:col-span-2 space-y-4">
                     <a href="#" class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-gold-500 flex items-center justify-center text-plum-950 font-black text-base">
+                        <div class="w-9 h-9 rounded-full bg-vibrantPink-600 text-white flex items-center justify-center font-black text-base">
                             <i class="fa-solid fa-crown"></i>
                         </div>
-                        <span class="font-serif text-xl font-bold gold-gradient-text">AK QUEEN'S CHOICE</span>
+                        <span class="font-serif text-xl font-bold gold-pink-gradient-text">AK QUEEN'S CHOICE</span>
                     </a>
-                    <p class="text-xs text-cream-200/70 max-w-sm leading-relaxed">
-                        AK Queen's Choice is your destination for premium 1 Gram Gold Plated Jewelry, Silk Sarees, Designer Hijabs, Regal Stationary, and Fancy Essentials.
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        AK Queen's Choice is your destination for premium 1 Gram Gold Plated Jewelry, Silk Sarees, Designer Hijabs, Regal Stationary, and Fancy Accessories.
                     </p>
                     <div class="flex gap-3 pt-2">
-                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-darkbg-800 border border-gold-500/30 text-gold-400 hover:bg-vibrantPink-600 hover:text-white flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-darkbg-800 border border-gold-500/30 text-gold-400 hover:bg-vibrantPink-600 hover:text-white flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-darkbg-800 border border-gold-500/30 text-gold-400 hover:bg-vibrantPink-600 hover:text-white flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
 
                 <!-- Categories -->
                 <div>
-                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Categories</h4>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">Categories</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#featured" onclick="filterCategory('jewelry')" class="hover:text-gold-300 transition-colors">1 Gram Plated Jewelry</a></li>
                         <li><a href="#featured" onclick="filterCategory('sarees')" class="hover:text-gold-300 transition-colors">Sarees Collection</a></li>
@@ -591,7 +623,7 @@
 
                 <!-- Customer Care -->
                 <div>
-                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Help & Support</h4>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">Help & Support</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#" class="hover:text-gold-300 transition-colors">Track Order</a></li>
                         <li><a href="#" class="hover:text-gold-300 transition-colors">Shipping & Delivery Policy</a></li>
@@ -603,7 +635,7 @@
 
                 <!-- Contact -->
                 <div>
-                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Boutique Contact</h4>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">Boutique Contact</h4>
                     <ul class="space-y-3 text-xs">
                         <li class="flex items-start gap-2">
                             <i class="fa-solid fa-location-dot mt-0.5 text-gold-400"></i>
@@ -622,9 +654,9 @@
 
             </div>
 
-            <div class="pt-8 border-t border-gold-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="pt-8 border-t border-gold-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
                 <p>&copy; 2026 AK Queen's Choice. All Rights Reserved.</p>
-                <div class="flex items-center gap-4 text-gold-400/70 text-lg">
+                <div class="flex items-center gap-4 text-gold-400 text-lg">
                     <i class="fa-brands fa-cc-visa"></i>
                     <i class="fa-brands fa-cc-mastercard"></i>
                     <i class="fa-solid fa-wallet"></i>
@@ -635,7 +667,7 @@
     </footer>
 
     <script>
-        // Database of Products specifically tailored for AK Queen's Choice
+        // Database of Products across all 5 requested categories
         const productsDatabase = [
             {
                 id: 1,
@@ -744,8 +776,8 @@
             if (items.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full text-center py-12">
-                        <i class="fa-solid fa-crown text-3xl text-gold-400 mb-2"></i>
-                        <p class="text-plum-900 font-semibold text-sm">No items found matching this selection.</p>
+                        <i class="fa-solid fa-crown text-3xl text-vibrantPink-400 mb-2"></i>
+                        <p class="text-slate-200 font-semibold text-sm">No royal items found matching this selection.</p>
                     </div>
                 `;
                 return;
@@ -754,40 +786,40 @@
             grid.innerHTML = items.map(product => {
                 const isWish = wishlist.includes(product.id);
                 return `
-                <div class="group bg-white rounded-2xl border border-gold-500/20 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
+                <div class="group bg-darkbg-900 rounded-2xl border border-gold-500/20 shadow-xl hover:border-vibrantPink-500/50 transition-all duration-300 flex flex-col overflow-hidden relative">
                     
-                    <!-- Badge -->
-                    <span class="absolute top-3 left-3 z-10 bg-plum-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-md border border-gold-500/30 uppercase tracking-wider shadow-sm">
+                    <!-- Category Badge -->
+                    <span class="absolute top-3 left-3 z-10 bg-darkbg-950/90 text-gold-300 border border-gold-500/30 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md">
                         ${product.badge}
                     </span>
 
                     <!-- Wishlist Button -->
-                    <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-gray-500 hover:text-rosegold hover:bg-white transition-all shadow-sm">
-                        <i class="${isWish ? 'fa-solid text-rosegold' : 'fa-regular'} fa-heart"></i>
+                    <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-darkbg-950/80 backdrop-blur-md border border-gold-500/30 flex items-center justify-center text-slate-300 hover:text-vibrantPink-400 transition-all shadow-sm">
+                        <i class="${isWish ? 'fa-solid text-vibrantPink-500' : 'fa-regular'} fa-heart"></i>
                     </button>
 
                     <!-- Product Image -->
-                    <div class="aspect-square overflow-hidden bg-cream-100 relative">
-                        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="aspect-square overflow-hidden bg-darkbg-950 relative">
+                        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
                     </div>
 
-                    <!-- Details -->
+                    <!-- Card Body -->
                     <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
-                            <div class="flex items-center gap-1 text-gold-500 text-xs mb-1">
+                            <div class="flex items-center gap-1 text-gold-400 text-xs mb-1">
                                 <i class="fa-solid fa-star"></i>
-                                <span class="font-bold text-slate-800 ml-0.5">${product.rating}</span>
-                                <span class="text-gray-400 font-normal">(${product.reviews})</span>
+                                <span class="font-bold text-white ml-0.5">${product.rating}</span>
+                                <span class="text-slate-400 font-normal">(${product.reviews})</span>
                             </div>
-                            <h3 class="font-serif font-bold text-plum-900 text-sm group-hover:text-gold-600 transition-colors line-clamp-1">${product.title}</h3>
+                            <h3 class="font-serif font-bold text-slate-100 text-sm group-hover:text-vibrantPink-400 transition-colors line-clamp-1">${product.title}</h3>
                         </div>
 
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+                        <div class="flex items-center justify-between pt-2 border-t border-darkbg-800">
                             <div>
-                                <span class="text-base font-extrabold text-plum-900">₹${product.price.toLocaleString('en-IN')}</span>
-                                ${product.originalPrice ? `<span class="text-xs text-gray-400 line-through ml-1.5">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                                <span class="text-base font-extrabold text-gold-300">₹${product.price.toLocaleString('en-IN')}</span>
+                                ${product.originalPrice ? `<span class="text-xs text-slate-500 line-through ml-1.5">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
                             </div>
-                            <button onclick="addToCart(${product.id})" class="px-3 py-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                            <button onclick="addToCart(${product.id})" class="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5 glow-pink">
                                 <i class="fa-solid fa-bag-shopping"></i> Add
                             </button>
                         </div>
@@ -800,14 +832,14 @@
         // Category Filter Logic
         function filterCategory(cat) {
             document.querySelectorAll('.filter-tab').forEach(btn => {
-                btn.classList.remove('bg-plum-900', 'text-gold-300', 'shadow-md');
-                btn.classList.add('bg-cream-100', 'text-plum-900');
+                btn.classList.remove('bg-vibrantPink-600', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-darkbg-900', 'text-slate-300', 'border', 'border-gold-500/20');
             });
 
             const activeBtn = document.querySelector(`.filter-tab[data-cat="${cat}"]`);
             if (activeBtn) {
-                activeBtn.classList.remove('bg-cream-100', 'text-plum-900');
-                activeBtn.classList.add('bg-plum-900', 'text-gold-300', 'shadow-md');
+                activeBtn.classList.remove('bg-darkbg-900', 'text-slate-300', 'border', 'border-gold-500/20');
+                activeBtn.classList.add('bg-vibrantPink-600', 'text-white', 'shadow-lg');
             }
 
             if (cat === 'all') {
@@ -818,7 +850,7 @@
             }
         }
 
-        // Cart Drawer Operations
+        // Add item to shopping cart
         function addToCart(id) {
             const product = productsDatabase.find(p => p.id === id);
             const existing = cart.find(item => item.id === id);
@@ -865,7 +897,7 @@
             document.getElementById('shippingTarget').innerText = `${percentage}%`;
             
             if (subtotal >= shippingTarget) {
-                document.getElementById('shippingText').innerText = "🎉 You've unlocked FREE Shipping!";
+                document.getElementById('shippingText').innerText = "🎉 You've unlocked FREE Delivery!";
                 document.getElementById('shippingCost').innerText = "FREE";
             } else {
                 const remaining = shippingTarget - subtotal;
@@ -877,34 +909,34 @@
             if (cart.length === 0) {
                 listContainer.innerHTML = `
                     <div class="text-center py-16 space-y-3">
-                        <i class="fa-solid fa-crown text-4xl text-gold-300"></i>
-                        <p class="text-plum-900 font-bold text-sm">Your Queen's Basket is empty</p>
-                        <button onclick="toggleCartDrawer()" class="px-5 py-2.5 bg-plum-900 text-gold-300 rounded-xl text-xs font-bold">Explore Collections</button>
+                        <i class="fa-solid fa-crown text-4xl text-vibrantPink-400"></i>
+                        <p class="text-white font-bold text-sm">Your Queen's Basket is empty</p>
+                        <button onclick="toggleCartDrawer()" class="px-5 py-2.5 bg-vibrantPink-600 text-white rounded-xl text-xs font-bold shadow-md">Explore Collections</button>
                     </div>
                 `;
                 return;
             }
 
             listContainer.innerHTML = cart.map(item => `
-                <div class="flex gap-3 bg-cream-100 p-3 rounded-xl border border-gold-500/20 items-center">
+                <div class="flex gap-3 bg-darkbg-800 p-3 rounded-xl border border-gold-500/20 items-center">
                     <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded-lg">
                     <div class="flex-1 min-w-0">
-                        <h4 class="text-xs font-serif font-bold text-plum-900 truncate">${item.title}</h4>
-                        <p class="text-xs text-gold-600 font-bold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
+                        <h4 class="text-xs font-serif font-bold text-white truncate">${item.title}</h4>
+                        <p class="text-xs text-gold-400 font-bold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
                         <div class="flex items-center gap-2 mt-2">
-                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-white text-plum-900 border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-gold-500/20">-</button>
-                            <span class="text-xs font-extrabold w-4 text-center">${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-white text-plum-900 border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-gold-500/20">+</button>
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-vibrantPink-600">-</button>
+                            <span class="text-xs font-extrabold w-4 text-center text-slate-200">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-vibrantPink-600">+</button>
                         </div>
                     </div>
-                    <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-rosegold p-1 text-xs">
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-vibrantPink-400 p-1 text-xs">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
             `).join('');
         }
 
-        // Toggle Wishlist
+        // Toggle Wishlist Status
         function toggleWishlist(id) {
             if (wishlist.includes(id)) {
                 wishlist = wishlist.filter(item => item !== id);
@@ -917,7 +949,7 @@
             renderProducts(productsDatabase);
         }
 
-        // Live Search Handling
+        // Handle Live Search Overlays
         function handleLiveSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const overlay = document.getElementById('searchResultsOverlay');
@@ -931,13 +963,13 @@
             overlay.classList.remove('hidden');
 
             if (results.length === 0) {
-                overlay.innerHTML = `<p class="text-xs text-cream-200/60 p-2 text-center">No royal items found</p>`;
+                overlay.innerHTML = `<p class="text-xs text-slate-400 p-2 text-center">No royal items found</p>`;
             } else {
                 overlay.innerHTML = results.map(r => `
-                    <div onclick="selectSearchResult(${r.id})" class="p-2 hover:bg-plum-800 rounded-xl cursor-pointer flex items-center gap-3">
+                    <div onclick="selectSearchResult(${r.id})" class="p-2 hover:bg-darkbg-700 rounded-xl cursor-pointer flex items-center gap-3">
                         <img src="${r.image}" class="w-10 h-10 object-cover rounded-md">
                         <div>
-                            <p class="text-xs font-bold text-cream-100">${r.title}</p>
+                            <p class="text-xs font-bold text-white">${r.title}</p>
                             <p class="text-[10px] text-gold-400">₹${r.price.toLocaleString('en-IN')}</p>
                         </div>
                     </div>
@@ -952,7 +984,7 @@
             document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Toggle UI Triggers
+        // UI Drawer & Menu toggles
         function toggleCartDrawer() {
             const drawer = document.getElementById('cartDrawer');
             const panel = document.getElementById('cartPanel');
@@ -982,12 +1014,12 @@
             }
         }
 
-        // Toast Messages
+        // Toast Messages Trigger
         function showToast(msg) {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
-            toast.className = 'bg-plum-950 text-gold-300 border border-gold-500/40 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0';
-            toast.innerHTML = `<i class="fa-solid fa-crown text-gold-400 text-sm"></i><span>${msg}</span>`;
+            toast.className = 'bg-darkbg-950 text-gold-300 border border-vibrantPink-500/50 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0 glow-pink';
+            toast.innerHTML = `<i class="fa-solid fa-crown text-vibrantPink-400 text-sm"></i><span>${msg}</span>`;
 
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 10);
@@ -997,7 +1029,7 @@
             }, 2500);
         }
 
-        // Timer Logic
+        // Live Countdown Timer
         function startTimer() {
             let h = 12, m = 45, s = 30;
             setInterval(() => {
