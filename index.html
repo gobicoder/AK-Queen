@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AK Queen's Choice | 1 Gram Plated Jewelry & Hijab Essentials</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -28,9 +28,9 @@
                         darkbg: {
                             950: '#060608',
                             900: '#0A0A0C',
-                            800: '#121216',
-                            700: '#1A1A22',
-                            600: '#262630',
+                            800: '#141418',
+                            700: '#1F1F26',
+                            600: '#2A2A34',
                         },
                         gold: {
                             100: '#FFF9E6',
@@ -41,7 +41,7 @@
                             600: '#AA8820',
                             700: '#806311',
                         },
-                        rosePink: {
+                        vibrantPink: {
                             50: '#FFF0F5',
                             100: '#FFDBE9',
                             300: '#FFB6C1',
@@ -51,6 +51,25 @@
                             700: '#9B0F48',
                             900: '#5C082A',
                         }
+                    },
+                    animation: {
+                        'marquee': 'marquee 22s linear infinite',
+                        'shimmer': 'shimmer 3s infinite linear',
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.8' }
+                        }
                     }
                 }
             }
@@ -59,7 +78,8 @@
     
     <style>
         ::-webkit-scrollbar {
-            width: 7px;
+            width: 8px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #0A0A0C;
@@ -73,7 +93,7 @@
         }
 
         .gold-pink-gradient-text {
-            background: linear-gradient(135deg, #FFF9E6 0%, #D4AF37 40%, #FF69B4 75%, #E0115F 100%);
+            background: linear-gradient(135deg, #FFF9E6 0%, #D4AF37 35%, #FF69B4 70%, #E0115F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -87,18 +107,18 @@
         .hero-pattern {
             background-color: #0A0A0C;
             background-image: 
-                radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px), 
-                radial-gradient(rgba(224, 17, 95, 0.08) 1px, #0A0A0C 1px);
-            background-size: 32px 32px;
-            background-position: 0 0, 16px 16px;
+                radial-gradient(rgba(212, 175, 55, 0.15) 1px, transparent 1px), 
+                radial-gradient(rgba(224, 17, 95, 0.12) 1px, #0A0A0C 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
         }
 
         .glow-pink {
-            box-shadow: 0 0 25px -5px rgba(224, 17, 95, 0.35);
+            box-shadow: 0 0 25px -5px rgba(224, 17, 95, 0.4);
         }
 
         .glow-gold {
-            box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.4);
         }
 
         .card-border-glow {
@@ -108,8 +128,12 @@
 
         .card-border-glow:hover {
             border-color: #FF69B4;
-            box-shadow: 0 10px 30px -10px rgba(224, 17, 95, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(224, 17, 95, 0.45);
             transform: translateY(-4px);
+        }
+
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
         }
 
         .subcat-scroll::-webkit-scrollbar {
@@ -121,132 +145,164 @@
         }
     </style>
 </head>
-<body class="bg-darkbg-900 text-slate-100 font-sans antialiased flex flex-col min-h-screen selection:bg-rosePink-500 selection:text-white">
+<body class="bg-darkbg-950 text-slate-100 font-sans antialiased flex flex-col min-h-screen selection:bg-vibrantPink-500 selection:text-white">
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-darkbg-950 via-rosePink-900 to-darkbg-950 text-gold-300 text-xs py-2 px-4 text-center tracking-wider border-b border-gold-500/20 font-medium flex items-center justify-center gap-2">
-        <i class="fa-solid fa-crown text-rosePink-400 text-xs"></i>
-        <span>Welcome to <strong class="text-gold-200">AK Queen's Choice</strong> – Anti-Tarnish Guaranteed 1 Gram Jewelry & Premium Hijab Essentials!</span>
-        <i class="fa-solid fa-crown text-rosePink-400 text-xs"></i>
+    <!-- 1. TOP BANNER: Flash Run Marquee Strip -->
+    <div class="relative bg-gradient-to-r from-darkbg-950 via-vibrantPink-900 to-darkbg-950 text-gold-300 text-xs py-2.5 border-b border-gold-500/30 overflow-hidden font-medium z-50 shadow-md">
+        <div class="marquee-container flex whitespace-nowrap overflow-hidden cursor-pointer">
+            <div class="marquee-content animate-marquee flex items-center gap-12 font-semibold tracking-wider uppercase text-[11px]">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-crown text-gold-400"></i> ✨ Welcome to <strong>AK Queen's Choice</strong> – Anti-Tarnish Guaranteed 1 Gram Jewelry & Premium Hijab Essentials! ✨</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-vibrantPink-400"></i> Free Express Shipping on Orders Above ₹1,499</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold-400"></i> 6-Month Anti-Tarnish Warranty Guaranteed</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-money-bill-wave text-vibrantPink-400"></i> Cash on Delivery (COD) Available Pan-India</span>
+                <!-- Duplicate for Seamless Infinite Scroll -->
+                <span class="flex items-center gap-2"><i class="fa-solid fa-crown text-gold-400"></i> ✨ Welcome to <strong>AK Queen's Choice</strong> – Anti-Tarnish Guaranteed 1 Gram Jewelry & Premium Hijab Essentials! ✨</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-vibrantPink-400"></i> Free Express Shipping on Orders Above ₹1,499</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold-400"></i> 6-Month Anti-Tarnish Warranty Guaranteed</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-money-bill-wave text-vibrantPink-400"></i> Cash on Delivery (COD) Available Pan-India</span>
+            </div>
+        </div>
     </div>
 
-    <!-- Header Navigation -->
+    <!-- 2. NAVIGATION & HEADER -->
     <header class="sticky top-0 z-40 bg-darkbg-900/95 backdrop-blur-md text-white shadow-2xl border-b border-gold-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 gap-4">
                 
                 <!-- Brand Logo -->
                 <a href="#" onclick="switchMainCategory('all'); return false;" class="flex items-center gap-3 group flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-gold-500 via-rosePink-500 to-gold-300 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
-                        <div class="w-full h-full bg-darkbg-950 rounded-full flex items-center justify-center text-rosePink-400">
-                            <i class="fa-solid fa-crown text-lg"></i>
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-gold-500 via-vibrantPink-500 to-gold-300 p-0.5 shadow-lg group-hover:scale-105 transition-transform glow-gold">
+                        <div class="w-full h-full bg-darkbg-950 rounded-full flex items-center justify-center text-vibrantPink-400">
+                            <i class="fa-solid fa-crown text-xl"></i>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-serif text-2xl font-black tracking-tight gold-pink-gradient-text">AK QUEEN'S</span>
-                        <span class="text-[10px] tracking-[0.28em] text-rosePink-400 font-bold uppercase -mt-1">CHOICE</span>
+                        <span class="text-[10px] tracking-[0.3em] text-vibrantPink-400 font-extrabold uppercase -mt-1">CHOICE</span>
                     </div>
                 </a>
 
                 <!-- Search Bar -->
                 <div class="hidden md:flex flex-1 max-w-lg items-center relative">
-                    <div class="flex w-full rounded-full border border-gold-500/30 bg-darkbg-800/90 focus-within:border-rosePink-500 focus-within:ring-1 focus-within:ring-rosePink-500/50 transition-all shadow-inner">
-                        <input type="text" id="searchInput" onkeyup="handleLiveSearch()" placeholder="Search Short Chains, Haram, Bangles, Hijab Pins..." class="w-full bg-transparent px-5 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none">
-                        <button onclick="handleSearchSubmit()" class="px-5 text-gold-400 hover:text-rosePink-400 transition-colors">
+                    <div class="flex w-full rounded-full border border-gold-500/30 bg-darkbg-800/90 focus-within:border-vibrantPink-500 focus-within:ring-1 focus-within:ring-vibrantPink-500/50 transition-all shadow-inner">
+                        <input type="text" id="searchInput" onkeyup="handleLiveSearch()" placeholder="Search Short Chains, Haram, Bangles, Hijabs..." class="w-full bg-transparent px-5 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none">
+                        <button onclick="handleLiveSearch()" class="px-5 text-gold-400 hover:text-vibrantPink-400 transition-colors">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
-                    <!-- Search Overlay -->
-                    <div id="searchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-darkbg-800 border border-rosePink-500/40 rounded-2xl shadow-2xl p-3 z-50 max-h-80 overflow-y-auto">
+                    <!-- Live Search Overlay -->
+                    <div id="searchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-darkbg-800 border border-vibrantPink-500/40 rounded-2xl shadow-2xl p-3 z-50 max-h-96 overflow-y-auto">
                     </div>
                 </div>
 
-                <!-- Header Actions -->
-                <div class="flex items-center gap-3 sm:gap-5">
+                <!-- Header Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-4">
                     
-                    <!-- Wishlist -->
-                    <button onclick="scrollToWishlist()" class="relative p-2.5 text-slate-300 hover:text-rosePink-400 rounded-full hover:bg-white/5 transition-colors" title="Wishlist">
-                        <i class="fa-regular fa-heart text-xl"></i>
-                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rosePink-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    <!-- Search Icon for Mobile -->
+                    <button onclick="toggleMobileSearch()" class="md:hidden p-2.5 text-slate-300 hover:text-gold-400 rounded-full hover:bg-white/5 transition-colors">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
                     </button>
 
-                    <!-- Shopping Cart -->
-                    <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-gradient-to-r from-gold-500 via-rosePink-500 to-rosePink-600 text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center justify-center glow-pink" title="Shopping Cart">
+                    <!-- Wishlist Trigger -->
+                    <button onclick="openWishlistModal()" class="relative p-2.5 text-slate-300 hover:text-vibrantPink-400 rounded-full hover:bg-white/5 transition-colors" title="Wishlist">
+                        <i class="fa-regular fa-heart text-xl"></i>
+                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-vibrantPink-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border border-darkbg-900 shadow">0</span>
+                    </button>
+
+                    <!-- Cart Trigger -->
+                    <button onclick="toggleCartDrawer()" class="relative px-3.5 py-2.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2 glow-pink" title="Shopping Cart">
                         <i class="fa-solid fa-bag-shopping text-base"></i>
-                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-darkbg-950 text-gold-300 border border-rosePink-500 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                        <span class="hidden sm:inline text-xs font-extrabold">Cart</span>
+                        <span id="cartBadge" class="bg-darkbg-950 text-gold-300 border border-vibrantPink-500 text-[11px] font-black px-2 py-0.5 rounded-full min-w-[20px] text-center">0</span>
                     </button>
 
                     <!-- Mobile Menu Toggle -->
                     <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gold-400 hover:text-white focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
+                        <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Header Navigation Tabs -->
             <nav class="hidden md:flex items-center justify-center gap-8 py-3 border-t border-gold-500/20 text-xs font-semibold tracking-wider uppercase text-slate-300">
-                <a href="#" onclick="switchMainCategory('all'); return false;" class="hover:text-gold-300 transition-colors">Home</a>
-                <a href="#products-section" onclick="switchMainCategory('jewelry'); return false;" class="text-gold-400 hover:text-rosePink-400 transition-colors flex items-center gap-1.5">
-                    <i class="fa-solid fa-gem text-xs"></i> One Gram Plated Jewelry
+                <a href="#" onclick="switchMainCategory('all'); return false;" id="navHome" class="text-gold-400 hover:text-vibrantPink-400 transition-colors flex items-center gap-1.5 font-bold">
+                    <i class="fa-solid fa-crown text-xs"></i> All Collections
                 </a>
-                <a href="#products-section" onclick="switchMainCategory('hijab'); return false;" class="text-rosePink-400 hover:text-gold-300 transition-colors flex items-center gap-1.5">
+                <a href="#products-section" onclick="switchMainCategory('jewelry'); return false;" id="navJewelry" class="hover:text-gold-300 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-gem text-xs"></i> 1 Gram Plated Jewelry
+                </a>
+                <a href="#products-section" onclick="switchMainCategory('hijab'); return false;" id="navHijab" class="hover:text-vibrantPink-400 transition-colors flex items-center gap-1.5">
                     <i class="fa-solid fa-spa text-xs"></i> Hijab Essentials
                 </a>
-                <a href="#flash-sale" class="text-gold-300 hover:text-rosePink-400 transition-colors font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-bolt text-rosePink-400"></i> Royal Special Offers
+                <a href="#flash-sale" class="text-gold-300 hover:text-vibrantPink-400 transition-colors font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-bolt text-vibrantPink-400"></i> Royal Flash Sale
                 </a>
             </nav>
         </div>
 
-        <!-- Mobile Drawer Navigation -->
-        <div id="mobileMenu" class="hidden md:hidden bg-darkbg-950 border-b border-gold-500/30 px-5 pt-3 pb-6 space-y-3">
-            <div class="relative mb-4">
-                <input type="text" id="mobileSearchInput" onkeyup="handleLiveSearchMobile()" placeholder="Search products..." class="w-full bg-darkbg-800 border border-gold-500/30 text-white px-4 py-2 rounded-xl text-sm focus:outline-none">
+        <!-- Mobile Search Dropdown -->
+        <div id="mobileSearchDrawer" class="hidden md:hidden bg-darkbg-950 p-4 border-b border-gold-500/30">
+            <div class="relative">
+                <input type="text" id="mobileSearchInput" onkeyup="handleLiveSearchMobile()" placeholder="Search jewelry or hijabs..." class="w-full bg-darkbg-800 border border-gold-500/30 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:border-vibrantPink-500">
+                <div id="mobileSearchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-darkbg-800 border border-vibrantPink-500/40 rounded-xl shadow-2xl p-3 z-50 max-h-64 overflow-y-auto"></div>
             </div>
-            <a href="#" onclick="toggleMobileMenu(); switchMainCategory('all');" class="block py-2 text-gold-400 font-semibold border-b border-darkbg-800">All Collections</a>
-            <a href="#products-section" onclick="toggleMobileMenu(); switchMainCategory('jewelry');" class="block py-2 text-slate-200 hover:text-rosePink-400 border-b border-darkbg-800">1 Gram Plated Jewelry</a>
-            <a href="#products-section" onclick="toggleMobileMenu(); switchMainCategory('hijab');" class="block py-2 text-slate-200 hover:text-rosePink-400 border-b border-darkbg-800">Hijab Essentials</a>
+        </div>
+
+        <!-- Mobile Hamburger Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-darkbg-950 border-b border-gold-500/30 px-6 pt-3 pb-6 space-y-3">
+            <a href="#" onclick="toggleMobileMenu(); switchMainCategory('all');" class="block py-2.5 text-gold-400 font-bold border-b border-darkbg-800 flex items-center gap-2">
+                <i class="fa-solid fa-crown text-xs"></i> All Collections
+            </a>
+            <a href="#products-section" onclick="toggleMobileMenu(); switchMainCategory('jewelry');" class="block py-2.5 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800 flex items-center gap-2">
+                <i class="fa-solid fa-gem text-xs text-gold-400"></i> 1 Gram Plated Jewelry
+            </a>
+            <a href="#products-section" onclick="toggleMobileMenu(); switchMainCategory('hijab');" class="block py-2.5 text-slate-200 hover:text-vibrantPink-400 border-b border-darkbg-800 flex items-center gap-2">
+                <i class="fa-solid fa-spa text-xs text-vibrantPink-400"></i> Hijab Essentials
+            </a>
+            <a href="#flash-sale" onclick="toggleMobileMenu();" class="block py-2.5 text-gold-300 font-bold flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-vibrantPink-400"></i> Flash Deals
+            </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative bg-darkbg-900 text-white overflow-hidden py-14 lg:py-20 border-b border-gold-500/20 hero-pattern">
+    <!-- 3. HERO SECTION -->
+    <section class="relative bg-darkbg-900 text-white overflow-hidden py-12 lg:py-20 border-b border-gold-500/20 hero-pattern">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-12 gap-10 items-center">
                 
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkbg-800 border border-rosePink-500/40 text-rosePink-400 text-xs uppercase tracking-widest font-bold glow-pink">
-                        <i class="fa-solid fa-crown text-gold-400 text-xs"></i> Royal Black, Gold & Pink Edition
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkbg-800 border border-vibrantPink-500/40 text-vibrantPink-300 text-xs uppercase tracking-widest font-bold glow-pink">
+                        <i class="fa-solid fa-crown text-gold-400 text-xs"></i> Elegance Fit For Royalty
                     </div>
                     <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white">
-                        Royal Elegance for <span class="gold-pink-gradient-text block mt-1">Modern Queens</span>
+                        Royal Luxury for <span class="gold-pink-gradient-text block mt-1">Modern Queens</span>
                     </h1>
                     <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        Discover handcrafted <strong class="text-gold-300 font-medium">1 Gram Micro Gold Plated Jewelry</strong> with lifetime luster finish, alongside luxurious <strong class="text-rosePink-300 font-medium">Hijab Essentials</strong> curated with unmatched delicacy.
+                        Discover handcrafted <strong class="text-gold-300 font-medium">1 Gram Micro Gold Plated Jewelry</strong> backed by a 6-Month Anti-Tarnish Warranty, alongside ultra-soft <strong class="text-vibrantPink-300 font-medium">Hijab Essentials</strong> curated for everyday grace.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-                        <a href="#products-section" onclick="switchMainCategory('jewelry');" class="px-8 py-4 bg-gradient-to-r from-gold-500 via-rosePink-500 to-rosePink-600 hover:from-gold-400 hover:to-rosePink-500 text-white font-bold rounded-xl shadow-xl transition-all text-center text-sm glow-pink">
-                            Shop 1 Gram Jewelry <i class="fa-solid fa-gem ml-2 text-xs"></i>
+                        <a href="#products-section" onclick="switchMainCategory('jewelry');" class="px-8 py-4 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-extrabold rounded-xl shadow-xl transition-all text-center text-sm glow-pink uppercase tracking-wider flex items-center justify-center gap-2">
+                            <span>Shop 1 Gram Gold</span> <i class="fa-solid fa-gem text-xs"></i>
                         </a>
-                        <a href="#products-section" onclick="switchMainCategory('hijab');" class="px-8 py-4 bg-darkbg-800/90 hover:bg-darkbg-700 text-gold-300 border border-gold-500/40 font-semibold rounded-xl backdrop-blur-md transition-all text-center text-sm">
-                            Explore Hijab Essentials <i class="fa-solid fa-spa ml-2 text-xs"></i>
+                        <a href="#products-section" onclick="switchMainCategory('hijab');" class="px-8 py-4 bg-darkbg-800/90 hover:bg-darkbg-700 text-gold-300 border border-gold-500/40 font-bold rounded-xl backdrop-blur-md transition-all text-center text-sm uppercase tracking-wider flex items-center justify-center gap-2">
+                            <span>Explore Hijabs</span> <i class="fa-solid fa-spa text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Hero Visual Side Card -->
+                <!-- Hero Visual Spotlight Card -->
                 <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-1.5 bg-gradient-to-b from-gold-500 via-rosePink-500 to-transparent shadow-2xl glow-gold">
+                    <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-1.5 bg-gradient-to-b from-gold-500 via-vibrantPink-500 to-transparent shadow-2xl glow-gold">
                         <div class="w-full h-full rounded-2xl overflow-hidden relative group bg-darkbg-950">
                             <img id="heroImage" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Royal Jewelry Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90">
                             <div class="absolute inset-0 bg-gradient-to-t from-darkbg-950 via-darkbg-950/20 to-transparent"></div>
                             
-                            <div class="absolute bottom-6 left-6 right-6 p-4 bg-darkbg-900/90 backdrop-blur-md rounded-2xl border border-rosePink-500/40 text-white flex items-center justify-between">
+                            <div class="absolute bottom-6 left-6 right-6 p-4 bg-darkbg-900/90 backdrop-blur-md rounded-2xl border border-vibrantPink-500/40 text-white flex items-center justify-between">
                                 <div>
-                                    <p class="text-[10px] uppercase tracking-widest text-rosePink-400 font-bold">Queen's Spotlight</p>
-                                    <h3 class="font-serif font-bold text-base text-gold-100">Antique Gold Temple Haram Set</h3>
+                                    <p class="text-[10px] uppercase tracking-widest text-vibrantPink-400 font-bold flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> 6-Month Anti-Tarnish</p>
+                                    <h3 class="font-serif font-bold text-base text-gold-100">Bridal Lakshmi Haram Set</h3>
                                 </div>
-                                <span class="bg-gradient-to-r from-gold-500 to-rosePink-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg shadow-md">₹2,999</span>
+                                <span class="bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-extrabold text-xs px-3.5 py-2 rounded-xl shadow-md">₹3,499</span>
                             </div>
                         </div>
                     </div>
@@ -256,33 +312,33 @@
         </div>
     </section>
 
-    <!-- Trust Badges Section -->
+    <!-- 9. TRUST BADGES STRIP -->
     <section class="bg-darkbg-800 py-6 border-b border-gold-500/20 shadow-inner">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
                 <div class="flex items-center gap-3 p-3.5 rounded-2xl bg-darkbg-900 border border-gold-500/20">
-                    <div class="w-10 h-10 rounded-xl bg-rosePink-900/50 border border-rosePink-500/40 text-gold-400 flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-gold-400 flex items-center justify-center text-lg flex-shrink-0">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-100 text-xs">Anti-Tarnish Micro Plating</h4>
-                        <p class="text-[10px] text-slate-400">Long lasting gold shine</p>
+                        <h4 class="font-bold text-slate-100 text-xs">Anti-Tarnish Plating</h4>
+                        <p class="text-[10px] text-slate-400">6-Month Shine Warranty</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-3 p-3.5 rounded-2xl bg-darkbg-900 border border-gold-500/20">
-                    <div class="w-10 h-10 rounded-xl bg-rosePink-900/50 border border-rosePink-500/40 text-rosePink-400 flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-vibrantPink-400 flex items-center justify-center text-lg flex-shrink-0">
                         <i class="fa-solid fa-feather-pointed"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-100 text-xs">Breathable Hijab Fabrics</h4>
-                        <p class="text-[10px] text-slate-400">Soft, snag-free luxury</p>
+                        <h4 class="font-bold text-slate-100 text-xs">Breathable Fabrics</h4>
+                        <p class="text-[10px] text-slate-400">Premium Chiffon & Silk</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-3 p-3.5 rounded-2xl bg-darkbg-900 border border-gold-500/20">
-                    <div class="w-10 h-10 rounded-xl bg-rosePink-900/50 border border-rosePink-500/40 text-gold-400 flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-gold-400 flex items-center justify-center text-lg flex-shrink-0">
                         <i class="fa-solid fa-truck-fast"></i>
                     </div>
                     <div>
@@ -292,12 +348,12 @@
                 </div>
 
                 <div class="flex items-center gap-3 p-3.5 rounded-2xl bg-darkbg-900 border border-gold-500/20">
-                    <div class="w-10 h-10 rounded-xl bg-rosePink-900/50 border border-rosePink-500/40 text-rosePink-400 flex items-center justify-center text-lg flex-shrink-0">
-                        <i class="fa-solid fa-rotate-left"></i>
+                    <div class="w-10 h-10 rounded-xl bg-vibrantPink-900/50 border border-vibrantPink-500/40 text-vibrantPink-400 flex items-center justify-center text-lg flex-shrink-0">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-100 text-xs">Easy Replacements</h4>
-                        <p class="text-[10px] text-slate-400">100% Quality Assurance</p>
+                        <h4 class="font-bold text-slate-100 text-xs">Cash on Delivery</h4>
+                        <p class="text-[10px] text-slate-400">Available Pan-India</p>
                     </div>
                 </div>
 
@@ -305,63 +361,65 @@
         </div>
     </section>
 
-    <!-- Main Products Section -->
+    <!-- 4 & 5. SUB-CATEGORY CHIPS & PRODUCTS CATALOG -->
     <section id="products-section" class="py-14 bg-darkbg-900 min-h-[600px]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Category Switcher Headers -->
             <div class="text-center max-w-2xl mx-auto mb-8">
-                <span class="text-rosePink-400 font-bold text-xs tracking-widest uppercase">AK Queen's Signature Boutique</span>
+                <span class="text-vibrantPink-400 font-bold text-xs tracking-widest uppercase">AK Queen's Boutique</span>
                 <h2 id="catalogTitle" class="font-serif text-3xl sm:text-4xl font-extrabold gold-gradient-text mt-1">Our Featured Collections</h2>
-                <div class="w-20 h-0.5 bg-gradient-to-r from-gold-500 to-rosePink-500 mx-auto mt-3"></div>
+                <div class="w-24 h-0.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-gold-500 mx-auto mt-3 rounded-full"></div>
             </div>
 
-            <!-- Main Category Buttons -->
+            <!-- Primary Category Tabs -->
             <div class="flex justify-center gap-3 mb-8">
-                <button onclick="switchMainCategory('all')" id="mainCatAll" class="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-vibrantPink-600 bg-rosePink-500 text-white shadow-lg">
-                    <i class="fa-solid fa-crown mr-1.5"></i> All Items
+                <button onclick="switchMainCategory('all')" id="mainCatAll" class="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-vibrantPink-500 text-white shadow-lg glow-pink">
+                    <i class="fa-solid fa-crown mr-1.5"></i> All Collections
                 </button>
                 <button onclick="switchMainCategory('jewelry')" id="mainCatJewelry" class="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-darkbg-800 text-slate-300 hover:border-gold-500">
                     <i class="fa-solid fa-gem mr-1.5 text-gold-400"></i> 1 Gram Plated Jewelry
                 </button>
-                <button onclick="switchMainCategory('hijab')" id="mainCatHijab" class="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-darkbg-800 text-slate-300 hover:border-rosePink-400">
-                    <i class="fa-solid fa-spa mr-1.5 text-rosePink-400"></i> Hijab Essentials
+                <button onclick="switchMainCategory('hijab')" id="mainCatHijab" class="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-darkbg-800 text-slate-300 hover:border-vibrantPink-400">
+                    <i class="fa-solid fa-spa mr-1.5 text-vibrantPink-400"></i> Hijab Essentials
                 </button>
             </div>
 
-            <!-- Sub Category Filter Pills Bar -->
-            <div class="mb-10 bg-darkbg-800/80 p-3 rounded-2xl border border-gold-500/20">
-                <div class="flex items-center justify-between mb-2 px-2">
-                    <span class="text-xs text-gold-300 font-semibold uppercase tracking-wider" id="subCatLabel">Filter By Type:</span>
-                    <span class="text-[10px] text-slate-400" id="itemCountDisplay">Showing all items</span>
+            <!-- Sub Category Scrollable Filter Bar -->
+            <div class="mb-10 bg-darkbg-800/80 p-4 rounded-2xl border border-gold-500/20 shadow-inner">
+                <div class="flex items-center justify-between mb-2.5 px-2">
+                    <span class="text-xs text-gold-300 font-bold uppercase tracking-wider flex items-center gap-1.5" id="subCatLabel">
+                        <i class="fa-solid fa-filter text-vibrantPink-400"></i> Filter By Sub-Category:
+                    </span>
+                    <span class="text-[11px] text-slate-400 font-medium" id="itemCountDisplay">Showing all items</span>
                 </div>
                 <div id="subCategoryContainer" class="flex gap-2 overflow-x-auto pb-2 pt-1 subcat-scroll">
-                    <!-- Javascript populated sub-category buttons -->
+                    <!-- Javascript dynamically renders pills here -->
                 </div>
             </div>
 
-            <!-- Products Grid Container -->
+            <!-- Products Grid -->
             <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Javascript populated product cards -->
+                <!-- Javascript populates detailed rich product cards -->
             </div>
 
         </div>
     </section>
 
-    <!-- Royal Special Offer Section -->
-    <section id="flash-sale" class="py-12 bg-gradient-to-r from-darkbg-950 via-darkbg-800 to-darkbg-950 text-white relative overflow-hidden border-y border-rosePink-500/30">
+    <!-- FLASH SALE SECTION -->
+    <section id="flash-sale" class="py-12 bg-gradient-to-r from-darkbg-950 via-darkbg-800 to-darkbg-950 text-white relative overflow-hidden border-y border-vibrantPink-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
                 
                 <div class="text-center lg:text-left space-y-2">
-                    <span class="bg-rosePink-900/60 text-rosePink-300 border border-rosePink-500/50 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest inline-block glow-pink">
+                    <span class="bg-vibrantPink-900/60 text-vibrantPink-300 border border-vibrantPink-500/50 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest inline-block glow-pink">
                         👑 Queen's Special Discount
                     </span>
                     <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">
-                        Flat 25% Off On 1 Gram Haram & Vintage Sets
+                        Flat 25% Off On All 1 Gram Haram & Vintage Sets
                     </h2>
                     <p class="text-slate-300 text-sm max-w-lg">
-                        Includes complimentary velvet gift pouch and anti-tarnish polishing cloth on all orders!
+                        Includes complimentary velvet gift pouch and anti-tarnish polishing cloth on all orders above ₹1,499!
                     </p>
                 </div>
 
@@ -369,17 +427,17 @@
                 <div class="flex items-center gap-3">
                     <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="hours" class="font-serif text-2xl font-black text-gold-400 block">14</span>
-                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Hours</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Hours</span>
                     </div>
-                    <span class="text-rosePink-500 font-bold text-xl">:</span>
+                    <span class="text-vibrantPink-500 font-bold text-xl">:</span>
                     <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="minutes" class="font-serif text-2xl font-black text-gold-400 block">32</span>
-                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Mins</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Mins</span>
                     </div>
-                    <span class="text-rosePink-500 font-bold text-xl">:</span>
+                    <span class="text-vibrantPink-500 font-bold text-xl">:</span>
                     <div class="bg-darkbg-900 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-2xl">
                         <span id="seconds" class="font-serif text-2xl font-black text-gold-400 block">45</span>
-                        <span class="text-[9px] uppercase tracking-wider text-slate-400">Secs</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Secs</span>
                     </div>
                 </div>
 
@@ -387,15 +445,15 @@
         </div>
     </section>
 
-    <!-- Quick View Modal -->
+    <!-- 7. QUICK VIEW MODAL -->
     <div id="quickViewModal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
         <div onclick="closeQuickView()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md"></div>
-        <div class="relative bg-darkbg-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 text-white shadow-2xl pointer-events-auto transform scale-95 transition-transform duration-300 overflow-hidden z-10" id="quickViewContent">
+        <div class="relative bg-darkbg-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 text-white shadow-2xl pointer-events-auto transform scale-95 transition-transform duration-300 overflow-hidden z-10 max-h-[90vh] overflow-y-auto" id="quickViewContent">
             <!-- Modal JavaScript content loaded here -->
         </div>
     </div>
 
-    <!-- Slide-out Shopping Cart Drawer -->
+    <!-- 6. SHOPPING CART DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
         <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md"></div>
         
@@ -403,29 +461,32 @@
             
             <div class="p-5 bg-darkbg-950 text-white flex items-center justify-between border-b border-gold-500/30">
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-crown text-rosePink-400 text-lg"></i>
+                    <i class="fa-solid fa-crown text-vibrantPink-400 text-lg"></i>
                     <h3 class="font-serif font-bold text-lg gold-gradient-text">Your Queen's Basket</h3>
-                    <span id="cartDrawerCount" class="text-xs bg-rosePink-600 text-white font-extrabold px-2 py-0.5 rounded-full">0</span>
+                    <span id="cartDrawerCount" class="text-xs bg-vibrantPink-600 text-white font-black px-2.5 py-0.5 rounded-full">0</span>
                 </div>
                 <button onclick="toggleCartDrawer()" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
+            <!-- Free Shipping Progress Bar -->
             <div class="p-4 bg-darkbg-800 border-b border-gold-500/20 text-xs">
-                <div class="flex justify-between font-semibold text-slate-200 mb-1.5">
+                <div class="flex justify-between font-bold text-slate-200 mb-1.5">
                     <span id="shippingText">Add ₹1,499 for FREE Delivery</span>
                     <span id="shippingTarget" class="text-gold-400">0%</span>
                 </div>
                 <div class="w-full h-2 bg-darkbg-950 rounded-full overflow-hidden border border-gold-500/20">
-                    <div id="shippingProgressBar" class="h-full bg-gradient-to-r from-gold-500 to-rosePink-500 w-0 transition-all duration-500"></div>
+                    <div id="shippingProgressBar" class="h-full bg-gradient-to-r from-gold-500 to-vibrantPink-500 w-0 transition-all duration-500"></div>
                 </div>
             </div>
 
+            <!-- Cart Items Scroll List -->
             <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
-                <!-- Javascript Cart Items -->
+                <!-- Javascript Cart Items populated here -->
             </div>
 
+            <!-- Cart Bottom Checkout Summary -->
             <div class="p-5 border-t border-gold-500/20 bg-darkbg-950 space-y-4">
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between text-slate-300">
@@ -433,76 +494,100 @@
                         <span id="cartSubtotal" class="font-bold text-white">₹0.00</span>
                     </div>
                     <div class="flex justify-between text-slate-300">
-                        <span>Shipping</span>
-                        <span id="shippingCost" class="text-rosePink-400 font-bold">Calculated at Checkout</span>
+                        <span>Delivery Fee</span>
+                        <span id="shippingCost" class="text-vibrantPink-400 font-bold">Calculated</span>
                     </div>
-                    <div class="border-t border-gold-500/20 pt-2 flex justify-between text-base font-extrabold text-white">
+                    <div class="border-t border-gold-500/20 pt-2 flex justify-between text-base font-black text-white">
                         <span>Grand Total</span>
                         <span id="cartTotal" class="text-gold-400">₹0.00</span>
                     </div>
                 </div>
 
-                <button onclick="handleCheckout()" class="w-full py-4 bg-gradient-to-r from-gold-500 via-rosePink-500 to-rosePink-600 hover:from-gold-400 hover:to-rosePink-500 text-white font-bold rounded-xl shadow-lg transition-all text-center flex items-center justify-center gap-2 text-sm uppercase tracking-wider glow-pink">
-                    Proceed To Order <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="handleCheckout('standard')" class="py-3.5 bg-gradient-to-r from-gold-500 via-vibrantPink-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-bold rounded-xl shadow-lg transition-all text-center flex items-center justify-center gap-1.5 text-xs uppercase tracking-wider glow-pink">
+                        <span>Checkout</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                    <button onclick="handleCheckout('whatsapp')" class="py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition-all text-center flex items-center justify-center gap-1.5 text-xs uppercase tracking-wider">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> <span>WhatsApp Order</span>
+                    </button>
+                </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Toast Container -->
+    <!-- 8. WISHLIST MODAL OVERLAY -->
+    <div id="wishlistModal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div onclick="closeWishlistModal()" class="absolute inset-0 bg-darkbg-950/80 backdrop-blur-md"></div>
+        <div class="relative bg-darkbg-900 border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 text-white shadow-2xl pointer-events-auto transform scale-95 transition-transform duration-300 overflow-hidden z-10 max-h-[85vh] flex flex-col">
+            <div class="flex justify-between items-center pb-4 border-b border-gold-500/20">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-vibrantPink-500 text-xl"></i>
+                    <h3 class="font-serif font-bold text-xl gold-gradient-text">Your Favorite Queens Choices</h3>
+                </div>
+                <button onclick="closeWishlistModal()" class="text-slate-400 hover:text-white text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="wishlistContent" class="flex-1 overflow-y-auto py-4 space-y-3">
+                <!-- Javascript populates wishlist items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. TOAST NOTIFICATION CONTAINER -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- Footer -->
+    <!-- 9. FOOTER -->
     <footer class="bg-darkbg-950 text-slate-300 text-sm border-t border-gold-500/30 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
                 
                 <div class="space-y-4">
                     <a href="#" class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-rosePink-600 text-white flex items-center justify-center font-black text-base">
+                        <div class="w-10 h-10 rounded-full bg-vibrantPink-600 text-white flex items-center justify-center font-black text-lg">
                             <i class="fa-solid fa-crown"></i>
                         </div>
                         <span class="font-serif text-xl font-bold gold-pink-gradient-text">AK QUEEN'S CHOICE</span>
                     </a>
                     <p class="text-xs text-slate-400 leading-relaxed">
-                        Exquisite 1 Gram Micro Plated Gold Jewelry and Premium Hijab Essentials. Designed for timeless beauty, durability, and regal elegance.
+                        Exquisite 1 Gram Micro Plated Gold Jewelry with 6-Month Anti-Tarnish Guarantee, alongside Luxurious Hijab Essentials curated for grace and everyday comfort.
                     </p>
                 </div>
 
                 <div>
-                    <h4 class="text-rosePink-400 font-bold mb-4 text-xs uppercase tracking-wider">1 Gram Jewelry Types</h4>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">1 Gram Jewelry Types</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#products-section" onclick="filterSubCategory('Short Chains')" class="hover:text-gold-300">Short Chains & Long Chains</a></li>
                         <li><a href="#products-section" onclick="filterSubCategory('Bangles')" class="hover:text-gold-300">Bangles & Bracelets</a></li>
-                        <li><a href="#products-section" onclick="filterSubCategory('Haram Set')" class="hover:text-gold-300">Haram & Necklace Sets</a></li>
-                        <li><a href="#products-section" onclick="filterSubCategory('Vintage Set')" class="hover:text-gold-300">Vintage & Antique Models</a></li>
+                        <li><a href="#products-section" onclick="filterSubCategory('Haram Set')" class="hover:text-gold-300">Haram & Choker Sets</a></li>
+                        <li><a href="#products-section" onclick="filterSubCategory('Vintage Set')" class="hover:text-gold-300">Vintage & Antiq Models</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-rosePink-400 font-bold mb-4 text-xs uppercase tracking-wider">Hijab Essentials</h4>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">Hijab Essentials</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#products-section" onclick="filterSubCategory('Premium Hijabs / Scarves')" class="hover:text-gold-300">Premium Hijabs / Scarves</a></li>
-                        <li><a href="#products-section" onclick="filterSubCategory('Hijab Pins & Magnetic Clips')" class="hover:text-gold-300">Hijab Pins & Magnetic Clips</a></li>
-                        <li><a href="#products-section" onclick="filterSubCategory('Undercaps / Inner Caps')" class="hover:text-gold-300">Undercaps & Inner Caps</a></li>
-                        <li><a href="#products-section" onclick="filterSubCategory('Hijab Brooches & Accessories')" class="hover:text-gold-300">Hijab Brooches & Accessories</a></li>
+                        <li><a href="#products-section" onclick="filterSubCategory('Hijab Pins & Clips')" class="hover:text-gold-300">Hijab Pins & Magnetic Clips</a></li>
+                        <li><a href="#products-section" onclick="filterSubCategory('Undercaps / Inner Caps')" class="hover:text-gold-300">Undercaps / Inner Caps</a></li>
+                        <li><a href="#products-section" onclick="filterSubCategory('Hijab Brooches')" class="hover:text-gold-300">Hijab Brooches & Accessories</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-rosePink-400 font-bold mb-4 text-xs uppercase tracking-wider">Guarantee & Support</h4>
-                    <ul class="space-y-2 text-xs">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-shield-check text-gold-400"></i> Anti-Tarnish Lifetime Guarantee</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-truck text-gold-400"></i> Insured Pan-India Delivery</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-headset text-gold-400"></i> 24/7 WhatsApp Support</li>
-                    </ul>
+                    <h4 class="text-vibrantPink-400 font-bold mb-4 text-xs uppercase tracking-wider">Queen's VIP Newsletter</h4>
+                    <p class="text-xs text-slate-400 mb-3">Subscribe for exclusive launch offers & royal discounts!</p>
+                    <div class="flex gap-2">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email" class="bg-darkbg-800 border border-gold-500/30 text-white px-3 py-2 rounded-xl text-xs focus:outline-none focus:border-vibrantPink-500 flex-1">
+                        <button onclick="subscribeNewsletter()" class="px-4 py-2 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-bold text-xs rounded-xl shadow">Join</button>
+                    </div>
                 </div>
 
             </div>
 
             <div class="pt-8 border-t border-gold-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-                <p>&copy; 2026 AK Queen's Choice. All Rights Reserved.</p>
+                <p>&copy; 2026 AK Queen's Choice. All Rights Reserved. Pan-India Express Delivery.</p>
                 <div class="flex items-center gap-4 text-gold-400 text-lg">
                     <i class="fa-brands fa-cc-visa"></i>
                     <i class="fa-brands fa-cc-mastercard"></i>
@@ -513,11 +598,11 @@
         </div>
     </footer>
 
-    <!-- JavaScript Data & Logic -->
+    <!-- MASTER JAVASCRIPT LOGIC -->
     <script>
-        // Master Products Database for One Gram Plated Jewelry and Hijab Essentials
+        // Master Products Database for All 10 Jewelry and 4 Hijab Sub-categories
         const productsDatabase = [
-            // --- ONE GRAM PLATED JEWELRY ---
+            // --- 1 GRAM PLATED JEWELRY ---
             {
                 id: 101,
                 title: "Anti-Tarnish 1 Gram Gold Short Chain",
@@ -525,10 +610,12 @@
                 subCategory: "Short Chains",
                 price: 1299,
                 originalPrice: 1899,
+                discount: "31% OFF",
                 rating: 4.9,
                 reviews: 124,
-                badge: "Anti-Tarnish Guarantee",
-                specs: "1 Gram Micro Plated • Length: 18 Inches • High Luster",
+                badge: "6-Month Anti-Tarnish",
+                specs: "1 Gram Micro Plated • Length: 18 Inches • High Luster Gloss Finish",
+                description: "Delicately crafted 1 gram gold micro-plated short chain with superior durability against daily wear.",
                 image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -538,10 +625,12 @@
                 subCategory: "Long Chains",
                 price: 1899,
                 originalPrice: 2499,
+                discount: "24% OFF",
                 rating: 4.8,
                 reviews: 98,
                 badge: "Long Chain",
-                specs: "1 Gram Micro Plated • Length: 28 Inches • Double Layered",
+                specs: "1 Gram Gold Coating • Length: 28 Inches • Double Layered Pearl Links",
+                description: "Classic long chain featuring traditional MOP embellishments with 1 gram high polish.",
                 image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -551,10 +640,12 @@
                 subCategory: "Bangles",
                 price: 1499,
                 originalPrice: 1999,
+                discount: "25% OFF",
                 rating: 5.0,
                 reviews: 145,
                 badge: "Set of 4",
-                specs: "1 Gram Gold Coating • Velvet Pouch Included • All Sizes Available",
+                specs: "1 Gram Gold Plated • Sizes 2.4, 2.6, 2.8 Available • Lifetime Polish",
+                description: "Traditional set of 4 micro gold-plated bangles with smooth inner comfort curves.",
                 image: "https://images.unsplash.com/photo-1611591475179-be25f0e956bc?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -564,10 +655,12 @@
                 subCategory: "Bracelet",
                 price: 899,
                 originalPrice: 1299,
+                discount: "30% OFF",
                 rating: 4.7,
                 reviews: 64,
                 badge: "Adjustable Lock",
-                specs: "High Grade Cubic Zirconia • Anti-Allergic Coating",
+                specs: "AAA+ Cubic Zirconia • Skin Friendly Anti-Allergic Coating",
+                description: "Modern adjustable luxury bracelet encrusted with sparkling CZ stones.",
                 image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -577,10 +670,12 @@
                 subCategory: "Rings",
                 price: 499,
                 originalPrice: 799,
+                discount: "37% OFF",
                 rating: 4.9,
                 reviews: 82,
-                badge: "1 Gram Finish",
-                specs: "Free Size Adjustable • Premium Gold Plating",
+                badge: "Free Size",
+                specs: "Adjustable Band • Micro Gold Tone • Anti-Fade Finish",
+                description: "Free-size solitaire ring coated with micro gold layer for timeless grace.",
                 image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -590,10 +685,12 @@
                 subCategory: "Haram Set",
                 price: 3499,
                 originalPrice: 4999,
+                discount: "30% OFF",
                 rating: 5.0,
                 reviews: 210,
                 badge: "Grand Bridal",
                 specs: "Includes Matching Jhumkas • Heavy Antique Gold Polish",
+                description: "Grand temple jewelry haram featuring Goddess Lakshmi motifs with rubies and emeralds.",
                 image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -603,10 +700,12 @@
                 subCategory: "Necklace Set",
                 price: 2299,
                 originalPrice: 3100,
+                discount: "25% OFF",
                 rating: 4.8,
                 reviews: 77,
                 badge: "Best Seller",
-                specs: "Micro Plated Choker • Earrings Included • Adjustable Thread",
+                specs: "1 Gram Gold Coating • Adjustable Thread • Earring Pair Included",
+                description: "Royal choker set adorned with synthetic rubies and dangling micro pearls.",
                 image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"
             },
             {
@@ -616,36 +715,42 @@
                 subCategory: "Earrings",
                 price: 799,
                 originalPrice: 1199,
+                discount: "33% OFF",
                 rating: 4.9,
                 reviews: 189,
-                badge: "Peacock Design",
-                specs: "Lightweight Pearl Drops • Push Back Clasp",
+                badge: "Peacock Art",
+                specs: "Lightweight • Pearl Drops • Secure Push Back Clasp",
+                description: "Exquisite peacock carved jhumka earrings with pearl cluster drops.",
                 image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=600"
             },
             {
                 id: 109,
-                title: "Victorian Vintage Matte Finish Jewelry Set",
+                title: "Victorian Vintage Dual Tone Jewelry Set",
                 mainCategory: "jewelry",
                 subCategory: "Vintage Set",
                 price: 2899,
                 originalPrice: 3800,
+                discount: "23% OFF",
                 rating: 4.9,
                 reviews: 53,
                 badge: "Vintage Heritage",
-                specs: "Victorian Dual Gold Tone • Emerald Embellishments",
+                specs: "Dual Gold & Silver Matte Polish • Emerald Embellishments",
+                description: "Heritage inspired Victorian dual-tone necklace set crafted for royal celebrations.",
                 image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600"
             },
             {
                 id: 110,
-                title: "Antique Royal Heritage Gold Polish Kada",
+                title: "Antique Temple Heritage Polish Kada",
                 mainCategory: "jewelry",
                 subCategory: "Antiq Models",
                 price: 1199,
                 originalPrice: 1699,
+                discount: "29% OFF",
                 rating: 4.8,
                 reviews: 91,
-                badge: "Antiq Polish",
-                specs: "Openable Screw Lock • Antique Temple Finish",
+                badge: "Antiq Finish",
+                specs: "Openable Screw Lock • Heavy Antique Embossing",
+                description: "Openable temple design kada bracelet with deep antique gold patina.",
                 image: "https://images.unsplash.com/photo-1611591475179-be25f0e956bc?auto=format&fit=crop&q=80&w=600"
             },
 
@@ -657,65 +762,73 @@
                 subCategory: "Premium Hijabs / Scarves",
                 price: 599,
                 originalPrice: 899,
+                discount: "33% OFF",
                 rating: 4.9,
                 reviews: 230,
                 badge: "Breathable",
-                specs: "180x75 cm • Non-Slip Light Chiffon Fabric",
+                specs: "180x75 cm • Ultra Light Non-Slip Chiffon Fabric",
+                description: "Ultra-soft bubble chiffon scarf offering full opacity with effortless drape.",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600"
             },
             {
                 id: 202,
-                title: "Snag-Free Matte Magnetic Hijab Clips (Pack of 4)",
+                title: "Snag-Free Magnetic Hijab Clips (Pack of 4)",
                 mainCategory: "hijab",
-                subCategory: "Hijab Pins & Magnetic Clips",
+                subCategory: "Hijab Pins & Clips",
                 price: 399,
                 originalPrice: 599,
+                discount: "33% OFF",
                 rating: 5.0,
                 reviews: 310,
                 badge: "No Pin Holes",
-                specs: "Ultra Strong Neodymium Magnets • Safe for Silk & Chiffon",
+                specs: "Neodymium Magnets • Matte Finish • Safe for Silk & Chiffon",
+                description: "Ultra strong magnetic hijab pins that hold layers securely without damaging fabrics.",
                 image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&q=80&w=600"
             },
             {
                 id: 203,
-                title: "Stretch Cotton Tie-Back Hijab Undercap",
+                title: "Stretch Organic Cotton Tie-Back Undercap",
                 mainCategory: "hijab",
                 subCategory: "Undercaps / Inner Caps",
                 price: 299,
                 originalPrice: 450,
+                discount: "33% OFF",
                 rating: 4.8,
                 reviews: 140,
-                badge: "100% Organic Cotton",
-                specs: "Adjustable Tie Strings • Prevents Hair Slippage",
+                badge: "100% Cotton",
+                specs: "Adjustable Tie Strings • Non-Slip Hair Hold",
+                description: "Breathable organic cotton tie-back cap that prevents hair slippage all day long.",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600"
             },
             {
                 id: 204,
-                title: "Crystal Rhinestone Luxury Hijab Brooch Pin",
+                title: "Crystal Rhinestone Luxury Hijab Brooch",
                 mainCategory: "hijab",
-                subCategory: "Hijab Brooches & Accessories",
+                subCategory: "Hijab Brooches",
                 price: 349,
                 originalPrice: 499,
+                discount: "30% OFF",
                 rating: 4.7,
                 reviews: 88,
-                badge: "Crystal Elegance",
-                specs: "Gold Plated Finish • Secure Safety Clasp",
+                badge: "Crystal Shine",
+                specs: "Gold Plated Base • Safety Lock Pin",
+                description: "Sparkling rhinestone brooch to add royal elegance to special occasion hijabs.",
                 image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=600"
             }
         ];
 
-        // Sub categories dictionary
+        // Sub-categories lists
         const jewelrySubCats = [
             "All Jewelry", "Short Chains", "Long Chains", "Bangles", "Bracelet", "Rings", 
             "Haram Set", "Necklace Set", "Earrings", "Vintage Set", "Antiq Models"
         ];
 
         const hijabSubCats = [
-            "All Hijab Essentials", "Premium Hijabs / Scarves", "Hijab Pins & Magnetic Clips", 
-            "Undercaps / Inner Caps", "Hijab Brooches & Accessories"
+            "All Hijab Essentials", "Premium Hijabs / Scarves", "Hijab Pins & Clips", 
+            "Undercaps / Inner Caps", "Hijab Brooches"
         ];
 
-        // Application State
+        // Global State
         let currentMainCat = 'all';
         let currentSubCat = 'all';
         let cart = [];
@@ -728,12 +841,11 @@
             updateCartUI();
         };
 
-        // Switch main categories (All, 1 Gram Jewelry, Hijab Essentials)
+        // Switch Main Categories
         function switchMainCategory(cat) {
             currentMainCat = cat;
             currentSubCat = 'all';
 
-            // Button Highlight Styling
             const btnAll = document.getElementById('mainCatAll');
             const btnJewelry = document.getElementById('mainCatJewelry');
             const btnHijab = document.getElementById('mainCatHijab');
@@ -743,13 +855,13 @@
             });
 
             if (cat === 'all') {
-                btnAll.className = "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-rosePink-500 text-white shadow-lg glow-pink";
+                btnAll.className = "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-vibrantPink-500 text-white shadow-lg glow-pink";
                 document.getElementById('catalogTitle').innerText = "Our Complete Royal Collections";
             } else if (cat === 'jewelry') {
                 btnJewelry.className = "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-gold-500 text-darkbg-950 font-black shadow-lg glow-gold";
                 document.getElementById('catalogTitle').innerText = "1 Gram Plated Jewelry Collections";
             } else if (cat === 'hijab') {
-                btnHijab.className = "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-rosePink-500 text-white shadow-lg glow-pink";
+                btnHijab.className = "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border border-gold-500/30 bg-vibrantPink-500 text-white shadow-lg glow-pink";
                 document.getElementById('catalogTitle').innerText = "Hijab Essentials Collections";
             }
 
@@ -757,7 +869,7 @@
             renderProducts();
         }
 
-        // Render sub category buttons dynamically
+        // Render Sub-Category Filter Pills
         function renderSubCategoryPills() {
             const container = document.getElementById('subCategoryContainer');
             let list = [];
@@ -770,12 +882,12 @@
                 list = ["All Items", ...jewelrySubCats.slice(1), ...hijabSubCats.slice(1)];
             }
 
-            container.innerHTML = list.map((subCatName, idx) => {
+            container.innerHTML = list.map((subCatName) => {
                 const isSelected = (currentSubCat === 'all' && (subCatName.startsWith('All'))) || currentSubCat === subCatName;
-                const activeClasses = isSelected ? 'bg-gradient-to-r from-gold-500 to-rosePink-500 text-white font-extrabold shadow-md' : 'bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-rosePink-400';
+                const activeClasses = isSelected ? 'bg-gradient-to-r from-gold-500 to-vibrantPink-500 text-white font-extrabold shadow-md' : 'bg-darkbg-900 text-slate-300 border border-gold-500/20 hover:border-vibrantPink-400';
 
                 return `
-                    <button onclick="filterSubCategory('${subCatName}')" class="px-3.5 py-1.5 rounded-full text-xs transition-all whitespace-nowrap flex-shrink-0 ${activeClasses}">
+                    <button onclick="filterSubCategory('${subCatName}')" class="px-4 py-2 rounded-xl text-xs transition-all whitespace-nowrap flex-shrink-0 ${activeClasses}">
                         ${subCatName}
                     </button>
                 `;
@@ -792,18 +904,15 @@
             renderProducts();
         }
 
-        // Render catalog items
+        // Render Product Cards
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
-            
             let filtered = productsDatabase;
 
-            // Apply main category filter
             if (currentMainCat !== 'all') {
                 filtered = filtered.filter(p => p.mainCategory === currentMainCat);
             }
 
-            // Apply subcategory filter
             if (currentSubCat !== 'all') {
                 filtered = filtered.filter(p => p.subCategory === currentSubCat);
             }
@@ -815,7 +924,7 @@
                     <div class="col-span-full text-center py-16 space-y-3">
                         <i class="fa-solid fa-crown text-3xl text-gold-400"></i>
                         <p class="text-slate-200 font-semibold text-sm">No items found in this selection.</p>
-                        <button onclick="switchMainCategory('all')" class="px-4 py-2 bg-rosePink-600 text-white text-xs font-bold rounded-xl shadow-md">View All Items</button>
+                        <button onclick="switchMainCategory('all')" class="px-4 py-2 bg-vibrantPink-600 text-white text-xs font-bold rounded-xl shadow-md">View All Items</button>
                     </div>
                 `;
                 return;
@@ -824,39 +933,45 @@
             grid.innerHTML = filtered.map(product => {
                 const isWish = wishlist.includes(product.id);
                 return `
-                <div class="group bg-darkbg-900 rounded-2xl border border-gold-500/20 shadow-xl hover:border-rosePink-500/50 transition-all duration-300 flex flex-col overflow-hidden relative">
+                <div class="group bg-darkbg-900 rounded-2xl border border-gold-500/20 shadow-xl hover:border-vibrantPink-500/50 transition-all duration-300 flex flex-col overflow-hidden relative">
                     
-                    <!-- Guarantee / Category Badge -->
-                    <span class="absolute top-3 left-3 z-10 bg-darkbg-950/90 text-gold-300 border border-gold-500/30 text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-md">
-                        ${product.badge}
-                    </span>
+                    <!-- Anti-Tarnish / Discount Badges -->
+                    <div class="absolute top-3 left-3 z-10 flex flex-col gap-1">
+                        <span class="bg-darkbg-950/90 text-gold-300 border border-gold-500/30 text-[9px] font-extrabold px-2 py-1 rounded-md uppercase tracking-wider shadow-md">
+                            ${product.badge}
+                        </span>
+                        ${product.discount ? `<span class="bg-vibrantPink-600 text-white text-[9px] font-black px-2 py-0.5 rounded-md uppercase w-fit">${product.discount}</span>` : ''}
+                    </div>
 
-                    <!-- Wishlist Toggle -->
-                    <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-darkbg-950/80 backdrop-blur-md border border-gold-500/30 flex items-center justify-center text-slate-300 hover:text-rosePink-400 transition-all shadow-sm">
-                        <i class="${isWish ? 'fa-solid text-rosePink-500' : 'fa-regular'} fa-heart"></i>
+                    <!-- Wishlist Heart Toggle -->
+                    <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-darkbg-950/80 backdrop-blur-md border border-gold-500/30 flex items-center justify-center text-slate-300 hover:text-vibrantPink-400 transition-all shadow-sm">
+                        <i class="${isWish ? 'fa-solid text-vibrantPink-500' : 'fa-regular'} fa-heart text-sm"></i>
                     </button>
 
                     <!-- Product Image -->
                     <div class="aspect-square overflow-hidden bg-darkbg-950 relative cursor-pointer" onclick="openQuickView(${product.id})">
                         <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
                         <div class="absolute inset-0 bg-darkbg-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="px-3 py-1.5 bg-gold-500 text-darkbg-950 font-bold text-xs rounded-lg shadow-lg">Quick View</span>
+                            <span class="px-3.5 py-2 bg-gold-500 text-darkbg-950 font-black text-xs rounded-xl shadow-lg uppercase tracking-wider">Quick View</span>
                         </div>
                     </div>
 
-                    <!-- Card Body -->
+                    <!-- Product Body Details -->
                     <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
-                            <span class="text-[10px] text-rosePink-400 font-bold uppercase tracking-wider">${product.subCategory}</span>
+                            <div class="flex items-center justify-between text-[10px] text-vibrantPink-400 font-bold uppercase tracking-wider mb-1">
+                                <span>${product.subCategory}</span>
+                                <span class="text-gold-400 flex items-center gap-1"><i class="fa-solid fa-star text-[9px]"></i> ${product.rating}</span>
+                            </div>
                             <h3 onclick="openQuickView(${product.id})" class="font-serif font-bold text-slate-100 text-xs sm:text-sm group-hover:text-gold-300 transition-colors line-clamp-1 cursor-pointer">${product.title}</h3>
                         </div>
 
                         <div class="flex items-center justify-between pt-2 border-t border-darkbg-800">
                             <div>
-                                <span class="text-sm font-extrabold text-gold-300">₹${product.price.toLocaleString('en-IN')}</span>
+                                <span class="text-sm font-black text-gold-300">₹${product.price.toLocaleString('en-IN')}</span>
                                 ${product.originalPrice ? `<span class="text-[10px] text-slate-500 line-through ml-1">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
                             </div>
-                            <button onclick="addToCart(${product.id})" class="px-3 py-1.5 bg-gradient-to-r from-gold-500 to-rosePink-600 hover:from-gold-400 hover:to-rosePink-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1 glow-pink">
+                            <button onclick="addToCart(${product.id})" class="px-3.5 py-1.5 bg-gradient-to-r from-gold-500 to-vibrantPink-600 hover:from-gold-400 hover:to-vibrantPink-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5 glow-pink">
                                 <i class="fa-solid fa-bag-shopping"></i> Add
                             </button>
                         </div>
@@ -866,7 +981,7 @@
             }).join('');
         }
 
-        // Quick View Modal
+        // Quick View Modal Logic
         function openQuickView(id) {
             const product = productsDatabase.find(p => p.id === id);
             if (!product) return;
@@ -875,25 +990,37 @@
             const content = document.getElementById('quickViewContent');
 
             content.innerHTML = `
-                <button onclick="closeQuickView()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <button onclick="closeQuickView()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg z-20">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
                 <div class="grid md:grid-cols-2 gap-6 items-center">
-                    <div class="aspect-square rounded-2xl overflow-hidden bg-darkbg-950 border border-gold-500/20">
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-darkbg-950 border border-gold-500/20 relative">
                         <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover">
+                        <span class="absolute bottom-3 left-3 bg-vibrantPink-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-md">${product.badge}</span>
                     </div>
                     <div class="space-y-4">
-                        <span class="text-xs bg-rosePink-900/60 text-rosePink-300 border border-rosePink-500/40 px-2.5 py-0.5 rounded-md font-bold uppercase tracking-wider">${product.subCategory}</span>
+                        <span class="text-xs bg-vibrantPink-900/60 text-vibrantPink-300 border border-vibrantPink-500/40 px-2.5 py-0.5 rounded-md font-bold uppercase tracking-wider">${product.subCategory}</span>
                         <h2 class="font-serif text-xl font-bold text-white">${product.title}</h2>
-                        <p class="text-xs text-slate-300">${product.specs}</p>
-                        <div class="text-xs space-y-1 bg-darkbg-800 p-3 rounded-xl border border-gold-500/20">
-                            <p class="text-gold-400 font-bold"><i class="fa-solid fa-shield-halved mr-1"></i> Quality Assurance</p>
-                            <p class="text-slate-400 text-[11px]">Anti-tarnish micro plating technology ensures long-lasting brilliance under normal wear.</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">${product.description}</p>
+                        
+                        <div class="text-xs space-y-1.5 bg-darkbg-800 p-3.5 rounded-xl border border-gold-500/20">
+                            <p class="text-gold-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> 6-Month Anti-Tarnish Warranty</p>
+                            <p class="text-slate-400 text-[11px]">${product.specs}</p>
                         </div>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-xl font-extrabold text-gold-300">₹${product.price.toLocaleString('en-IN')}</span>
-                            <button onclick="addToCart(${product.id}); closeQuickView();" class="px-5 py-2.5 bg-gradient-to-r from-gold-500 to-rosePink-600 hover:from-gold-400 hover:to-rosePink-500 text-white font-bold text-xs rounded-xl shadow-lg glow-pink">
-                                Add To Basket
+
+                        <div class="flex items-center gap-3 pt-2">
+                            <div>
+                                <span class="text-2xl font-black text-gold-300">₹${product.price.toLocaleString('en-IN')}</span>
+                                ${product.originalPrice ? `<span class="text-xs text-slate-500 line-through ml-1">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="addToCart(${product.id}); closeQuickView();" class="py-3 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white font-bold text-xs rounded-xl shadow-lg glow-pink flex items-center justify-center gap-1.5 uppercase">
+                                <i class="fa-solid fa-bag-shopping"></i> Add To Cart
+                            </button>
+                            <button onclick="buyNowWhatsApp(${product.id})" class="py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-1.5 uppercase">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Buy
                             </button>
                         </div>
                     </div>
@@ -910,7 +1037,7 @@
             modal.classList.add('pointer-events-none', 'opacity-0');
         }
 
-        // Shopping Cart Logic
+        // Cart Drawer Logic
         function addToCart(id) {
             const product = productsDatabase.find(p => p.id === id);
             const existing = cart.find(item => item.id === id);
@@ -922,7 +1049,7 @@
             }
 
             updateCartUI();
-            showToast(`Added "${product.title}" to your basket!`);
+            showToast(`Added "${product.title}" to cart!`);
         }
 
         function updateQuantity(id, delta) {
@@ -939,6 +1066,7 @@
         function removeFromCart(id) {
             cart = cart.filter(i => i.id !== id);
             updateCartUI();
+            showToast("Item removed from cart");
         }
 
         function updateCartUI() {
@@ -957,11 +1085,11 @@
             document.getElementById('shippingTarget').innerText = `${percentage}%`;
             
             if (subtotal >= shippingTarget) {
-                document.getElementById('shippingText').innerText = "🎉 You've unlocked FREE Express Shipping!";
+                document.getElementById('shippingText').innerText = "🎉 You've unlocked FREE Express Delivery!";
                 document.getElementById('shippingCost').innerText = "FREE";
             } else {
                 const remaining = shippingTarget - subtotal;
-                document.getElementById('shippingText').innerText = `Add ₹${remaining.toLocaleString('en-IN')} more for FREE Shipping`;
+                document.getElementById('shippingText').innerText = `Add ₹${remaining.toLocaleString('en-IN')} for FREE Shipping`;
                 document.getElementById('shippingCost').innerText = "₹99";
             }
 
@@ -969,9 +1097,9 @@
             if (cart.length === 0) {
                 listContainer.innerHTML = `
                     <div class="text-center py-16 space-y-3">
-                        <i class="fa-solid fa-crown text-4xl text-rosePink-400"></i>
+                        <i class="fa-solid fa-crown text-4xl text-vibrantPink-400"></i>
                         <p class="text-white font-bold text-sm">Your Queen's Basket is empty</p>
-                        <button onclick="toggleCartDrawer()" class="px-5 py-2 bg-rosePink-600 text-white rounded-xl text-xs font-bold shadow-md">Shop Collections</button>
+                        <button onclick="toggleCartDrawer()" class="px-5 py-2 bg-vibrantPink-600 text-white rounded-xl text-xs font-bold shadow-md">Shop Collections</button>
                     </div>
                 `;
                 return;
@@ -984,19 +1112,19 @@
                         <h4 class="text-xs font-serif font-bold text-white truncate">${item.title}</h4>
                         <p class="text-xs text-gold-400 font-bold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
                         <div class="flex items-center gap-2 mt-2">
-                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-rosePink-600">-</button>
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-vibrantPink-600">-</button>
                             <span class="text-xs font-extrabold w-4 text-center text-slate-200">${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-rosePink-600">+</button>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-darkbg-950 text-white border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-vibrantPink-600">+</button>
                         </div>
                     </div>
-                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-rosePink-400 p-1 text-xs">
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-vibrantPink-400 p-1 text-xs">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
             `).join('');
         }
 
-        // Wishlist System
+        // Wishlist Logic
         function toggleWishlist(id) {
             if (wishlist.includes(id)) {
                 wishlist = wishlist.filter(item => item !== id);
@@ -1009,32 +1137,44 @@
             renderProducts();
         }
 
-        function scrollToWishlist() {
+        function openWishlistModal() {
+            const modal = document.getElementById('wishlistModal');
+            const content = document.getElementById('wishlistContent');
+
             if (wishlist.length === 0) {
-                showToast("Your wishlist is currently empty!");
+                content.innerHTML = `
+                    <div class="text-center py-10 space-y-2">
+                        <i class="fa-regular fa-heart text-3xl text-slate-500"></i>
+                        <p class="text-slate-300 text-xs">Your wishlist is currently empty.</p>
+                    </div>
+                `;
             } else {
                 const wishProducts = productsDatabase.filter(p => wishlist.includes(p.id));
-                document.getElementById('catalogTitle').innerText = "Your Wishlisted Royal Items";
-                renderProductsGridCustom(wishProducts);
-                document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function renderProductsGridCustom(items) {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = items.map(product => `
-                <div class="bg-darkbg-900 rounded-2xl border border-gold-500/20 p-4 space-y-3">
-                    <img src="${product.image}" class="w-full h-40 object-cover rounded-xl">
-                    <h3 class="font-bold text-xs text-white">${product.title}</h3>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold-400 font-bold text-xs">₹${product.price.toLocaleString('en-IN')}</span>
-                        <button onclick="addToCart(${product.id})" class="px-3 py-1 bg-rosePink-600 text-white text-xs font-bold rounded-lg">Add</button>
+                content.innerHTML = wishProducts.map(product => `
+                    <div class="flex items-center justify-between bg-darkbg-800 p-3 rounded-xl border border-gold-500/20">
+                        <div class="flex items-center gap-3">
+                            <img src="${product.image}" class="w-12 h-12 object-cover rounded-lg">
+                            <div>
+                                <h4 class="text-xs font-bold text-white">${product.title}</h4>
+                                <p class="text-xs text-gold-400 font-bold">₹${product.price.toLocaleString('en-IN')}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart(${product.id})" class="px-3 py-1.5 bg-gradient-to-r from-gold-500 to-vibrantPink-600 text-white text-xs font-bold rounded-lg">Add to Cart</button>
+                            <button onclick="toggleWishlist(${product.id}); openWishlistModal();" class="p-1.5 text-slate-400 hover:text-vibrantPink-400 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
         }
 
-        // Live Search
+        function closeWishlistModal() {
+            document.getElementById('wishlistModal').classList.add('pointer-events-none', 'opacity-0');
+        }
+
+        // Search Overlay System
         function handleLiveSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const overlay = document.getElementById('searchResultsOverlay');
@@ -1066,12 +1206,43 @@
             }
         }
 
+        function handleLiveSearchMobile() {
+            const query = document.getElementById('mobileSearchInput').value.toLowerCase().trim();
+            const overlay = document.getElementById('mobileSearchResultsOverlay');
+
+            if (!query) {
+                overlay.classList.add('hidden');
+                return;
+            }
+
+            const results = productsDatabase.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.subCategory.toLowerCase().includes(query)
+            );
+            
+            overlay.classList.remove('hidden');
+
+            if (results.length === 0) {
+                overlay.innerHTML = `<p class="text-xs text-slate-400 p-2 text-center">No matching items found</p>`;
+            } else {
+                overlay.innerHTML = results.map(r => `
+                    <div onclick="selectSearchResult(${r.id}); toggleMobileSearch();" class="p-2 hover:bg-darkbg-700 rounded-xl cursor-pointer flex items-center gap-3">
+                        <img src="${r.image}" class="w-10 h-10 object-cover rounded-md">
+                        <div>
+                            <p class="text-xs font-bold text-white">${r.title}</p>
+                            <p class="text-[10px] text-gold-400">₹${r.price.toLocaleString('en-IN')} • ${r.subCategory}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
         function selectSearchResult(id) {
             document.getElementById('searchResultsOverlay').classList.add('hidden');
             openQuickView(id);
         }
 
-        // Drawers and Toast Utilities
+        // Drawers & Search Toggles
         function toggleCartDrawer() {
             const drawer = document.getElementById('cartDrawer');
             const panel = document.getElementById('cartPanel');
@@ -1091,11 +1262,16 @@
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
 
+        function toggleMobileSearch() {
+            document.getElementById('mobileSearchDrawer').classList.toggle('hidden');
+        }
+
+        // Toast Notification System
         function showToast(msg) {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
-            toast.className = 'bg-darkbg-950 text-gold-300 border border-rosePink-500/50 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0 glow-pink';
-            toast.innerHTML = `<i class="fa-solid fa-crown text-rosePink-400 text-sm"></i><span>${msg}</span>`;
+            toast.className = 'bg-darkbg-950 text-gold-300 border border-vibrantPink-500/50 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0 glow-pink';
+            toast.innerHTML = `<i class="fa-solid fa-crown text-vibrantPink-400 text-sm"></i><span>${msg}</span>`;
 
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 10);
@@ -1105,7 +1281,41 @@
             }, 2500);
         }
 
-        // Live Countdown
+        // WhatsApp Direct Purchase / Order Integration
+        function buyNowWhatsApp(id) {
+            const product = productsDatabase.find(p => p.id === id);
+            if (!product) return;
+            const text = encodeURIComponent(`Hello AK Queen's Choice! I would like to order: ${product.title} (Price: ₹${product.price}). Please send me order details.`);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function handleCheckout(type) {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+
+            if (type === 'whatsapp') {
+                const cartSummary = cart.map(i => `${i.title} x${i.quantity} (₹${i.price * i.quantity})`).join('\n');
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const text = encodeURIComponent(`Hello AK Queen's Choice! Here is my Order Basket:\n\n${cartSummary}\n\nTotal: ₹${total}\n\nPlease confirm my order!`);
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+            } else {
+                showToast("Redirecting to AK Queen's Choice Secure Payment Gateway...");
+            }
+        }
+
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (!email || !email.includes('@')) {
+                showToast("Please enter a valid email address!");
+                return;
+            }
+            showToast("Welcome to the AK Queen's VIP Circle!");
+            document.getElementById('newsletterEmail').value = '';
+        }
+
+        // Live Countdown Timer
         function startTimer() {
             let h = 14, m = 32, s = 45;
             setInterval(() => {
@@ -1122,14 +1332,6 @@
                 document.getElementById('minutes').innerText = String(m).padStart(2, '0');
                 document.getElementById('seconds').innerText = String(s).padStart(2, '0');
             }, 1000);
-        }
-
-        function handleCheckout() {
-            if (cart.length === 0) {
-                showToast("Your cart is empty!");
-                return;
-            }
-            showToast("Redirecting to AK Queen's Choice Secure Checkout...");
         }
     </script>
 </body>
