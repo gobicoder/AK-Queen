@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK Queen's Choice | Royalty & Everyday Elegance</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Custom Color & Style Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        plum: {
+                            50: '#f7f3f8',
+                            100: '#eddfe8',
+                            800: '#3c183d',
+                            900: '#2b102c',
+                            950: '#1b091c',
+                        },
+                        gold: {
+                            100: '#fbf4dc',
+                            300: '#e7ce84',
+                            400: '#dfbc5e',
+                            500: '#d4af37',
+                            600: '#b89228',
+                        },
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#faf6f0',
+                            200: '#f2e8da',
+                        },
+                        rosegold: '#b76e79',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf6f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b89228;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbf4dc 0%, #d4af37 50%, #e7ce84 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, #d4af37, #fbf4dc, #d4af37) 1;
+        }
+
+        .hero-pattern {
+            background-color: #2b102c;
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #2b102c 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+            background-opacity: 0.05;
+        }
+
+        .custom-glass {
+            background: rgba(43, 16, 44, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <div class="bg-plum-950 text-gold-300 text-xs py-2 px-4 text-center tracking-wider border-b border-gold-500/20 font-medium flex items-center justify-center gap-2">
+        <i class="fa-solid fa-crown text-gold-400 text-xs"></i>
+        <span>Welcome to <strong>AK Queen's Choice</strong> – Free Express Shipping on Orders Above ₹1,499!</span>
+        <i class="fa-solid fa-crown text-gold-400 text-xs"></i>
+    </div>
+
+    <header class="sticky top-0 z-40 bg-plum-900/95 backdrop-blur-md text-white shadow-lg border-b border-gold-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group flex-shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-300 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-plum-950 rounded-full flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-crown text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif text-2xl font-bold tracking-tight gold-gradient-text">AK QUEEN'S</span>
+                        <span class="text-[10px] tracking-[0.25em] text-gold-300 font-medium uppercase -mt-1">CHOICE</span>
+                    </div>
+                </a>
+
+                <!-- Interactive Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-lg items-center relative">
+                    <div class="flex w-full rounded-full border border-gold-500/40 bg-plum-950/60 focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400/50 transition-all">
+                        <input type="text" id="searchInput" onkeyup="handleLiveSearch()" placeholder="Search Sarees, 1 Gram Jewelry, Hijabs..." class="w-full bg-transparent px-5 py-2.5 text-sm text-cream-100 placeholder-gold-300/50 focus:outline-none">
+                        <button onclick="handleSearchSubmit()" class="px-5 text-gold-400 hover:text-gold-300 transition-colors">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <!-- Live Search Overlay Dropdown -->
+                    <div id="searchResultsOverlay" class="hidden absolute top-12 left-0 right-0 bg-plum-900 border border-gold-500/30 rounded-2xl shadow-2xl p-3 z-50 max-h-80 overflow-y-auto">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right Action Buttons -->
+                <div class="flex items-center gap-3 sm:gap-5">
+                    
+                    <!-- Wishlist Counter -->
+                    <button onclick="scrollToWishlist()" class="relative p-2 text-gold-300 hover:text-gold-100 rounded-full hover:bg-white/5 transition-colors" title="Wishlist">
+                        <i class="fa-regular fa-heart text-xl"></i>
+                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rosegold text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-gradient-to-r from-gold-500 to-gold-600 text-plum-950 rounded-full font-bold shadow-md hover:scale-105 transition-transform flex items-center justify-center" title="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-plum-950 text-gold-300 border border-gold-400 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Mobile Navigation Toggle -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gold-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories Link Bar -->
+            <nav class="hidden md:flex items-center justify-center gap-8 py-3 border-t border-gold-500/20 text-xs font-semibold tracking-wider uppercase text-cream-100">
+                <a href="#" class="text-gold-400 hover:text-gold-300 transition-colors">Home</a>
+                <a href="#categories" class="hover:text-gold-400 transition-colors">Categories</a>
+                <a href="#featured" onclick="filterCategory('jewelry')" class="hover:text-gold-400 transition-colors">One Gram Jewelry</a>
+                <a href="#featured" onclick="filterCategory('sarees')" class="hover:text-gold-400 transition-colors">Sarees</a>
+                <a href="#featured" onclick="filterCategory('hijab')" class="hover:text-gold-400 transition-colors">Hijab Essentials</a>
+                <a href="#featured" onclick="filterCategory('stationary')" class="hover:text-gold-400 transition-colors">Stationary</a>
+                <a href="#featured" onclick="filterCategory('fancy')" class="hover:text-gold-400 transition-colors">Fancy Items</a>
+                <a href="#flash-sale" class="text-rosegold hover:text-white transition-colors font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-bolt text-gold-400"></i> Royal Offer
+                </a>
+            </nav>
+        </div>
+
+        <!-- Mobile Drawer Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-plum-950 border-b border-gold-500/30 px-5 pt-3 pb-6 space-y-3">
+            <div class="relative mb-4">
+                <input type="text" id="mobileSearchInput" onkeyup="handleLiveSearchMobile()" placeholder="Search products..." class="w-full bg-plum-900 border border-gold-500/30 text-white px-4 py-2 rounded-xl text-sm focus:outline-none">
+            </div>
+            <a href="#" onclick="toggleMobileMenu()" class="block py-2 text-gold-400 font-semibold border-b border-plum-900">Home</a>
+            <a href="#categories" onclick="toggleMobileMenu()" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">All Categories</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('jewelry')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">One Gram Jewelry</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('sarees')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Sarees Collection</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('hijab')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Hijab Items</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('stationary')" class="block py-2 text-cream-100 hover:text-gold-300 border-b border-plum-900">Stationary</a>
+            <a href="#featured" onclick="toggleMobileMenu(); filterCategory('fancy')" class="block py-2 text-cream-100 hover:text-gold-300">Fancy Items</a>
+        </div>
+    </header>
+
+    <section class="relative bg-plum-950 text-white overflow-hidden py-16 lg:py-24 border-b border-gold-500/30 hero-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text Left -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs uppercase tracking-widest font-semibold">
+                        <i class="fa-solid fa-gem text-xs"></i> Unveiling The Royal Collection 2026
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-cream-50">
+                        Elevate Your Grace with <span class="gold-gradient-text block mt-1">AK Queen's Choice</span>
+                    </h1>
+                    <p class="text-cream-200/80 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Discover 1 Gram Plated Jewelry, Silk Sarees, Designer Hijabs, Premium Stationary, and Exclusive Fancy Essentials tailored for modern royalty.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <a href="#featured" onclick="filterCategory('jewelry')" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold rounded-xl shadow-xl shadow-gold-500/20 transition-all transform hover:-translate-y-0.5 text-center text-sm">
+                            Shop 1 Gram Gold <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <a href="#featured" onclick="filterCategory('sarees')" class="px-8 py-4 bg-plum-900/80 hover:bg-plum-800 text-gold-300 border border-gold-500/40 font-semibold rounded-xl backdrop-blur-md transition-all text-center text-sm">
+                            Explore Sarees Collection
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Showcase Right -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-2 bg-gradient-to-b from-gold-400/40 via-gold-500/10 to-transparent shadow-2xl">
+                        <div class="w-full h-full rounded-2xl overflow-hidden relative group">
+                            <img id="heroImage" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Royal Jewelry Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-80"></div>
+                            
+                            <!-- Floating Floating Card Tag -->
+                            <div class="absolute bottom-6 left-6 right-6 p-4 bg-plum-950/80 backdrop-blur-md rounded-2xl border border-gold-500/30 text-white flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold">Featured Spotlight</p>
+                                    <h3 class="font-serif font-bold text-base text-cream-100">Antique Temple Necklace</h3>
+                                </div>
+                                <span class="bg-gold-500 text-plum-950 font-extrabold text-xs px-2.5 py-1 rounded-lg">₹2,499</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-cream-100 py-8 border-b border-gold-500/20 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">1 Gram Gold Guarantee</h4>
+                        <p class="text-[11px] text-gray-500">Long-lasting shine finish</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">Handpicked Sarees</h4>
+                        <p class="text-[11px] text-gray-500">Authentic royal fabrics</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">Express Shipping</h4>
+                        <p class="text-[11px] text-gray-500">Safe doorstep delivery</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-3 rounded-2xl bg-white border border-gold-500/20 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-plum-900 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-plum-900 text-xs sm:text-sm">100% Quality Assured</h4>
+                        <p class="text-[11px] text-gray-500">Direct boutique quality</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="py-16 bg-cream-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Explore Collections</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-plum-900 mt-1">Our 5 Boutique Pillars</h2>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                
+                <!-- Category 1 -->
+                <div onclick="filterCategory('jewelry')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400" alt="1 Gram Plated Jewelry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Top Selling</span>
+                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">1 Gram Plated Jewelry</h3>
+                        <p class="text-xs text-gold-300/80">35+ Designs</p>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div onclick="filterCategory('sarees')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=400" alt="Sarees Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-rosegold text-white font-bold px-2 py-0.5 rounded-md w-max mb-1">New Arrivals</span>
+                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Sarees Collection</h3>
+                        <p class="text-xs text-gold-300/80">42+ Silks & Weaves</p>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div onclick="filterCategory('hijab')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400" alt="Hijab Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Essentials</span>
+                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Hijab Essentials</h3>
+                        <p class="text-xs text-gold-300/80">28+ Fabrics & Pins</p>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div onclick="filterCategory('stationary')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=400" alt="Stationary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500/20 border border-gold-400 text-gold-300 font-bold px-2 py-0.5 rounded-md w-max mb-1">Trending</span>
+                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Stationary</h3>
+                        <p class="text-xs text-gold-300/80">18+ Royal Journals</p>
+                    </div>
+                </div>
+
+                <!-- Category 5 -->
+                <div onclick="filterCategory('fancy')" class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 bg-plum-950 cursor-pointer aspect-[3/4] border border-gold-500/20">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400" alt="Fancy Items" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-950/20 to-transparent flex flex-col justify-end p-4">
+                        <span class="text-[10px] bg-gold-500 text-plum-950 font-bold px-2 py-0.5 rounded-md w-max mb-1">Gifting</span>
+                        <h3 class="font-serif font-bold text-base text-cream-100 group-hover:text-gold-300 transition-colors">Fancy Items</h3>
+                        <p class="text-xs text-gold-300/80">25+ Accessories</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="flash-sale" class="py-12 bg-gradient-to-r from-plum-950 via-plum-900 to-plum-950 text-white relative overflow-hidden border-y border-gold-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                
+                <div class="text-center lg:text-left space-y-2">
+                    <span class="bg-gold-500/20 text-gold-300 border border-gold-500/40 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest inline-block">
+                        👑 Queen's Exclusive Sale
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-cream-50">
+                        Flat 30% Off On All 1 Gram Jewelry Sets
+                    </h2>
+                    <p class="text-cream-200/80 text-sm max-w-lg">
+                        Limited time offer! Get complimentary luxury velvet packaging on every purchase.
+                    </p>
+                </div>
+
+                <!-- Functional Countdown Display -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                        <span id="hours" class="font-serif text-2xl font-black text-gold-400 block">12</span>
+                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Hours</span>
+                    </div>
+                    <span class="text-gold-400 font-bold text-xl">:</span>
+                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                        <span id="minutes" class="font-serif text-2xl font-black text-gold-400 block">45</span>
+                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Mins</span>
+                    </div>
+                    <span class="text-gold-400 font-bold text-xl">:</span>
+                    <div class="bg-plum-900/90 border border-gold-500/40 rounded-2xl p-3.5 w-20 text-center shadow-lg">
+                        <span id="seconds" class="font-serif text-2xl font-black text-gold-400 block">30</span>
+                        <span class="text-[9px] uppercase tracking-wider text-cream-200/70">Secs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="featured" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Handpicked for Royalty</span>
+                    <h2 class="font-serif text-3xl font-extrabold text-plum-900 mt-1">Featured Product Showcase</h2>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                    <button onclick="filterCategory('all')" class="filter-tab active-tab px-4 py-2 rounded-full bg-plum-900 text-gold-300 shadow-md transition-all" data-cat="all">All Items</button>
+                    <button onclick="filterCategory('jewelry')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="jewelry">1 Gram Jewelry</button>
+                    <button onclick="filterCategory('sarees')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="sarees">Sarees</button>
+                    <button onclick="filterCategory('hijab')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="hijab">Hijab Items</button>
+                    <button onclick="filterCategory('stationary')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="stationary">Stationary</button>
+                    <button onclick="filterCategory('fancy')" class="filter-tab px-4 py-2 rounded-full bg-cream-100 text-plum-900 hover:bg-gold-500/20 transition-all" data-cat="fancy">Fancy Items</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Products Grid -->
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Javascript populated cards -->
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-16 bg-cream-100 border-t border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Queen's Feedback</span>
+                <h2 class="font-serif text-3xl font-extrabold text-plum-900 mt-1">Stories From Our Queens</h2>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-3"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-500 gap-1 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
+                        "The 1 Gram Gold Plated Haram looks identical to real gold! I wore it to my cousin's wedding and got endless compliments."
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">FA</div>
+                        <div>
+                            <h4 class="font-bold text-xs text-plum-900">Fatima Ahamed</h4>
+                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-500 gap-1 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
+                        "The Kanchipuram Soft Silk Saree fabric texture is so soft and light to drape. Outstanding quality and prompt delivery."
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">PR</div>
+                        <div>
+                            <h4 class="font-bold text-xs text-plum-900">Priya Ramakrishnan</h4>
+                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gold-500/20 space-y-4">
+                    <div class="flex text-gold-500 gap-1 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-xs sm:text-sm italic leading-relaxed">
+                        "The Chiffon Hijabs and magnetic pins set are super comfortable for daily wear. AK Queen's Choice is my go-to boutique now!"
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <div class="w-10 h-10 rounded-full bg-plum-900 text-gold-400 font-bold flex items-center justify-center text-sm">AZ</div>
+                        <div>
+                            <h4 class="font-bold text-xs text-plum-900">Ayesha Zoya</h4>
+                            <p class="text-[10px] text-gold-600 font-semibold">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop Blur overlay -->
+        <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-plum-950/70 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Drawer Slide Out Panel -->
+        <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300 border-l border-gold-500/30">
+            
+            <!-- Cart Header -->
+            <div class="p-5 bg-plum-900 text-white flex items-center justify-between border-b border-gold-500/30">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-gold-400 text-lg"></i>
+                    <h3 class="font-serif font-bold text-lg text-cream-100">Your Queen's Basket</h3>
+                    <span id="cartDrawerCount" class="text-xs bg-gold-500 text-plum-950 font-extrabold px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <button onclick="toggleCartDrawer()" class="p-1.5 text-gold-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Free Shipping Progress Tracker Bar -->
+            <div class="p-4 bg-cream-100 border-b border-gold-500/20 text-xs">
+                <div class="flex justify-between font-semibold text-plum-900 mb-1.5">
+                    <span id="shippingText">Add ₹1,499 for FREE Delivery</span>
+                    <span id="shippingTarget">0%</span>
+                </div>
+                <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="shippingProgressBar" class="h-full bg-gradient-to-r from-gold-500 to-gold-600 w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Cart Items List Container -->
+            <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- Dynamically rendered -->
+            </div>
+
+            <!-- Cart Subtotal & Checkout Actions Footer -->
+            <div class="p-5 border-t border-gray-100 bg-cream-50 space-y-4">
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between text-gray-600">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal" class="font-bold text-plum-900">₹0.00</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Estimated Shipping</span>
+                        <span id="shippingCost" class="text-gold-600 font-bold">Calculated at Checkout</span>
+                    </div>
+                    <div class="border-t border-gray-200 pt-2 flex justify-between text-base font-extrabold text-plum-900">
+                        <span>Grand Total</span>
+                        <span id="cartTotal" class="text-gold-600">₹0.00</span>
+                    </div>
+                </div>
+
+                <button onclick="handleCheckout()" class="w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold rounded-xl shadow-lg shadow-gold-500/20 transition-all text-center flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                    Proceed To Order <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <footer class="bg-plum-950 text-cream-200/80 text-sm border-t border-gold-500/30 mt-auto">
+        
+        <!-- Newsletter Signup Section -->
+        <div class="border-b border-gold-500/20 py-12 bg-plum-900/40">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto border border-gold-500/30">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <h3 class="font-serif text-2xl sm:text-3xl font-extrabold text-cream-100">Join The Queen's VIP Circle</h3>
+                <p class="text-xs sm:text-sm text-gold-300/80 max-w-md mx-auto">
+                    Subscribe for exclusive previews of new 1 Gram Gold designs, silk sarees, and private discount offers.
+                </p>
+                <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
+                    <input type="email" id="newsletterEmail" required placeholder="Enter your email address" class="px-5 py-3 rounded-xl bg-plum-900 border border-gold-500/40 text-white placeholder-gold-300/40 focus:outline-none focus:border-gold-400 flex-1 text-xs">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-plum-950 font-bold rounded-xl text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Links Grid -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-gold-500 flex items-center justify-center text-plum-950 font-black text-base">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold gold-gradient-text">AK QUEEN'S CHOICE</span>
+                    </a>
+                    <p class="text-xs text-cream-200/70 max-w-sm leading-relaxed">
+                        AK Queen's Choice is your destination for premium 1 Gram Gold Plated Jewelry, Silk Sarees, Designer Hijabs, Regal Stationary, and Fancy Essentials.
+                    </p>
+                    <div class="flex gap-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-plum-900 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-plum-950 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div>
+                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Categories</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#featured" onclick="filterCategory('jewelry')" class="hover:text-gold-300 transition-colors">1 Gram Plated Jewelry</a></li>
+                        <li><a href="#featured" onclick="filterCategory('sarees')" class="hover:text-gold-300 transition-colors">Sarees Collection</a></li>
+                        <li><a href="#featured" onclick="filterCategory('hijab')" class="hover:text-gold-300 transition-colors">Hijab Essentials</a></li>
+                        <li><a href="#featured" onclick="filterCategory('stationary')" class="hover:text-gold-300 transition-colors">Royal Stationary</a></li>
+                        <li><a href="#featured" onclick="filterCategory('fancy')" class="hover:text-gold-300 transition-colors">Fancy Accessories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div>
+                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Help & Support</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-gold-300 transition-colors">Track Order</a></li>
+                        <li><a href="#" class="hover:text-gold-300 transition-colors">Shipping & Delivery Policy</a></li>
+                        <li><a href="#" class="hover:text-gold-300 transition-colors">Jewelry Care Guide</a></li>
+                        <li><a href="#" class="hover:text-gold-300 transition-colors">Return Policy</a></li>
+                        <li><a href="#" class="hover:text-gold-300 transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-gold-400 font-bold mb-4 text-xs uppercase tracking-wider">Boutique Contact</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-gold-400"></i>
+                            <span>12 Royal Plaza, Main Boutique Street, India</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-gold-400"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-gold-400"></i>
+                            <span>support@akqueenschoice.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-gold-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <p>&copy; 2026 AK Queen's Choice. All Rights Reserved.</p>
+                <div class="flex items-center gap-4 text-gold-400/70 text-lg">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-solid fa-wallet"></i>
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Database of Products specifically tailored for AK Queen's Choice
+        const productsDatabase = [
+            {
+                id: 1,
+                title: "Antique Temple Gold Haram Necklace",
+                category: "jewelry",
+                price: 2499,
+                originalPrice: 3500,
+                rating: 4.9,
+                reviews: 148,
+                badge: "1 Gram Gold",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 2,
+                title: "Kanchipuram Soft Silk Zari Saree",
+                category: "sarees",
+                price: 3899,
+                originalPrice: 5200,
+                rating: 4.9,
+                reviews: 92,
+                badge: "Best Seller",
+                image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 3,
+                title: "Premium Luxury Chiffon Hijab Set",
+                category: "hijab",
+                price: 699,
+                originalPrice: 999,
+                rating: 4.8,
+                reviews: 75,
+                badge: "Set of 3",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 4,
+                title: "Royal Velvet Hardcover Journal & Pen",
+                category: "stationary",
+                price: 499,
+                originalPrice: 750,
+                rating: 4.7,
+                reviews: 38,
+                badge: "Gift Box",
+                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 5,
+                title: "Gold Embellished Hair Accessory Clutch",
+                category: "fancy",
+                price: 349,
+                originalPrice: 500,
+                rating: 4.6,
+                reviews: 51,
+                badge: "Fancy",
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 6,
+                title: "Jhumka Earring 1 Gram Plated Pair",
+                category: "jewelry",
+                price: 899,
+                originalPrice: 1299,
+                rating: 4.8,
+                reviews: 210,
+                badge: "Popular",
+                image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 7,
+                title: "Designer Banarasi Brocade Saree",
+                category: "sarees",
+                price: 4299,
+                originalPrice: 6000,
+                rating: 5.0,
+                reviews: 64,
+                badge: "Royal Weave",
+                image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 8,
+                title: "Magnetic Hijab Pins & Storage Box",
+                category: "hijab",
+                price: 299,
+                originalPrice: 450,
+                rating: 4.9,
+                reviews: 130,
+                badge: "Snag Free",
+                image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&q=80&w=600"
+            }
+        ];
+
+        // State variables
+        let cart = [];
+        let wishlist = [];
+
+        // App Initialization
+        window.onload = function() {
+            renderProducts(productsDatabase);
+            startTimer();
+            updateCartUI();
+        };
+
+        // Render Product Cards Grid
+        function renderProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fa-solid fa-crown text-3xl text-gold-400 mb-2"></i>
+                        <p class="text-plum-900 font-semibold text-sm">No items found matching this selection.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = items.map(product => {
+                const isWish = wishlist.includes(product.id);
+                return `
+                <div class="group bg-white rounded-2xl border border-gold-500/20 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
+                    
+                    <!-- Badge -->
+                    <span class="absolute top-3 left-3 z-10 bg-plum-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-md border border-gold-500/30 uppercase tracking-wider shadow-sm">
+                        ${product.badge}
+                    </span>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-gray-500 hover:text-rosegold hover:bg-white transition-all shadow-sm">
+                        <i class="${isWish ? 'fa-solid text-rosegold' : 'fa-regular'} fa-heart"></i>
+                    </button>
+
+                    <!-- Product Image -->
+                    <div class="aspect-square overflow-hidden bg-cream-100 relative">
+                        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex items-center gap-1 text-gold-500 text-xs mb-1">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-slate-800 ml-0.5">${product.rating}</span>
+                                <span class="text-gray-400 font-normal">(${product.reviews})</span>
+                            </div>
+                            <h3 class="font-serif font-bold text-plum-900 text-sm group-hover:text-gold-600 transition-colors line-clamp-1">${product.title}</h3>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+                            <div>
+                                <span class="text-base font-extrabold text-plum-900">₹${product.price.toLocaleString('en-IN')}</span>
+                                ${product.originalPrice ? `<span class="text-xs text-gray-400 line-through ml-1.5">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="px-3 py-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-plum-950 font-bold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                                <i class="fa-solid fa-bag-shopping"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Category Filter Logic
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.classList.remove('bg-plum-900', 'text-gold-300', 'shadow-md');
+                btn.classList.add('bg-cream-100', 'text-plum-900');
+            });
+
+            const activeBtn = document.querySelector(`.filter-tab[data-cat="${cat}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-cream-100', 'text-plum-900');
+                activeBtn.classList.add('bg-plum-900', 'text-gold-300', 'shadow-md');
+            }
+
+            if (cat === 'all') {
+                renderProducts(productsDatabase);
+            } else {
+                const filtered = productsDatabase.filter(p => p.category === cat);
+                renderProducts(filtered);
+            }
+        }
+
+        // Cart Drawer Operations
+        function addToCart(id) {
+            const product = productsDatabase.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${product.title}" to your basket!`);
+        }
+
+        function updateQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            document.getElementById('cartBadge').innerText = totalItems;
+            document.getElementById('cartDrawerCount').innerText = totalItems;
+            document.getElementById('cartSubtotal').innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('cartTotal').innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+
+            // Free Shipping threshold ₹1,499
+            const shippingTarget = 1499;
+            const percentage = Math.min(100, Math.round((subtotal / shippingTarget) * 100));
+            document.getElementById('shippingProgressBar').style.width = `${percentage}%`;
+            document.getElementById('shippingTarget').innerText = `${percentage}%`;
+            
+            if (subtotal >= shippingTarget) {
+                document.getElementById('shippingText').innerText = "🎉 You've unlocked FREE Shipping!";
+                document.getElementById('shippingCost').innerText = "FREE";
+            } else {
+                const remaining = shippingTarget - subtotal;
+                document.getElementById('shippingText').innerText = `Add ₹${remaining.toLocaleString('en-IN')} more for FREE Shipping`;
+                document.getElementById('shippingCost').innerText = "₹99";
+            }
+
+            const listContainer = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-16 space-y-3">
+                        <i class="fa-solid fa-crown text-4xl text-gold-300"></i>
+                        <p class="text-plum-900 font-bold text-sm">Your Queen's Basket is empty</p>
+                        <button onclick="toggleCartDrawer()" class="px-5 py-2.5 bg-plum-900 text-gold-300 rounded-xl text-xs font-bold">Explore Collections</button>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = cart.map(item => `
+                <div class="flex gap-3 bg-cream-100 p-3 rounded-xl border border-gold-500/20 items-center">
+                    <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-serif font-bold text-plum-900 truncate">${item.title}</h4>
+                        <p class="text-xs text-gold-600 font-bold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-white text-plum-900 border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-gold-500/20">-</button>
+                            <span class="text-xs font-extrabold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-white text-plum-900 border border-gold-500/30 flex items-center justify-center text-xs font-bold hover:bg-gold-500/20">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-rosegold p-1 text-xs">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Toggle Wishlist
+        function toggleWishlist(id) {
+            if (wishlist.includes(id)) {
+                wishlist = wishlist.filter(item => item !== id);
+                showToast("Removed from Wishlist");
+            } else {
+                wishlist.push(id);
+                showToast("Saved to your Wishlist!");
+            }
+            document.getElementById('wishlistBadge').innerText = wishlist.length;
+            renderProducts(productsDatabase);
+        }
+
+        // Live Search Handling
+        function handleLiveSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const overlay = document.getElementById('searchResultsOverlay');
+
+            if (!query) {
+                overlay.classList.add('hidden');
+                return;
+            }
+
+            const results = productsDatabase.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            overlay.classList.remove('hidden');
+
+            if (results.length === 0) {
+                overlay.innerHTML = `<p class="text-xs text-cream-200/60 p-2 text-center">No royal items found</p>`;
+            } else {
+                overlay.innerHTML = results.map(r => `
+                    <div onclick="selectSearchResult(${r.id})" class="p-2 hover:bg-plum-800 rounded-xl cursor-pointer flex items-center gap-3">
+                        <img src="${r.image}" class="w-10 h-10 object-cover rounded-md">
+                        <div>
+                            <p class="text-xs font-bold text-cream-100">${r.title}</p>
+                            <p class="text-[10px] text-gold-400">₹${r.price.toLocaleString('en-IN')}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function selectSearchResult(id) {
+            document.getElementById('searchResultsOverlay').classList.add('hidden');
+            const filtered = productsDatabase.filter(p => p.id === id);
+            renderProducts(filtered);
+            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Toggle UI Triggers
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const panel = document.getElementById('cartPanel');
+
+            if (drawer.classList.contains('pointer-events-none')) {
+                drawer.classList.remove('pointer-events-none', 'opacity-0');
+                drawer.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('pointer-events-none', 'opacity-0');
+                drawer.classList.remove('opacity-100');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function scrollToWishlist() {
+            if (wishlist.length === 0) {
+                showToast("Your wishlist is currently empty!");
+            } else {
+                const wishProducts = productsDatabase.filter(p => wishlist.includes(p.id));
+                renderProducts(wishProducts);
+                document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Toast Messages
+        function showToast(msg) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'bg-plum-950 text-gold-300 border border-gold-500/40 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transform transition-all duration-300 translate-y-full opacity-0';
+            toast.innerHTML = `<i class="fa-solid fa-crown text-gold-400 text-sm"></i><span>${msg}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Timer Logic
+        function startTimer() {
+            let h = 12, m = 45, s = 30;
+            setInterval(() => {
+                if (s > 0) s--;
+                else {
+                    s = 59;
+                    if (m > 0) m--;
+                    else {
+                        m = 59;
+                        if (h > 0) h--;
+                    }
+                }
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+            showToast("Redirecting to AK Queen's Choice Secure Checkout...");
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            showToast(`Welcome to the VIP Circle, ${email}!`);
+            document.getElementById('newsletterEmail').value = '';
+        }
+    </script>
+</body>
+</html>
